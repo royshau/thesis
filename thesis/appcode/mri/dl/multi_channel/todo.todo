@@ -1,0 +1,4 @@
+ ☐ Norm the data to 0-1
+ ☐ Phase - amibu
+ ☐ Init with <1: 'moving_variance', init_ops.ones_initializer())
+ ☐ 

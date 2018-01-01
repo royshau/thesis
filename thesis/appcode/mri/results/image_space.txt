@@ -1,0 +1,57 @@
+Factor 2:
+10k examples:
+/newdisk/ohadsh/work/runs/Wgan/random_mask_rv_image_space/factor2/random_mask_factor2_unetL2_adam/model.ckpt-2090000
+MSE-ZERO = 40.915653
+MSE-PROPOSED = 19.419891
+PSNR-MEAN-ZERO = 32.045904 [dB]
+PSNR-MEAN-PROPOSED = 35.282331 [dB]
+PSNR-STD-ZERO = 2.614981 [dB]
+PSNR-STD-PROPOSED = 2.209326 [dB]
+
+Factor 4:
+running:
+/newdisk/ohadsh/work/runs/Wgan/random_mask_rv_image_space/factor4/random_mask_factor4_wgan_unet/model.ckpt-330000
+MSE-PROPOSED = 115.192604
+PSNR-MEAN-PROPOSED = 27.550554 [dB]
+PSNR-STD-PROPOSED = 2.053129 [dB]
+
+running:
+/newdisk/ohadsh/work/runs/Wgan/random_mask_rv_image_space/factor4/random_mask_factor4_unetL2_adam/model.ckpt-2440000
+MSE-PROPOSED = 52.797276
+PSNR-MEAN-PROPOSED = 30.938684 [dB]
+PSNR-STD-PROPOSED = 2.151818 [dB]
+
+/newdisk/ohadsh/work/runs/Wgan/random_mask_rv_image_space/factor4/random_mask_factor4_wgan_no_scale/model.ckpt-350000
+MSE-PROPOSED = 132.166275
+PSNR-MEAN-PROPOSED = 26.953593 [dB]
+PSNR-STD-PROPOSED = 1.917342 [dB]
+
+running:
+/newdisk/ohadsh/work/runs/Wgan/random_mask_rv_image_space/factor4/random_mask_factor4_L2_adam_noise_normed/model.ckpt-820000
+MSE-PROPOSED = 87.366920
+PSNR-MEAN-PROPOSED = 28.751329 [dB]
+PSNR-STD-PROPOSED = 2.187658 [dB]
+
+
+/newdisk/ohadsh/work/runs/Wgan/random_mask_rv_image_space/factor4/random_mask_factor4_unetL2_adam/model.ckpt-4990000
+MSE-PROPOSED = 45.115532
+PSNR-MEAN-PROPOSED = 31.621538 [dB]
+PSNR-STD-PROPOSED = 2.170054 [dB]
+
+
+
+Factor 6:
+Using factor 4 network:
+/newdisk/ohadsh/work/runs/Wgan/random_mask_rv_image_space/factor4/random_mask_factor4_unetL2_adam/model.ckpt-4990000
+MSE-ZERO = 1462.964600
+MSE-PROPOSED = 1396.021729
+PSNR-MEAN-ZERO = 16.512461 [dB]
+PSNR-MEAN-PROPOSED = 16.715878 [dB]
+PSNR-STD-ZERO = 2.293676 [dB]
+PSNR-STD-PROPOSED = 2.663943 [dB]
+
+
+/newdisk/ohadsh/work/runs/Wgan/random_mask_rv_image_space/factor6/random_mask_factor6_unetL2_adam/model.ckpt-2400000
+MSE-PROPOSED = 292.372925
+PSNR-MEAN-PROPOSED = 23.505428 [dB]
+PSNR-STD-PROPOSED = 2.754870 [dB]

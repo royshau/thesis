@@ -1,0 +1,127 @@
+################################################################################################################################################################
+																		Runs
+################################################################################################################################################################
+
+2017-08-19:
+Server:
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. Random mask - factor 6 D2
+	gpu 0
+	python main_wgan_single_mask.py --train_dir /home/ohadsh/work/runs/Wgan/random_mask_rv/IXI/random_mask_factor6_D2/ --mode train --print_train 1000 --gen_loss_context 1.0 --learning_rate 0.000005 --print_test 10000 --database IXI_T1 --gen_loss_adversarial 1.0 --num_D_updates 2 --mini_batch_size 15 --random_sampling_factor 6 
+
+	python main_wgan_single_mask.py --train_dir /home/ohadsh/work/runs/Wgan/random_mask_rv/IXI/random_mask_factor6_D2_zeroBias/ --mode train --print_train 1000 --gen_loss_context 1.0 --learning_rate 0.000005 --print_test 10000 --database IXI_T1 --gen_loss_adversarial 1.0 --num_D_updates 2 --mini_batch_size 15 --random_sampling_factor 6 --reg_b 0.0
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.  Random mask - factor 4
+	gpu 2
+	python main_wgan_single_mask.py --train_dir /home/ohadsh/work/runs/Wgan/random_mask_rv/IXI/random_mask_factor4_single/ --mode train --print_train 1000 --gen_loss_context 1.0 --learning_rate 0.000005 --print_test 10000 --database IXI_T1 --gen_loss_adversarial 1.0 --num_D_updates 5 --mini_batch_size 15 --random_sampling_factor 4
+
+	results: Graphs are looks fine, images are fine also. But need more iterations
+	Action: resume + add new run with num_D_updates = 1
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+3. Random mask - factor 4 - num_D_updates = 1
+	gpu 0
+	python main_wgan_single_mask.py --train_dir /home/ohadsh/work/runs/Wgan/random_mask_rv/IXI/random_mask_factor4_D1 --mode resume --print_train 1000 --gen_loss_context 1.0 --learning_rate 0.000005 --print_test 10000 --database IXI_T1 --gen_loss_adversarial 1.0 --num_D_updates 1 --mini_batch_size 20 --random_sampling_factor 4 --mode resume --checkpoint /home/ohadsh/work/runs/Wgan/random_mask_rv/IXI/random_mask_factor4_D1/model.ckpt-2740000
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4. Random lines, 0.7, 0.45, single mask, keep_center =1.0, factor of 33.9, num_D_updates = 1
+	gpu 1
+	python main_wgan_single_mask.py --train_dir /home/ohadsh/work/runs/Wgan/random_mask_rv/IXI/random_lines_07_45_single_keep1 --mode train --print_train 1000 --gen_loss_context 1.0 --learning_rate 0.000005 --print_test 10000 --database IXI_T1 --gen_loss_adversarial 1.0 --num_D_updates 1 --mini_batch_size 15 &
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+HOLD
+4. Encoder - using no residual block + L2 loss
+	gpu 1
+	python main_wgan_encoder.py --train_dir /home/ohadsh/work/runs/Wgan/random_mask_rv/IXI/random_mask_factor4_encoderL2OnlyNoRes/ --mode train --print_train 1000 --gen_loss_context 1.0 --learning_rate 0.000005 --print_test 10000 --database IXI_T1 --gen_loss_adversarial 0.0 --num_D_updates 1 --mini_batch_size 15 --random_sampling_factor 4 &
+
+	results:
+	Sucseed to reconstruct the image but with a lot of artifacts, blurring, etc.
+	TODO: run the same with gan weight
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+################################################################################################################################################################
+																		Comparisons
+################################################################################################################################################################
+
+1. rsync with random_mask_factor4_D1 and check better snapshot
+2. rsync with random_mask_factor4_D1_bias_zero and compare to 1, try to understant the +
+3. rsync with random_mask_factor6_D2 and compare to ZeroPadding + CS-MRI
+4. ALOHA
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+################################################################################################################################################################
+																		Stopped	
+################################################################################################################################################################
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+3. Random mask encoder - factor 4
+	encoder-decoder in generator only
+	gpu 1
+	python main_wgan_encoder.py --train_dir /home/ohadsh/work/runs/Wgan/random_mask_rv/IXI/random_lines_07_45_single_encoder/ --mode train --print_train 1000 --gen_loss_context 1.0 --learning_rate 0.000005 --print_test 10000 --database IXI_T1 --gen_loss_adversarial 1.0 --num_D_updates 5 --mini_batch_size 15 --random_sampling_factor 4 &
+
+	results: problem with the name, should be mask4 and  not random_lines
+			 results are bad. maybe consider lower D_updates.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+4. Random mask fft - factor 4
+	Conv with 1x1, only on channel dim in generator only
+	gpu 2
+	python main_wgan_single_mask.py --train_dir /home/ohadsh/work/runs/Wgan/random_mask_rv/IXI/random_lines_07_45_single_fft/ --mode train --print_train 1000 --gen_loss_context 1.0 --learning_rate 0.000005 --print_test 10000 --database IXI_T1 --gen_loss_adversarial 1.0 --num_D_updates 5 --mini_batch_size 15 --random_sampling_factor 4 &
+
+	results: problem with the name, should be mask4 and  not random_lines
+			 results are very bad. Currently don't proceccide with this experiemnt
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Random lines, 0.7, 0.45, single mask
+	gpu 3
+	python main_wgan_single_mask.py --train_dir /home/ohadsh/work/runs/Wgan/random_mask_rv/IXI/random_lines_07_45_single/ --mode train --print_train 1000 --gen_loss_context 1.0 --learning_rate 0.000005 --print_test 10000 --database IXI_T1 --gen_loss_adversarial 1.0 --num_D_updates 5 --mini_batch_size 15
+
+	results: Graphs are looks fine, but images looks bad. Maybe resume with more iterations
+	Action: resume
+	results are bad.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Random mask - factor 4 - num_D_updates = 1, use old GAN
+	gpu 3
+	python main_gan.py --train_dir /home/ohadsh/work/runs/Wgan/random_mask_rv/IXI/random_mask_factor4_regGAN_g20/ --mode train --print_train 1000 --gen_loss_context 1.0 --learning_rate 0.000005 --print_test 10000 --database IXI_T1 --gen_loss_adversarial 1.0 --num_gen_updates 20 --mini_batch_size 15 --random_sampling_factor 4
+	Bad results
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+   Random mask - No bias decay
+	gpu 0
+	python main_wgan_single_mask.py --train_dir /home/ohadsh/work/runs/Wgan/random_mask_rv/IXI/random_mask_factor4_D1_bias_zero --mode train --print_train  1000 --gen_loss_context 1.0 --learning_rate 0.000005 --print_test 10000 --database IXI_T1 --gen_loss_adversarial 1.0 --num_D_updates 1 --mini_batch_size 15 --random_sampling_factor 4 --reg_b 0.0
+	
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+   Random mask - No bias decay + L2 x10 weighted
+	gpu 1
+	python main_wgan_single_mask.py --train_dir /home/ohadsh/work/runs/Wgan/random_mask_rv/IXI/random_mask_factor4_D1_bias_zero_L2weighted --mode train --print_train  1000 --gen_loss_context 10.0 --learning_rate 0.000005 --print_test 10000 --database IXI_T1 --gen_loss_adversarial 1.0 --num_D_updates 1 --mini_batch_size 15 --random_sampling_factor 4 --reg_b 0.0

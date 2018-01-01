@@ -1,0 +1,57 @@
+Regstration:
+matlab - imregdemons()
+
+SchizReg:
+-----------------------------------
+np.array([22, 136])
+rot = 0
+
+ADNI NORMAL
+-----------------------------------
+1. sagittal
+cd ~/work/python/thesis/appcode/mri/k_space; set BASE=/sheard/Ohad/thesis/data/ADNI/data_for_train/NORMAL/sagittal/ ; python create_base_data_for_train.py --data_base_name=ADNI_Normal --output_dir=${BASE} --axial_limits "[40,120]" ; python shuffle_data.py --base_dir=${BASE}/base/ --output_dir=${BASE}/ --data_base ADNI_Normal
+
+2. axial
+cd ~/work/python/thesis/appcode/mri/k_space; set BASE=/sheard/Ohad/thesis/data/ADNI/data_for_train/NORMAL/axial/ ; python create_base_data_for_train.py --data_base_name=ADNI_Normal --output_dir=${BASE} --trans "(1,2,0)" --axial_limits "[95,195]" --rot 0 ; python shuffle_data.py --base_dir=${BASE}/base/ --output_dir=${BASE}/ --data_base ADNI_Normal
+
+3. coronal
+cd ~/work/python/thesis/appcode/mri/k_space; set BASE=/sheard/Ohad/thesis/data/ADNI/data_for_train/NORMAL/axial/ ; python create_base_data_for_train.py --data_base_name=ADNI_Normal --output_dir=${BASE} --trans "(0,2,1)" --axial_limits "[65,175]" ; python shuffle_data.py --base_dir=${BASE}/base/ --output_dir=${BASE}/ --data_base ADNI_Normal
+
+
+IXI:
+-----------------------------------
+
+T1: 
+
+1. sagittal
+cd ~/work/python/thesis/appcode/mri/k_space; set BASE=/sheard/Ohad/thesis/data/IXI/data_for_train/T1/sagittal/ ; python create_base_data_for_train.py --data_base_name=IXI_T1 --output_dir=${BASE} --axial_limits "[30,122]" --rot 90 ; python shuffle_data.py --base_dir=${BASE}/base/ --output_dir=${BASE}/ --data_base IXI_T1
+
+
+2. axial
+cd ~/work/python/thesis/appcode/mri/k_space; set BASE=/sheard/Ohad/thesis/data/IXI/data_for_train/T1/axial/ ; python create_base_data_for_train.py --data_base_name=IXI_T1 --output_dir=${BASE} --trans "(0,2,1)" --axial_limits "[100,200]" --rot 0 ; python shuffle_data.py --base_dir=${BASE}/base/ --output_dir=${BASE}/ --data_base IXI_T1
+
+
+3. coronal
+cd ~/work/python/thesis/appcode/mri/k_space; set BASE=/sheard/Ohad/thesis/data/IXI/data_for_train/T1/coronal/  ; python create_base_data_for_train.py --data_base_name=IXI_T1 --output_dir=${BASE} --trans "(1,2,0)" --axial_limits "[30,122]" --rot 90 ; python shuffle_data.py --base_dir=${BASE}/base/ --output_dir=${BASE}/ --data_base IXI_T1
+
+
+T2:
+1. axial
+cd ~/work/python/thesis/appcode/mri/k_space ; set BASE=/sheard/Ohad/thesis/data/IXI/data_for_train/T2/axial/ ; python create_base_data_for_train.py --data_base_name=IXI_T2 --output_dir=${BASE} --axial_limits "[35,100]" --rot 270; python shuffle_data.py --base_dir=${BASE}/base/ --output_dir=${BASE}/ --data_base IXI_T2
+
+
+2. coronal
+cd ~/work/python/thesis/appcode/mri/k_space ; set BASE=/sheard/Ohad/thesis/data/IXI/data_for_train/T2/coronal/ ; python create_base_data_for_train.py --data_base_name=IXI_T2 --output_dir=${BASE} --trans "(0,2,1)" --axial_limits "[50,190]" --rot 90 ; python shuffle_data.py --base_dir=${BASE}/base/ --output_dir=${BASE}/ --data_base IXI_T2
+
+
+3. sagittal
+cd ~/work/python/thesis/appcode/mri/k_space ; set BASE=/sheard/Ohad/thesis/data/IXI/data_for_train/T2/sagittal/ ; python create_base_data_for_train.py --data_base_name=IXI_T2 --output_dir=${BASE} --trans "(2,1,0)" --axial_limits "[60,185]" --rot 180 ; python shuffle_data.py --base_dir=${BASE}/base/ --output_dir=${BASE}/ --data_base IXI_T2
+
+
+
+OASIS:
+-----------------------------------
+REGULAR:
+
+1. axial
+cd ~/work/python/thesis/appcode/mri/k_space; set BASE=/sheard/Ohad/thesis/data/OASIS/data_for_train/REGULAR/axial/ ; python create_base_data_for_train.py --data_base_name=OASIS_REGULAR --output_dir=${BASE} --trans "(0,2,1)" --axial_limits "[100,185]" --rot 180 ; python shuffle_data.py --base_dir=${BASE}/base/ --output_dir=${BASE}/ --data_base OASIS_REGULAR_AXIAL

@@ -1,0 +1,2 @@
+python main_wgan_single_mask.py --train_dir /media/ohadsh/sheard/googleDrive/Master/runs/Wgan/random_mask_rv/IXI/factor_6_adv_l2_noise_lower_lr/ --mode train --print_train 100 --gen_loss_context 1.0 --learning_rate 0.000001 --print_test 1000 --database IXI_T1 --gen_loss_adversarial 1.0 --num_D_updates 4
+

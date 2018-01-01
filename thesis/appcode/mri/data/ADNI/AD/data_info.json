@@ -1,0 +1,302 @@
+{
+	"002_S_1018": {
+		"hash": 84,
+		"tt": "train",
+		"file": "ID_002_S_1018_Original.nii.gz"
+	},
+	"002_T_1018": {
+		"hash": 85,
+		"tt": "train",
+		"file": "ID_002_T_1018_Original.nii.gz"
+	},
+	"005_S_0814": {
+		"hash": 86,
+		"tt": "train",
+		"file": "ID_005_S_0814_Original.nii.gz"
+	},
+	"005_T_0814": {
+		"hash": 87,
+		"tt": "train",
+		"file": "ID_005_T_0814_Original.nii.gz"
+	},
+	"007_S_1304": {
+		"hash": 88,
+		"tt": "test",
+		"file": "ID_007_S_1304_Original.nii.gz"
+	},
+	"012_S_0689": {
+		"hash": 89,
+		"tt": "test",
+		"file": "ID_012_S_0689_Original.nii.gz"
+	},
+	"012_T_0689": {
+		"hash": 90,
+		"tt": "train",
+		"file": "ID_012_T_0689_Original.nii.gz"
+	},
+	"013_T_0996": {
+		"hash": 91,
+		"tt": "train",
+		"file": "ID_013_T_0996_Original.nii.gz"
+	},
+	"018_S_0335": {
+		"hash": 92,
+		"tt": "train",
+		"file": "ID_018_S_0335_Original.nii.gz"
+	},
+	"018_S_0633": {
+		"hash": 93,
+		"tt": "train",
+		"file": "ID_018_S_0633_Original.nii.gz"
+	},
+	"018_T_0335": {
+		"hash": 94,
+		"tt": "train",
+		"file": "ID_018_T_0335_Original.nii.gz"
+	},
+	"018_T_0633": {
+		"hash": 95,
+		"tt": "train",
+		"file": "ID_018_T_0633_Original.nii.gz"
+	},
+	"021_S_0753": {
+		"hash": 96,
+		"tt": "train",
+		"file": "ID_021_S_0753_Original.nii.gz"
+	},
+	"023_S_0139": {
+		"hash": 97,
+		"tt": "train",
+		"file": "ID_023_S_0139_Original.nii.gz"
+	},
+	"023_S_0916": {
+		"hash": 98,
+		"tt": "train",
+		"file": "ID_023_S_0916_Original.nii.gz"
+	},
+	"023_S_1262": {
+		"hash": 99,
+		"tt": "train",
+		"file": "ID_023_S_1262_Original.nii.gz"
+	},
+	"023_S_1289": {
+		"hash": 100,
+		"tt": "train",
+		"file": "ID_023_S_1289_Original.nii.gz"
+	},
+	"023_T_0916": {
+		"hash": 101,
+		"tt": "train",
+		"file": "ID_023_T_0916_Original.nii.gz"
+	},
+	"023_T_1262": {
+		"hash": 102,
+		"tt": "train",
+		"file": "ID_023_T_1262_Original.nii.gz"
+	},
+	"027_S_0404": {
+		"hash": 103,
+		"tt": "train",
+		"file": "ID_027_S_0404_Original.nii.gz"
+	},
+	"027_S_1081": {
+		"hash": 104,
+		"tt": "train",
+		"file": "ID_027_S_1081_Original.nii.gz"
+	},
+	"027_S_1082": {
+		"hash": 105,
+		"tt": "test",
+		"file": "ID_027_S_1082_Original.nii.gz"
+	},
+	"027_S_1385": {
+		"hash": 106,
+		"tt": "train",
+		"file": "ID_027_S_1385_Original.nii.gz"
+	},
+	"027_T_0404": {
+		"hash": 107,
+		"tt": "train",
+		"file": "ID_027_T_0404_Original.nii.gz"
+	},
+	"027_T_1081": {
+		"hash": 108,
+		"tt": "train",
+		"file": "ID_027_T_1081_Original.nii.gz"
+	},
+	"027_T_1082": {
+		"hash": 109,
+		"tt": "train",
+		"file": "ID_027_T_1082_Original.nii.gz"
+	},
+	"027_T_1385": {
+		"hash": 110,
+		"tt": "train",
+		"file": "ID_027_T_1385_Original.nii.gz"
+	},
+	"031_S_1209": {
+		"hash": 111,
+		"tt": "train",
+		"file": "ID_031_S_1209_Original.nii.gz"
+	},
+	"031_T_1209": {
+		"hash": 112,
+		"tt": "train",
+		"file": "ID_031_T_1209_Original.nii.gz"
+	},
+	"032_S_1101": {
+		"hash": 113,
+		"tt": "train",
+		"file": "ID_032_S_1101_Original.nii.gz"
+	},
+	"033_S_0724": {
+		"hash": 114,
+		"tt": "train",
+		"file": "ID_033_S_0724_Original.nii.gz"
+	},
+	"033_S_0733": {
+		"hash": 115,
+		"tt": "train",
+		"file": "ID_033_S_0733_Original.nii.gz"
+	},
+	"033_T_0724": {
+		"hash": 116,
+		"tt": "train",
+		"file": "ID_033_T_0724_Original.nii.gz"
+	},
+	"033_T_0733": {
+		"hash": 117,
+		"tt": "train",
+		"file": "ID_033_T_0733_Original.nii.gz"
+	},
+	"067_S_0812": {
+		"hash": 118,
+		"tt": "train",
+		"file": "ID_067_S_0812_Original.nii.gz"
+	},
+	"067_S_1185": {
+		"hash": 119,
+		"tt": "train",
+		"file": "ID_067_S_1185_Original.nii.gz"
+	},
+	"067_S_1253": {
+		"hash": 120,
+		"tt": "train",
+		"file": "ID_067_S_1253_Original.nii.gz"
+	},
+	"067_T_0812": {
+		"hash": 121,
+		"tt": "test",
+		"file": "ID_067_T_0812_Original.nii.gz"
+	},
+	"082_S_1079": {
+		"hash": 122,
+		"tt": "train",
+		"file": "ID_082_S_1079_Original.nii.gz"
+	},
+	"116_S_0392": {
+		"hash": 123,
+		"tt": "train",
+		"file": "ID_116_S_0392_Original.nii.gz"
+	},
+	"116_S_0487": {
+		"hash": 124,
+		"tt": "train",
+		"file": "ID_116_S_0487_Original.nii.gz"
+	},
+	"116_S_1083": {
+		"hash": 125,
+		"tt": "train",
+		"file": "ID_116_S_1083_Original.nii.gz"
+	},
+	"116_T_0487": {
+		"hash": 126,
+		"tt": "train",
+		"file": "ID_116_T_0487_Original.nii.gz"
+	},
+	"126_S_0606": {
+		"hash": 127,
+		"tt": "train",
+		"file": "ID_126_S_0606_Original.nii.gz"
+	},
+	"126_T_0606": {
+		"hash": 128,
+		"tt": "train",
+		"file": "ID_126_T_0606_Original.nii.gz"
+	},
+	"127_S_0844": {
+		"hash": 129,
+		"tt": "train",
+		"file": "ID_127_S_0844_Original.nii.gz"
+	},
+	"130_S_0956": {
+		"hash": 130,
+		"tt": "train",
+		"file": "ID_130_S_0956_Original.nii.gz"
+	},
+	"130_S_1337": {
+		"hash": 131,
+		"tt": "train",
+		"file": "ID_130_S_1337_Original.nii.gz"
+	},
+	"131_S_0691": {
+		"hash": 132,
+		"tt": "test",
+		"file": "ID_131_S_0691_Original.nii.gz"
+	},
+	"131_T_0457": {
+		"hash": 133,
+		"tt": "train",
+		"file": "ID_131_T_0457_Original.nii.gz"
+	},
+	"133_S_1055": {
+		"hash": 134,
+		"tt": "train",
+		"file": "ID_133_S_1055_Original.nii.gz"
+	},
+	"133_S_1170": {
+		"hash": 135,
+		"tt": "train",
+		"file": "ID_133_S_1170_Original.nii.gz"
+	},
+	"133_T_1055": {
+		"hash": 136,
+		"tt": "train",
+		"file": "ID_133_T_1055_Original.nii.gz"
+	},
+	"133_T_1170": {
+		"hash": 137,
+		"tt": "train",
+		"file": "ID_133_T_1170_Original.nii.gz"
+	},
+	"136_S_0194": {
+		"hash": 138,
+		"tt": "train",
+		"file": "ID_136_S_0194_Original.nii.gz"
+	},
+	"136_S_0299": {
+		"hash": 139,
+		"tt": "test",
+		"file": "ID_136_S_0299_Original.nii.gz"
+	},
+	"136_S_0426": {
+		"hash": 140,
+		"tt": "train",
+		"file": "ID_136_S_0426_Original.nii.gz"
+	},
+	"136_T_0299": {
+		"hash": 141,
+		"tt": "train",
+		"file": "ID_136_T_0299_Original.nii.gz"
+	},
+	"136_T_0300": {
+		"hash": 142,
+		"tt": "train",
+		"file": "ID_136_T_0300_Original.nii.gz"
+	},
+	"136_T_0426": {
+		"hash": 143,
+		"tt": "test",
+		"file": "ID_136_T_0426_Original.nii.gz"
+	}
+}

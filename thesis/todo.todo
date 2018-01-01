@@ -1,0 +1,21 @@
+TODO:
+ 
+ ☐ Use deeper networks:
+   ☐ Discriminator - use VGG-16
+   ☐ Generator - try deeper + image-to-image networks
+   ☐ Resnet
+ 
+ ☐ Run with normal distribution noise instead of uniform: mean+variance from real/imaginary part estimation
+ ☐ Try to understand the k-space distribution and create noise with the same noise
+ ☐ local-global architecture
+ ☐ 
+ ☐ 
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+Archive:
+ ✔ 1. Develop shuffle script @done (17-02-10 09:43)
+ ✔ k_space values are very small, but int is > 0 -> So I have normalized the data, see /media/ohadsh/sheard/Ohad/thesis/data/SchizData/SchizReg/train/24_05_2016/shuffle/factors.json @done (17-02-10 09:42) @project(Data)
+ ✔ 1. Create mnist-like data base with get_batch(50) method. @done (17-02-10 09:42)
+ ✔ 4. Develop network code with tensorBoard @done (17-02-10 09:40) @project(TODO)
+ ✔ 3. Create examples using random subsampling @done (17-02-10 09:40) @project(TODO)
+ ✔ 2. Convert data-base to like-mnist style, for easy reading with tensorflow @done (17-02-10 09:40) @project(TODO)
+ ✔ 1. Interface with nibabel (niftty lib) for easy reading data base @done (17-02-10 09:40) @project(TODO)

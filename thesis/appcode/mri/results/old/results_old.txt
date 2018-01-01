@@ -1,0 +1,282 @@
+Results from 22.08.2017
+Data IXI:
+
+
+################################################## Random mask Factor 4 ##########################################
+Results 5000 examples:
+
+Zero padding:
+MSE-ZERO = 138.766846
+PSNR-MEAN-ZERO = 26.741942 [dB]
+PSNR-STD-ZERO = 2.339061 [dB]
+
+UPDATED 5000:
+MSE-ZERO = 139.545670
+PSNR-MEAN-ZERO = 26.717635 [dB]
+PSNR-STD-ZERO = 2.151053 [dB]
+
+UPDATED 2500:
+MSE-ZERO = 140.638275
+PSNR-MEAN-ZERO = 26.683764 [dB]
+PSNR-STD-ZERO = 2.142759 [dB]
+
+CS-MRI:
+MEAN = 34.582979698942225 (2458 samples)
+STD = 2.6636461380601357
+
+1.	random_mask_factor4_single
+	discriminator updates = 4
+	snapshot - /media/ohadsh/sheard/Ohad/temp/Wgan/random_mask_rv/IXI/random_mask_factor4_single/model.ckpt-340000/
+		MSE-PROPOSED = 30.151222
+		PSNR-MEAN-PROPOSED = 33.371750 [dB]
+		PSNR-STD-PROPOSED = 2.523804 [dB]
+
+	snapshot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_single/model.ckpt-790000
+		MSE-PROPOSED = 27.185770
+		PSNR-MEAN-PROPOSED = 33.821383 [dB]
+		PSNR-STD-PROPOSED = 2.759889 [dB]
+
+	snapshot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_single/model.ckpt-880000
+		MSE-PROPOSED = 26.945799
+		PSNR-MEAN-PROPOSED = 33.859889 [dB]
+		PSNR-STD-PROPOSED = 2.765222 [dB]
+
+	snapshot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_single/model.ckpt-1400000
+		MSE-PROPOSED = 26.005573
+		PSNR-MEAN-PROPOSED = 34.014135 [dB]
+		PSNR-STD-PROPOSED = 2.784107 [dB]
+
+	snapshot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_single/model.ckpt-2100000
+		MSE-PROPOSED = 25.359798
+		PSNR-MEAN-PROPOSED = 34.123341 [dB]
+		PSNR-STD-PROPOSED = 2.794429 [dB]
+
+	snapshot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_single/model.ckpt-4090000
+		MSE-PROPOSED = 24.578659
+		PSNR-MEAN-PROPOSED = 34.259217 [dB]
+		PSNR-STD-PROPOSED = 2.803443 [dB]
+
+2.	random_mask_factor4_D1
+	discriminator updates = 1
+	snapshot - /media/ohadsh/sheard/Ohad/temp/Wgan/random_mask_rv/IXI/random_mask_factor4_D1/model.ckpt-360000
+		MSE-PROPOSED = 28.718344
+		PSNR-MEAN-PROPOSED = 33.583206 [dB]
+		PSNR-STD-PROPOSED = 2.605834 [dB]
+
+	snapshot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_D1/model.ckpt-1330000
+		MSE-PROPOSED = 26.010630
+		PSNR-MEAN-PROPOSED = 34.013290 [dB]
+		PSNR-STD-PROPOSED = 2.645701 [dB]
+
+	snapshot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_D1/model.ckpt-2270000
+		MSE-PROPOSED = 24.943628
+		PSNR-MEAN-PROPOSED = 34.195203 [dB]
+		PSNR-STD-PROPOSED = 2.828023 [dB]
+	
+	snapshot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_D1/model.ckpt-2740000
+		MSE-PROPOSED = 24.292814
+		PSNR-MEAN-PROPOSED = 34.310021 [dB]
+		PSNR-STD-PROPOSED = 2.861602 [dB]
+
+	****BEST OCTOBER 2016********
+	snapshot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_D1/model.ckpt-3340000
+		MSE-PROPOSED = 22.770859
+		PSNR-MEAN-PROPOSED = 34.591005 [dB]
+		PSNR-STD-PROPOSED = 2.939233 [dB]
+		Upadted 2500:
+		MSE-PROPOSED = 22.602526
+		PSNR-MEAN-PROPOSED = 34.623229 [dB]
+		PSNR-STD-PROPOSED = 2.555809 [dB]
+		Updated 5000:
+		MSE-PROPOSED = 22.677235
+		PSNR-MEAN-PROPOSED = 34.608898 [dB]
+		PSNR-STD-PROPOSED = 2.574584 [dB]
+
+
+
+
+3.	random_mask_factor4_D1_bias_zero
+	discriminator updates = 1
+	bias decay = 0.0
+	snspahot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_D1_bias_zero/model.ckpt-1810000
+		MSE-PROPOSED = 29.435221
+		PSNR-MEAN-PROPOSED = 33.476126 [dB]
+		PSNR-STD-PROPOSED = 2.348437 [dB]
+
+	snapshot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_D1_bias_zero/model.ckpt-2930000
+		MSE-PROPOSED = 28.312000
+		PSNR-MEAN-PROPOSED = 33.645094 [dB]
+		PSNR-STD-PROPOSED = 2.396883 [dB
+
+	snapshot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_D1_bias_zero/model.ckpt-3240000
+		MSE-PROPOSED = 28.029331
+		PSNR-MEAN-PROPOSED = 33.688672 [dB]
+		PSNR-STD-PROPOSED = 2.410424 [dB]
+
+
+
+4.	random_mask_factor4_D1_bias_zero_L2weighted
+	discriminator updates = 1
+	bias decay = 0.0
+	L2 weight = 100
+	snspahot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_D1_bias_zero_L2weighted/model.ckpt-440000
+		MSE-PROPOSED = 32.559452
+		PSNR-MEAN-PROPOSED = 33.038028 [dB]
+		PSNR-STD-PROPOSED = 2.186593 [dB]
+
+	snspahot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_D1_bias_zero_L2weighted/model.ckpt-1550000		
+		MSE-PROPOSED = 27.606031
+		PSNR-MEAN-PROPOSED = 33.754760 [dB]
+		PSNR-STD-PROPOSED = 2.454648 [dB]
+
+	snapshot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_D1_bias_zero_L2weighted/model.ckpt-1860000
+		MSE-PROPOSED = 26.190184
+		PSNR-MEAN-PROPOSED = 33.983414 [dB]
+		PSNR-STD-PROPOSED = 2.649267 [dB]
+
+	### BEST OF UNET ## - still graphs looks bad
+5. random_mask_factor4_D1_high_lr_betterD
+	discriminator updates = 1
+	snapshot - /sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv_unet/IXI/random_mask_factor4_D1_high_lr_betterD/model.ckpt-790000
+	2500:
+	MSE-PROPOSED = 21.718950
+	PSNR-MEAN-PROPOSED = 34.796411 [dB]
+	PSNR-STD-PROPOSED = 2.374307 [dB]	
+
+6. random_mask_factor4_D1_unet2
+   better discriminator: as the generator encoder
+   2500:
+   snapshot - /newdisk/ohadsh/work/runs/Wgan/random_mask_rv_unet/IXI/random_mask_factor4_D1_unet2/model.ckpt-190000
+	MSE-PROPOSED = 26.167118
+	PSNR-MEAN-PROPOSED = 33.987240 [dB]
+	PSNR-STD-PROPOSED = 2.414598 [dB]
+
+
+-------- NORMAL DISTRIBUTION TO GENERATOR INSTEAD OF UNIFORM ------
+5.  random_mask_factor4_D1_normal_noise
+ 	d upadtes 1
+ 	L2 weight = 1
+ 	use normal distribtuion in generator input with mean=0, std=0.1
+ 	snapshot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_D1_normal_noise/model.ckpt-1650000
+	MSE-PROPOSED = 38.487789
+	PSNR-MEAN-PROPOSED = 32.311570 [dB]
+	PSNR-STD-PROPOSED = 2.003987 [dB]
+	2500:
+	MSE-PROPOSED = 38.456776
+	PSNR-MEAN-PROPOSED = 32.315071 [dB]
+	PSNR-STD-PROPOSED = 2.004245 [dB]
+
+6. UNET - 
+ 	d upadtes 1
+ 	L2 weight = 1
+ 	use normal distribtuion in generator input with mean=0, std=0.1
+ 	snapshot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv_unet//IXI/random_mask_factor4_D1_normal_noise/model.ckpt-980000
+	results 2500:
+	MSE-PROPOSED = 32.810162
+	PSNR-MEAN-PROPOSED = 33.004716 [dB]
+	PSNR-STD-PROPOSED = 2.215404 [dB]
+
+7. Centered
+	TRAINED ON ONLY CENTRED DATA
+ 	d upadtes 1
+ 	L2 weight = 1
+ 	use normal distribtuion in generator input with mean=0, std=0.1
+	snspshot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_D1_normal_noise_centered/model.ckpt-90000
+	On all data 2500:
+	MSE-PROPOSED = 45.184822
+	PSNR-MEAN-PROPOSED = 31.614873 [dB]
+	PSNR-STD-PROPOSED = 1.990919 [dB]
+	On centered data 2500:
+	MSE-PROPOSED = 45.187130
+	PSNR-MEAN-PROPOSED = 31.614652 [dB]
+	PSNR-STD-PROPOSED = 1.990184 [dB]
+
+
+
+
+--------------------------------------- ######### Results from random_mask_rv_Nov17 after many bug fixes ######### -----------------------
+
+Matlab 7123 examples - fixed data:
+Zero:
+Mean: 27.412848841780146
+Std: 2.2310414405058099
+CS:
+Mean: 33.774401474097992
+Std: 2.6073875010213143
+on 2500:
+Mean: 33.824387039999998
+Std: 2.6057781256093233
+
+1. random_mask_factor4_D1
+	discriminator updates = 1
+	snapshot - /sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv_Nov17/IXI/random_mask_factor4_D1/model.ckpt-780000
+	******************BEST NOV 2017******************
+	2500:
+	MSE-PROPOSED = 21.170401
+	PSNR-MEAN-PROPOSED = 34.907508 [dB]
+	PSNR-STD-PROPOSED = 2.447093 [dB]
+
+Fixed data:
+MSE-ZERO = 138.067856
+MSE-PROPOSED = 21.232183
+PSNR-MEAN-ZERO = 26.763873 [dB]
+PSNR-MEAN-PROPOSED = 34.894852 [dB]
+PSNR-STD-ZERO = 2.189415 [dB]
+PSNR-STD-PROPOSED = 2.497164 [dB
+
+
+
+
+2. random_mask_factor4_D1_clip005
+	discriminator updates = 1
+	clip w = 0.005
+	snapshot - /newdisk/ohadsh/work/runs/Wgan/random_mask_rv_Nov17/IXI/random_mask_factor4_D1_clip005/model.ckpt-840000
+	MSE-PROPOSED = 45.892414
+	PSNR-MEAN-PROPOSED = 31.547390 [dB]
+	PSNR-STD-PROPOSED = 0.897232 [dB]
+
+
+
+
+################################################## Random mask Factor 6 ##########################################
+Results 5000 examples:
+
+Zero padding:
+MSE-ZERO = 1285.482056
+PSNR-MEAN-ZERO = 17.074139 [dB]
+PSNR-STD-ZERO = 2.673718 [dB]
+
+CS-MRI:
+something aroung 29.19
+PSNR-MEAN-CS = 28.561676509090912
+PSNR-STD-CS = 3.6353399666692416
+
+1.	random_mask_factor6_D2
+	discriminator updates = 2
+	snspahot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor6_D2/model.ckpt-1070000
+		MSE-PROPOSED = 119.890587
+		PSNR-MEAN-PROPOSED = 27.376948 [dB]
+		PSNR-STD-PROPOSED = 3.421560 [dB]
+
+
+2.	random_mask_factor6_D2_biasZero
+	discriminator updates = 2
+	snspahot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor6_D2_biasZero/model.ckpt-130000
+		MSE-PROPOSED = 146.700714
+		PSNR-MEAN-PROPOSED = 26.500477 [dB]
+		PSNR-STD-PROPOSED = 3.491237 [dB]
+
+	snapshot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor6_D2_biasZero/model.ckpt-1000000
+		MSE-PROPOSED = 97.309509
+		PSNR-MEAN-PROPOSED = 28.283246 [dB]
+		PSNR-STD-PROPOSED = 2.824119 [dB]
+
+	snapshot - /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor6_D2_biasZero/model.ckpt-2370000
+		MSE-PROPOSED = 92.876717
+		PSNR-MEAN-PROPOSED = 28.485731 [dB]
+		PSNR-STD-PROPOSED = 2.760201 [dB]
+
+
+
+	//
+	python statistics.py --data_base IXI_T1 --sampling_factor 6 --tt train --predict_name random_mask_factor4_single --predict_path /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_single/predict/train/ --checkpoint /media/ohadsh/sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv/IXI/random_mask_factor4_single/model.ckpt-790000

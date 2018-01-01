@@ -1,0 +1,8 @@
+# Dimensions
+256 256 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+# Command
+fft -i 7 /media/ohadsh/Data/ohadsh/work/python/thesis/appcode/mri/CS/example /media/ohadsh/Data/ohadsh/work/python/thesis/appcode/mri/CS/example_fft 
+# Files
+ >/media/ohadsh/Data/ohadsh/work/python/thesis/appcode/mri/CS/example_fft </media/ohadsh/Data/ohadsh/work/python/thesis/appcode/mri/CS/example
+# Creator
+BART v0.4.01

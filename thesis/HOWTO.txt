@@ -1,0 +1,63 @@
+How to file:
+
+1. First, you need to have a nifti database of MRI scans,
+   The dataBase should be in 1 directory, each case in different dir, named "caseX"
+
+2. You can create a dataBase by using:
+    from appcode.mri.data.mri_data_base import MriDataBase
+    data_source = MriDataBase('SchizReg')
+
+    Need to data_to_path.json in appcode.mri.data in order to init the class
+
+3. Create a base data for training using:
+    data_source = MriDataBase(data_base_name)
+    data_creator = DataCreator(data_source, output_dir, axial_limits=axial_limits)
+    data_creator.create_examples()
+
+    Or by script:
+    python create_base_data_for_train.py --data_base_name=SchizReg --output_dir=/sheard/Ohad/thesis/data/SchizData/SchizReg/train/03_01_2016/base/
+
+4. Shuffle the data using:
+    python shuffle_data.py --base_dir=/media/ohadsh/sheard/Ohad/thesis/data/SchizData/SchizReg/train/03_01_2016/base
+    --output_dir=/media/ohadsh/sheard/Ohad/thesis/data/SchizData/SchizReg/train/03_01_2016/shuffle/ --seed=135
+
+3+4 : both:
+from appcode/mri/k_space:
+python create_base_data_for_train.py --data_base_name=SchizReg --output_dir=/sheard/Ohad/thesis/data/SchizData/SchizReg/train/03_01_2016/ ; python ./shuffle_data.py --base_dir=/media/ohadsh/sheard/Ohad/thesis/data/SchizData/SchizReg/train/03_01_2016/base --output_dir=/media/ohadsh/sheard/Ohad/thesis/data/SchizData/SchizReg/train/03_01_2016/ --seed=456
+
+Good updated example:
+cd ~/work/python/thesis/appcode/mri/k_space; set BASE=/sheard/Ohad/thesis/data/IXI/data_for_train/T1/sagittal/ ; python create_base_data_for_train.py --data_base_name=IXI_T1 --output_dir=${BASE} --axial_limits "[30,122]" --rot 90 ; python shuffle_data.py --base_dir=${BASE}/base/ --output_dir=${BASE}/ --data_base IXI_T1
+
+
+5. Train and have fun
+
+rsync -raP /sheard/Ohad/thesis/data/SchizData/SchizReg/train/24_05_2016/shuffle/* ohadsh@132.72.48.22:/home/ohadsh/work/data/SchizReg/
+snx -s vpn1.bgu.ac.il -u ohas@vpn
+6013
+
+6. Freesurfer
+set FREESURFER_HOME = /media/ohadsh/sheard/Ohad/Downloads/freesurfe
+source FreeSurferEnv.csh
+run bin/freeview
+
+7.
+FSL segmentation:
+setenv FSLDIR /media/ohadsh/sheard/Ohad/thesis/tools/fsl - already in ~/.tcshrc
+setFSL -> which means $FSLDIR/etc/fslconf/fsl.csh
+cd $FSLDIR/bin
+fast -I 1 -v /media/ohadsh/sheard/Ohad/thesis/tools/examples/new_image.nii.gz
+-I 1- only one iterations of something
+
+
+8. Create nifti data from training, predict and other.
+python $THESIS/appcode/mri/results/create_nifti_from_raw_data.py --data_dir /media/ohadsh/sheard/Ohad/thesis/data/IXI/data_for_train/T1/sagittal_updated/shuffle/ --predict_path /sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv_Nov17/IXI/random_mask_factor4_D1/predict/train/ --cs_path /sheard/googleDrive/Master/runs/CS/IXI/random_mask_subset/factor4/cs_mri_predict.bin --tt train --output_path /sheard/try/train/ --random_sampling_factor 4 --num_of_cases 10
+
+9. Create segmentation commands:
+python $THESIS/appcode/mri/results/create_segmentation_commands.py --data_dir /media/ohadsh/sheard/try/train/ --suffixes "['','_predict', '_zeroPadding', '_CS']" --num_of_cases 10
+
+10. Calculate dice score
+python $THESIS/appcode/mri/results/calc_segmentation_statistics.py --data_dir /media/ohadsh/sheard/try/train/ --suffixes "['','_predict', '_zeroPadding']" --num_of_cases 2 --brain_only True
+
+
+11. Viewer:
+python $THESIS/appcode/mri/results/viewer.py --data_dir /media/ohadsh/sheard/try/results/factor6/random_mask_factor6_D1_lr2_weighted_2_model.ckpt-1280000/ --suffixes "['','_CS', '_predict']" --num_of_cases 3 --brain_only True --views "['brains','segs']" --mask "{'x1': 35, 'x2': 245, 'y1': 20, 'y2': 256}"

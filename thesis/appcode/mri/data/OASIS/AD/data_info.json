@@ -1,0 +1,1937 @@
+{
+  "OAS1_0329_MR1_2": {
+    "tt": "train", 
+    "hash": 278, 
+    "file": "OAS1_0329_MR1_2.hdr"
+  }, 
+  "OAS1_0329_MR1_3": {
+    "tt": "train", 
+    "hash": 279, 
+    "file": "OAS1_0329_MR1_3.hdr"
+  }, 
+  "OAS1_0329_MR1_1": {
+    "tt": "train", 
+    "hash": 277, 
+    "file": "OAS1_0329_MR1_1.hdr"
+  }, 
+  "OAS1_0329_MR1_4": {
+    "tt": "train", 
+    "hash": 280, 
+    "file": "OAS1_0329_MR1_4.hdr"
+  }, 
+  "OAS1_0335_MR1_4": {
+    "tt": "train", 
+    "hash": 284, 
+    "file": "OAS1_0335_MR1_4.hdr"
+  }, 
+  "OAS1_0210_MR1_4": {
+    "tt": "train", 
+    "hash": 168, 
+    "file": "OAS1_0210_MR1_4.hdr"
+  }, 
+  "OAS1_0210_MR1_3": {
+    "tt": "train", 
+    "hash": 167, 
+    "file": "OAS1_0210_MR1_3.hdr"
+  }, 
+  "OAS1_0210_MR1_2": {
+    "tt": "train", 
+    "hash": 166, 
+    "file": "OAS1_0210_MR1_2.hdr"
+  }, 
+  "OAS1_0335_MR1_3": {
+    "tt": "train", 
+    "hash": 283, 
+    "file": "OAS1_0335_MR1_3.hdr"
+  }, 
+  "OAS1_0335_MR1_2": {
+    "tt": "train", 
+    "hash": 282, 
+    "file": "OAS1_0335_MR1_2.hdr"
+  }, 
+  "OAS1_0084_MR1_2": {
+    "tt": "train", 
+    "hash": 82, 
+    "file": "OAS1_0084_MR1_2.hdr"
+  }, 
+  "OAS1_0084_MR1_3": {
+    "tt": "train", 
+    "hash": 83, 
+    "file": "OAS1_0084_MR1_3.hdr"
+  }, 
+  "OAS1_0084_MR1_1": {
+    "tt": "test", 
+    "hash": 81, 
+    "file": "OAS1_0084_MR1_1.hdr"
+  }, 
+  "OAS1_0084_MR1_4": {
+    "tt": "train", 
+    "hash": 84, 
+    "file": "OAS1_0084_MR1_4.hdr"
+  }, 
+  "OAS1_0308_MR1_1": {
+    "tt": "train", 
+    "hash": 261, 
+    "file": "OAS1_0308_MR1_1.hdr"
+  }, 
+  "OAS1_0308_MR1_3": {
+    "tt": "train", 
+    "hash": 263, 
+    "file": "OAS1_0308_MR1_3.hdr"
+  }, 
+  "OAS1_0308_MR1_2": {
+    "tt": "train", 
+    "hash": 262, 
+    "file": "OAS1_0308_MR1_2.hdr"
+  }, 
+  "OAS1_0308_MR1_4": {
+    "tt": "test", 
+    "hash": 264, 
+    "file": "OAS1_0308_MR1_4.hdr"
+  }, 
+  "OAS1_0028_MR1_1": {
+    "tt": "test", 
+    "hash": 23, 
+    "file": "OAS1_0028_MR1_1.hdr"
+  }, 
+  "OAS1_0082_MR1_4": {
+    "tt": "test", 
+    "hash": 80, 
+    "file": "OAS1_0082_MR1_4.hdr"
+  }, 
+  "OAS1_0124_MR1_3": {
+    "tt": "train", 
+    "hash": 111, 
+    "file": "OAS1_0124_MR1_3.hdr"
+  }, 
+  "OAS1_0124_MR1_2": {
+    "tt": "train", 
+    "hash": 110, 
+    "file": "OAS1_0124_MR1_2.hdr"
+  }, 
+  "OAS1_0082_MR1_1": {
+    "tt": "train", 
+    "hash": 77, 
+    "file": "OAS1_0082_MR1_1.hdr"
+  }, 
+  "OAS1_0082_MR1_2": {
+    "tt": "train", 
+    "hash": 78, 
+    "file": "OAS1_0082_MR1_2.hdr"
+  }, 
+  "OAS1_0082_MR1_3": {
+    "tt": "train", 
+    "hash": 79, 
+    "file": "OAS1_0082_MR1_3.hdr"
+  }, 
+  "OAS1_0015_MR1_1": {
+    "tt": "train", 
+    "hash": 5, 
+    "file": "OAS1_0015_MR1_1.hdr"
+  }, 
+  "OAS1_0015_MR1_2": {
+    "tt": "train", 
+    "hash": 6, 
+    "file": "OAS1_0015_MR1_2.hdr"
+  }, 
+  "OAS1_0015_MR1_3": {
+    "tt": "train", 
+    "hash": 7, 
+    "file": "OAS1_0015_MR1_3.hdr"
+  }, 
+  "OAS1_0023_MR1_3": {
+    "tt": "train", 
+    "hash": 21, 
+    "file": "OAS1_0023_MR1_3.hdr"
+  }, 
+  "OAS1_0291_MR1_3": {
+    "tt": "train", 
+    "hash": 243, 
+    "file": "OAS1_0291_MR1_3.hdr"
+  }, 
+  "OAS1_0023_MR1_1": {
+    "tt": "train", 
+    "hash": 19, 
+    "file": "OAS1_0023_MR1_1.hdr"
+  }, 
+  "OAS1_0137_MR1_2": {
+    "tt": "train", 
+    "hash": 118, 
+    "file": "OAS1_0137_MR1_2.hdr"
+  }, 
+  "OAS1_0137_MR1_4": {
+    "tt": "train", 
+    "hash": 120, 
+    "file": "OAS1_0137_MR1_4.hdr"
+  }, 
+  "OAS1_0291_MR1_4": {
+    "tt": "train", 
+    "hash": 244, 
+    "file": "OAS1_0291_MR1_4.hdr"
+  }, 
+  "OAS1_0023_MR1_4": {
+    "tt": "train", 
+    "hash": 22, 
+    "file": "OAS1_0023_MR1_4.hdr"
+  }, 
+  "OAS1_0335_MR1_1": {
+    "tt": "train", 
+    "hash": 281, 
+    "file": "OAS1_0335_MR1_1.hdr"
+  }, 
+  "OAS1_0185_MR1_2": {
+    "tt": "train", 
+    "hash": 158, 
+    "file": "OAS1_0185_MR1_2.hdr"
+  }, 
+  "OAS1_0185_MR1_3": {
+    "tt": "train", 
+    "hash": 159, 
+    "file": "OAS1_0185_MR1_3.hdr"
+  }, 
+  "OAS1_0233_MR1_4": {
+    "tt": "train", 
+    "hash": 183, 
+    "file": "OAS1_0233_MR1_4.hdr"
+  }, 
+  "OAS1_0185_MR1_1": {
+    "tt": "train", 
+    "hash": 157, 
+    "file": "OAS1_0185_MR1_1.hdr"
+  }, 
+  "OAS1_0233_MR1_2": {
+    "tt": "train", 
+    "hash": 181, 
+    "file": "OAS1_0233_MR1_2.hdr"
+  }, 
+  "OAS1_0233_MR1_3": {
+    "tt": "train", 
+    "hash": 182, 
+    "file": "OAS1_0233_MR1_3.hdr"
+  }, 
+  "OAS1_0185_MR1_4": {
+    "tt": "train", 
+    "hash": 160, 
+    "file": "OAS1_0185_MR1_4.hdr"
+  }, 
+  "OAS1_0233_MR1_1": {
+    "tt": "train", 
+    "hash": 180, 
+    "file": "OAS1_0233_MR1_1.hdr"
+  }, 
+  "OAS1_0046_MR1_4": {
+    "tt": "train", 
+    "hash": 49, 
+    "file": "OAS1_0046_MR1_4.hdr"
+  }, 
+  "OAS1_0039_MR1_3": {
+    "tt": "train", 
+    "hash": 37, 
+    "file": "OAS1_0039_MR1_3.hdr"
+  }, 
+  "OAS1_0046_MR1_1": {
+    "tt": "train", 
+    "hash": 46, 
+    "file": "OAS1_0046_MR1_1.hdr"
+  }, 
+  "OAS1_0046_MR1_2": {
+    "tt": "train", 
+    "hash": 47, 
+    "file": "OAS1_0046_MR1_2.hdr"
+  }, 
+  "OAS1_0046_MR1_3": {
+    "tt": "train", 
+    "hash": 48, 
+    "file": "OAS1_0046_MR1_3.hdr"
+  }, 
+  "OAS1_0291_MR1_2": {
+    "tt": "train", 
+    "hash": 242, 
+    "file": "OAS1_0291_MR1_2.hdr"
+  }, 
+  "OAS1_0179_MR1_3": {
+    "tt": "train", 
+    "hash": 151, 
+    "file": "OAS1_0179_MR1_3.hdr"
+  }, 
+  "OAS1_0179_MR1_2": {
+    "tt": "test", 
+    "hash": 150, 
+    "file": "OAS1_0179_MR1_2.hdr"
+  }, 
+  "OAS1_0179_MR1_1": {
+    "tt": "train", 
+    "hash": 149, 
+    "file": "OAS1_0179_MR1_1.hdr"
+  }, 
+  "OAS1_0179_MR1_4": {
+    "tt": "train", 
+    "hash": 152, 
+    "file": "OAS1_0179_MR1_4.hdr"
+  }, 
+  "OAS1_0451_MR1_1": {
+    "tt": "train", 
+    "hash": 376, 
+    "file": "OAS1_0451_MR1_1.hdr"
+  }, 
+  "OAS1_0451_MR1_2": {
+    "tt": "train", 
+    "hash": 377, 
+    "file": "OAS1_0451_MR1_2.hdr"
+  }, 
+  "OAS1_0451_MR1_3": {
+    "tt": "train", 
+    "hash": 378, 
+    "file": "OAS1_0451_MR1_3.hdr"
+  }, 
+  "OAS1_0447_MR1_4": {
+    "tt": "train", 
+    "hash": 375, 
+    "file": "OAS1_0447_MR1_4.hdr"
+  }, 
+  "OAS1_0447_MR1_1": {
+    "tt": "train", 
+    "hash": 372, 
+    "file": "OAS1_0447_MR1_1.hdr"
+  }, 
+  "OAS1_0447_MR1_3": {
+    "tt": "train", 
+    "hash": 374, 
+    "file": "OAS1_0447_MR1_3.hdr"
+  }, 
+  "OAS1_0447_MR1_2": {
+    "tt": "train", 
+    "hash": 373, 
+    "file": "OAS1_0447_MR1_2.hdr"
+  }, 
+  "OAS1_0134_MR1_4": {
+    "tt": "test", 
+    "hash": 116, 
+    "file": "OAS1_0134_MR1_4.hdr"
+  }, 
+  "OAS1_0134_MR1_2": {
+    "tt": "train", 
+    "hash": 114, 
+    "file": "OAS1_0134_MR1_2.hdr"
+  }, 
+  "OAS1_0134_MR1_3": {
+    "tt": "train", 
+    "hash": 115, 
+    "file": "OAS1_0134_MR1_3.hdr"
+  }, 
+  "OAS1_0134_MR1_1": {
+    "tt": "train", 
+    "hash": 113, 
+    "file": "OAS1_0134_MR1_1.hdr"
+  }, 
+  "OAS1_0115_MR1_1": {
+    "tt": "test", 
+    "hash": 93, 
+    "file": "OAS1_0115_MR1_1.hdr"
+  }, 
+  "OAS1_0115_MR1_3": {
+    "tt": "train", 
+    "hash": 95, 
+    "file": "OAS1_0115_MR1_3.hdr"
+  }, 
+  "OAS1_0115_MR1_2": {
+    "tt": "train", 
+    "hash": 94, 
+    "file": "OAS1_0115_MR1_2.hdr"
+  }, 
+  "OAS1_0115_MR1_4": {
+    "tt": "train", 
+    "hash": 96, 
+    "file": "OAS1_0115_MR1_4.hdr"
+  }, 
+  "OAS1_0124_MR1_1": {
+    "tt": "train", 
+    "hash": 109, 
+    "file": "OAS1_0124_MR1_1.hdr"
+  }, 
+  "OAS1_0124_MR1_4": {
+    "tt": "train", 
+    "hash": 112, 
+    "file": "OAS1_0124_MR1_4.hdr"
+  }, 
+  "OAS1_0432_MR1_1": {
+    "tt": "train", 
+    "hash": 360, 
+    "file": "OAS1_0432_MR1_1.hdr"
+  }, 
+  "OAS1_0432_MR1_3": {
+    "tt": "test", 
+    "hash": 362, 
+    "file": "OAS1_0432_MR1_3.hdr"
+  }, 
+  "OAS1_0432_MR1_2": {
+    "tt": "train", 
+    "hash": 361, 
+    "file": "OAS1_0432_MR1_2.hdr"
+  }, 
+  "OAS1_0432_MR1_4": {
+    "tt": "train", 
+    "hash": 363, 
+    "file": "OAS1_0432_MR1_4.hdr"
+  }, 
+  "OAS1_0402_MR1_1": {
+    "tt": "train", 
+    "hash": 332, 
+    "file": "OAS1_0402_MR1_1.hdr"
+  }, 
+  "OAS1_0402_MR1_2": {
+    "tt": "train", 
+    "hash": 333, 
+    "file": "OAS1_0402_MR1_2.hdr"
+  }, 
+  "OAS1_0402_MR1_3": {
+    "tt": "train", 
+    "hash": 334, 
+    "file": "OAS1_0402_MR1_3.hdr"
+  }, 
+  "OAS1_0402_MR1_4": {
+    "tt": "train", 
+    "hash": 335, 
+    "file": "OAS1_0402_MR1_4.hdr"
+  }, 
+  "OAS1_0155_MR1_4": {
+    "tt": "train", 
+    "hash": 132, 
+    "file": "OAS1_0155_MR1_4.hdr"
+  }, 
+  "OAS1_0155_MR1_1": {
+    "tt": "train", 
+    "hash": 129, 
+    "file": "OAS1_0155_MR1_1.hdr"
+  }, 
+  "OAS1_0155_MR1_3": {
+    "tt": "train", 
+    "hash": 131, 
+    "file": "OAS1_0155_MR1_3.hdr"
+  }, 
+  "OAS1_0155_MR1_2": {
+    "tt": "train", 
+    "hash": 130, 
+    "file": "OAS1_0155_MR1_2.hdr"
+  }, 
+  "OAS1_0399_MR1_3": {
+    "tt": "train", 
+    "hash": 326, 
+    "file": "OAS1_0399_MR1_3.hdr"
+  }, 
+  "OAS1_0399_MR1_2": {
+    "tt": "train", 
+    "hash": 325, 
+    "file": "OAS1_0399_MR1_2.hdr"
+  }, 
+  "OAS1_0399_MR1_1": {
+    "tt": "train", 
+    "hash": 324, 
+    "file": "OAS1_0399_MR1_1.hdr"
+  }, 
+  "OAS1_0312_MR1_1": {
+    "tt": "train", 
+    "hash": 265, 
+    "file": "OAS1_0312_MR1_1.hdr"
+  }, 
+  "OAS1_0312_MR1_2": {
+    "tt": "train", 
+    "hash": 266, 
+    "file": "OAS1_0312_MR1_2.hdr"
+  }, 
+  "OAS1_0399_MR1_4": {
+    "tt": "test", 
+    "hash": 327, 
+    "file": "OAS1_0399_MR1_4.hdr"
+  }, 
+  "OAS1_0405_MR1_3": {
+    "tt": "train", 
+    "hash": 338, 
+    "file": "OAS1_0405_MR1_3.hdr"
+  }, 
+  "OAS1_0405_MR1_2": {
+    "tt": "train", 
+    "hash": 337, 
+    "file": "OAS1_0405_MR1_2.hdr"
+  }, 
+  "OAS1_0405_MR1_1": {
+    "tt": "train", 
+    "hash": 336, 
+    "file": "OAS1_0405_MR1_1.hdr"
+  }, 
+  "OAS1_0405_MR1_4": {
+    "tt": "train", 
+    "hash": 339, 
+    "file": "OAS1_0405_MR1_4.hdr"
+  }, 
+  "OAS1_0374_MR1_4": {
+    "tt": "train", 
+    "hash": 307, 
+    "file": "OAS1_0374_MR1_4.hdr"
+  }, 
+  "OAS1_0374_MR1_1": {
+    "tt": "test", 
+    "hash": 304, 
+    "file": "OAS1_0374_MR1_1.hdr"
+  }, 
+  "OAS1_0374_MR1_2": {
+    "tt": "train", 
+    "hash": 305, 
+    "file": "OAS1_0374_MR1_2.hdr"
+  }, 
+  "OAS1_0374_MR1_3": {
+    "tt": "train", 
+    "hash": 306, 
+    "file": "OAS1_0374_MR1_3.hdr"
+  }, 
+  "OAS1_0351_MR1_4": {
+    "tt": "train", 
+    "hash": 292, 
+    "file": "OAS1_0351_MR1_4.hdr"
+  }, 
+  "OAS1_0351_MR1_3": {
+    "tt": "train", 
+    "hash": 291, 
+    "file": "OAS1_0351_MR1_3.hdr"
+  }, 
+  "OAS1_0351_MR1_2": {
+    "tt": "test", 
+    "hash": 290, 
+    "file": "OAS1_0351_MR1_2.hdr"
+  }, 
+  "OAS1_0351_MR1_1": {
+    "tt": "train", 
+    "hash": 289, 
+    "file": "OAS1_0351_MR1_1.hdr"
+  }, 
+  "OAS1_0312_MR1_4": {
+    "tt": "test", 
+    "hash": 268, 
+    "file": "OAS1_0312_MR1_4.hdr"
+  }, 
+  "OAS1_0287_MR1_4": {
+    "tt": "train", 
+    "hash": 232, 
+    "file": "OAS1_0287_MR1_4.hdr"
+  }, 
+  "OAS1_0287_MR1_3": {
+    "tt": "train", 
+    "hash": 231, 
+    "file": "OAS1_0287_MR1_3.hdr"
+  }, 
+  "OAS1_0287_MR1_2": {
+    "tt": "train", 
+    "hash": 230, 
+    "file": "OAS1_0287_MR1_2.hdr"
+  }, 
+  "OAS1_0287_MR1_1": {
+    "tt": "train", 
+    "hash": 229, 
+    "file": "OAS1_0287_MR1_1.hdr"
+  }, 
+  "OAS1_0039_MR1_2": {
+    "tt": "train", 
+    "hash": 36, 
+    "file": "OAS1_0039_MR1_2.hdr"
+  }, 
+  "OAS1_0226_MR1_1": {
+    "tt": "test", 
+    "hash": 176, 
+    "file": "OAS1_0226_MR1_1.hdr"
+  }, 
+  "OAS1_0226_MR1_2": {
+    "tt": "train", 
+    "hash": 177, 
+    "file": "OAS1_0226_MR1_2.hdr"
+  }, 
+  "OAS1_0226_MR1_3": {
+    "tt": "train", 
+    "hash": 178, 
+    "file": "OAS1_0226_MR1_3.hdr"
+  }, 
+  "OAS1_0226_MR1_4": {
+    "tt": "train", 
+    "hash": 179, 
+    "file": "OAS1_0226_MR1_4.hdr"
+  }, 
+  "OAS1_0268_MR1_2": {
+    "tt": "train", 
+    "hash": 207, 
+    "file": "OAS1_0268_MR1_2.hdr"
+  }, 
+  "OAS1_0268_MR1_3": {
+    "tt": "train", 
+    "hash": 208, 
+    "file": "OAS1_0268_MR1_3.hdr"
+  }, 
+  "OAS1_0268_MR1_1": {
+    "tt": "train", 
+    "hash": 206, 
+    "file": "OAS1_0268_MR1_1.hdr"
+  }, 
+  "OAS1_0268_MR1_4": {
+    "tt": "train", 
+    "hash": 209, 
+    "file": "OAS1_0268_MR1_4.hdr"
+  }, 
+  "OAS1_0312_MR1_3": {
+    "tt": "train", 
+    "hash": 267, 
+    "file": "OAS1_0312_MR1_3.hdr"
+  }, 
+  "OAS1_0060_MR1_1": {
+    "tt": "train", 
+    "hash": 62, 
+    "file": "OAS1_0060_MR1_1.hdr"
+  }, 
+  "OAS1_0060_MR1_2": {
+    "tt": "train", 
+    "hash": 63, 
+    "file": "OAS1_0060_MR1_2.hdr"
+  }, 
+  "OAS1_0060_MR1_3": {
+    "tt": "train", 
+    "hash": 64, 
+    "file": "OAS1_0060_MR1_3.hdr"
+  }, 
+  "OAS1_0060_MR1_4": {
+    "tt": "train", 
+    "hash": 65, 
+    "file": "OAS1_0060_MR1_4.hdr"
+  }, 
+  "OAS1_0123_MR1_2": {
+    "tt": "train", 
+    "hash": 106, 
+    "file": "OAS1_0123_MR1_2.hdr"
+  }, 
+  "OAS1_0123_MR1_3": {
+    "tt": "train", 
+    "hash": 107, 
+    "file": "OAS1_0123_MR1_3.hdr"
+  }, 
+  "OAS1_0123_MR1_1": {
+    "tt": "train", 
+    "hash": 105, 
+    "file": "OAS1_0123_MR1_1.hdr"
+  }, 
+  "OAS1_0123_MR1_4": {
+    "tt": "test", 
+    "hash": 108, 
+    "file": "OAS1_0123_MR1_4.hdr"
+  }, 
+  "OAS1_0158_MR1_4": {
+    "tt": "train", 
+    "hash": 136, 
+    "file": "OAS1_0158_MR1_4.hdr"
+  }, 
+  "OAS1_0158_MR1_1": {
+    "tt": "train", 
+    "hash": 133, 
+    "file": "OAS1_0158_MR1_1.hdr"
+  }, 
+  "OAS1_0158_MR1_2": {
+    "tt": "train", 
+    "hash": 134, 
+    "file": "OAS1_0158_MR1_2.hdr"
+  }, 
+  "OAS1_0158_MR1_3": {
+    "tt": "train", 
+    "hash": 135, 
+    "file": "OAS1_0158_MR1_3.hdr"
+  }, 
+  "OAS1_0272_MR1_4": {
+    "tt": "train", 
+    "hash": 217, 
+    "file": "OAS1_0272_MR1_4.hdr"
+  }, 
+  "OAS1_0272_MR1_3": {
+    "tt": "train", 
+    "hash": 216, 
+    "file": "OAS1_0272_MR1_3.hdr"
+  }, 
+  "OAS1_0272_MR1_2": {
+    "tt": "train", 
+    "hash": 215, 
+    "file": "OAS1_0272_MR1_2.hdr"
+  }, 
+  "OAS1_0272_MR1_1": {
+    "tt": "train", 
+    "hash": 214, 
+    "file": "OAS1_0272_MR1_1.hdr"
+  }, 
+  "OAS1_0053_MR1_2": {
+    "tt": "test", 
+    "hash": 55, 
+    "file": "OAS1_0053_MR1_2.hdr"
+  }, 
+  "OAS1_0053_MR1_3": {
+    "tt": "train", 
+    "hash": 56, 
+    "file": "OAS1_0053_MR1_3.hdr"
+  }, 
+  "OAS1_0053_MR1_1": {
+    "tt": "test", 
+    "hash": 54, 
+    "file": "OAS1_0053_MR1_1.hdr"
+  }, 
+  "OAS1_0053_MR1_4": {
+    "tt": "train", 
+    "hash": 57, 
+    "file": "OAS1_0053_MR1_4.hdr"
+  }, 
+  "OAS1_0290_MR1_4": {
+    "tt": "train", 
+    "hash": 240, 
+    "file": "OAS1_0290_MR1_4.hdr"
+  }, 
+  "OAS1_0290_MR1_3": {
+    "tt": "train", 
+    "hash": 239, 
+    "file": "OAS1_0290_MR1_3.hdr"
+  }, 
+  "OAS1_0290_MR1_2": {
+    "tt": "test", 
+    "hash": 238, 
+    "file": "OAS1_0290_MR1_2.hdr"
+  }, 
+  "OAS1_0290_MR1_1": {
+    "tt": "train", 
+    "hash": 237, 
+    "file": "OAS1_0290_MR1_1.hdr"
+  }, 
+  "OAS1_0400_MR1_2": {
+    "tt": "train", 
+    "hash": 329, 
+    "file": "OAS1_0400_MR1_2.hdr"
+  }, 
+  "OAS1_0137_MR1_1": {
+    "tt": "train", 
+    "hash": 117, 
+    "file": "OAS1_0137_MR1_1.hdr"
+  }, 
+  "OAS1_0400_MR1_1": {
+    "tt": "train", 
+    "hash": 328, 
+    "file": "OAS1_0400_MR1_1.hdr"
+  }, 
+  "OAS1_0217_MR1_1": {
+    "tt": "train", 
+    "hash": 169, 
+    "file": "OAS1_0217_MR1_1.hdr"
+  }, 
+  "OAS1_0400_MR1_4": {
+    "tt": "test", 
+    "hash": 331, 
+    "file": "OAS1_0400_MR1_4.hdr"
+  }, 
+  "OAS1_0023_MR1_2": {
+    "tt": "train", 
+    "hash": 20, 
+    "file": "OAS1_0023_MR1_2.hdr"
+  }, 
+  "OAS1_0137_MR1_3": {
+    "tt": "train", 
+    "hash": 119, 
+    "file": "OAS1_0137_MR1_3.hdr"
+  }, 
+  "OAS1_0056_MR1_3": {
+    "tt": "train", 
+    "hash": 60, 
+    "file": "OAS1_0056_MR1_3.hdr"
+  }, 
+  "OAS1_0056_MR1_2": {
+    "tt": "train", 
+    "hash": 59, 
+    "file": "OAS1_0056_MR1_2.hdr"
+  }, 
+  "OAS1_0056_MR1_1": {
+    "tt": "test", 
+    "hash": 58, 
+    "file": "OAS1_0056_MR1_1.hdr"
+  }, 
+  "OAS1_0291_MR1_1": {
+    "tt": "train", 
+    "hash": 241, 
+    "file": "OAS1_0291_MR1_1.hdr"
+  }, 
+  "OAS1_0056_MR1_4": {
+    "tt": "train", 
+    "hash": 61, 
+    "file": "OAS1_0056_MR1_4.hdr"
+  }, 
+  "OAS1_0039_MR1_1": {
+    "tt": "train", 
+    "hash": 35, 
+    "file": "OAS1_0039_MR1_1.hdr"
+  }, 
+  "OAS1_0143_MR1_1": {
+    "tt": "train", 
+    "hash": 125, 
+    "file": "OAS1_0143_MR1_1.hdr"
+  }, 
+  "OAS1_0143_MR1_2": {
+    "tt": "train", 
+    "hash": 126, 
+    "file": "OAS1_0143_MR1_2.hdr"
+  }, 
+  "OAS1_0143_MR1_3": {
+    "tt": "train", 
+    "hash": 127, 
+    "file": "OAS1_0143_MR1_3.hdr"
+  }, 
+  "OAS1_0143_MR1_4": {
+    "tt": "train", 
+    "hash": 128, 
+    "file": "OAS1_0143_MR1_4.hdr"
+  }, 
+  "OAS1_0052_MR1_4": {
+    "tt": "train", 
+    "hash": 53, 
+    "file": "OAS1_0052_MR1_4.hdr"
+  }, 
+  "OAS1_0052_MR1_3": {
+    "tt": "test", 
+    "hash": 52, 
+    "file": "OAS1_0052_MR1_3.hdr"
+  }, 
+  "OAS1_0052_MR1_2": {
+    "tt": "test", 
+    "hash": 51, 
+    "file": "OAS1_0052_MR1_2.hdr"
+  }, 
+  "OAS1_0052_MR1_1": {
+    "tt": "train", 
+    "hash": 50, 
+    "file": "OAS1_0052_MR1_1.hdr"
+  }, 
+  "OAS1_0240_MR1_1": {
+    "tt": "train", 
+    "hash": 188, 
+    "file": "OAS1_0240_MR1_1.hdr"
+  }, 
+  "OAS1_0240_MR1_2": {
+    "tt": "train", 
+    "hash": 189, 
+    "file": "OAS1_0240_MR1_2.hdr"
+  }, 
+  "OAS1_0240_MR1_3": {
+    "tt": "test", 
+    "hash": 190, 
+    "file": "OAS1_0240_MR1_3.hdr"
+  }, 
+  "OAS1_0035_MR1_4": {
+    "tt": "train", 
+    "hash": 34, 
+    "file": "OAS1_0035_MR1_4.hdr"
+  }, 
+  "OAS1_0035_MR1_2": {
+    "tt": "train", 
+    "hash": 32, 
+    "file": "OAS1_0035_MR1_2.hdr"
+  }, 
+  "OAS1_0035_MR1_3": {
+    "tt": "train", 
+    "hash": 33, 
+    "file": "OAS1_0035_MR1_3.hdr"
+  }, 
+  "OAS1_0035_MR1_1": {
+    "tt": "train", 
+    "hash": 31, 
+    "file": "OAS1_0035_MR1_1.hdr"
+  }, 
+  "OAS1_0028_MR1_4": {
+    "tt": "train", 
+    "hash": 26, 
+    "file": "OAS1_0028_MR1_4.hdr"
+  }, 
+  "OAS1_0304_MR1_4": {
+    "tt": "train", 
+    "hash": 256, 
+    "file": "OAS1_0304_MR1_4.hdr"
+  }, 
+  "OAS1_0304_MR1_1": {
+    "tt": "train", 
+    "hash": 253, 
+    "file": "OAS1_0304_MR1_1.hdr"
+  }, 
+  "OAS1_0304_MR1_3": {
+    "tt": "train", 
+    "hash": 255, 
+    "file": "OAS1_0304_MR1_3.hdr"
+  }, 
+  "OAS1_0304_MR1_2": {
+    "tt": "train", 
+    "hash": 254, 
+    "file": "OAS1_0304_MR1_2.hdr"
+  }, 
+  "OAS1_0300_MR1_1": {
+    "tt": "train", 
+    "hash": 249, 
+    "file": "OAS1_0300_MR1_1.hdr"
+  }, 
+  "OAS1_0411_MR1_1": {
+    "tt": "test", 
+    "hash": 340, 
+    "file": "OAS1_0411_MR1_1.hdr"
+  }, 
+  "OAS1_0411_MR1_2": {
+    "tt": "train", 
+    "hash": 341, 
+    "file": "OAS1_0411_MR1_2.hdr"
+  }, 
+  "OAS1_0411_MR1_3": {
+    "tt": "train", 
+    "hash": 342, 
+    "file": "OAS1_0411_MR1_3.hdr"
+  }, 
+  "OAS1_0411_MR1_4": {
+    "tt": "train", 
+    "hash": 343, 
+    "file": "OAS1_0411_MR1_4.hdr"
+  }, 
+  "OAS1_0021_MR1_1": {
+    "tt": "train", 
+    "hash": 11, 
+    "file": "OAS1_0021_MR1_1.hdr"
+  }, 
+  "OAS1_0307_MR1_3": {
+    "tt": "train", 
+    "hash": 259, 
+    "file": "OAS1_0307_MR1_3.hdr"
+  }, 
+  "OAS1_0021_MR1_3": {
+    "tt": "train", 
+    "hash": 13, 
+    "file": "OAS1_0021_MR1_3.hdr"
+  }, 
+  "OAS1_0307_MR1_1": {
+    "tt": "train", 
+    "hash": 257, 
+    "file": "OAS1_0307_MR1_1.hdr"
+  }, 
+  "OAS1_0021_MR1_4": {
+    "tt": "train", 
+    "hash": 14, 
+    "file": "OAS1_0021_MR1_4.hdr"
+  }, 
+  "OAS1_0307_MR1_4": {
+    "tt": "test", 
+    "hash": 260, 
+    "file": "OAS1_0307_MR1_4.hdr"
+  }, 
+  "OAS1_0300_MR1_4": {
+    "tt": "train", 
+    "hash": 252, 
+    "file": "OAS1_0300_MR1_4.hdr"
+  }, 
+  "OAS1_0273_MR1_2": {
+    "tt": "train", 
+    "hash": 219, 
+    "file": "OAS1_0273_MR1_2.hdr"
+  }, 
+  "OAS1_0273_MR1_3": {
+    "tt": "train", 
+    "hash": 220, 
+    "file": "OAS1_0273_MR1_3.hdr"
+  }, 
+  "OAS1_0273_MR1_1": {
+    "tt": "test", 
+    "hash": 218, 
+    "file": "OAS1_0273_MR1_1.hdr"
+  }, 
+  "OAS1_0003_MR1_1": {
+    "tt": "test", 
+    "hash": 1, 
+    "file": "OAS1_0003_MR1_1.hdr"
+  }, 
+  "OAS1_0003_MR1_3": {
+    "tt": "train", 
+    "hash": 3, 
+    "file": "OAS1_0003_MR1_3.hdr"
+  }, 
+  "OAS1_0003_MR1_2": {
+    "tt": "train", 
+    "hash": 2, 
+    "file": "OAS1_0003_MR1_2.hdr"
+  }, 
+  "OAS1_0003_MR1_4": {
+    "tt": "train", 
+    "hash": 4, 
+    "file": "OAS1_0003_MR1_4.hdr"
+  }, 
+  "OAS1_0352_MR1_1": {
+    "tt": "train", 
+    "hash": 293, 
+    "file": "OAS1_0352_MR1_1.hdr"
+  }, 
+  "OAS1_0352_MR1_2": {
+    "tt": "train", 
+    "hash": 294, 
+    "file": "OAS1_0352_MR1_2.hdr"
+  }, 
+  "OAS1_0352_MR1_3": {
+    "tt": "train", 
+    "hash": 295, 
+    "file": "OAS1_0352_MR1_3.hdr"
+  }, 
+  "OAS1_0424_MR1_4": {
+    "tt": "train", 
+    "hash": 351, 
+    "file": "OAS1_0424_MR1_4.hdr"
+  }, 
+  "OAS1_0424_MR1_1": {
+    "tt": "train", 
+    "hash": 348, 
+    "file": "OAS1_0424_MR1_1.hdr"
+  }, 
+  "OAS1_0424_MR1_2": {
+    "tt": "test", 
+    "hash": 349, 
+    "file": "OAS1_0424_MR1_2.hdr"
+  }, 
+  "OAS1_0424_MR1_3": {
+    "tt": "train", 
+    "hash": 350, 
+    "file": "OAS1_0424_MR1_3.hdr"
+  }, 
+  "OAS1_0067_MR1_3": {
+    "tt": "test", 
+    "hash": 72, 
+    "file": "OAS1_0067_MR1_3.hdr"
+  }, 
+  "OAS1_0067_MR1_2": {
+    "tt": "train", 
+    "hash": 71, 
+    "file": "OAS1_0067_MR1_2.hdr"
+  }, 
+  "OAS1_0067_MR1_1": {
+    "tt": "train", 
+    "hash": 70, 
+    "file": "OAS1_0067_MR1_1.hdr"
+  }, 
+  "OAS1_0307_MR1_2": {
+    "tt": "train", 
+    "hash": 258, 
+    "file": "OAS1_0307_MR1_2.hdr"
+  }, 
+  "OAS1_0094_MR1_4": {
+    "tt": "train", 
+    "hash": 88, 
+    "file": "OAS1_0094_MR1_4.hdr"
+  }, 
+  "OAS1_0094_MR1_1": {
+    "tt": "train", 
+    "hash": 85, 
+    "file": "OAS1_0094_MR1_1.hdr"
+  }, 
+  "OAS1_0094_MR1_3": {
+    "tt": "train", 
+    "hash": 87, 
+    "file": "OAS1_0094_MR1_3.hdr"
+  }, 
+  "OAS1_0094_MR1_2": {
+    "tt": "train", 
+    "hash": 86, 
+    "file": "OAS1_0094_MR1_2.hdr"
+  }, 
+  "OAS1_0021_MR1_2": {
+    "tt": "test", 
+    "hash": 12, 
+    "file": "OAS1_0021_MR1_2.hdr"
+  }, 
+  "OAS1_0210_MR1_1": {
+    "tt": "test", 
+    "hash": 165, 
+    "file": "OAS1_0210_MR1_1.hdr"
+  }, 
+  "OAS1_0373_MR1_4": {
+    "tt": "train", 
+    "hash": 303, 
+    "file": "OAS1_0373_MR1_4.hdr"
+  }, 
+  "OAS1_0373_MR1_3": {
+    "tt": "train", 
+    "hash": 302, 
+    "file": "OAS1_0373_MR1_3.hdr"
+  }, 
+  "OAS1_0373_MR1_2": {
+    "tt": "train", 
+    "hash": 301, 
+    "file": "OAS1_0373_MR1_2.hdr"
+  }, 
+  "OAS1_0373_MR1_1": {
+    "tt": "train", 
+    "hash": 300, 
+    "file": "OAS1_0373_MR1_1.hdr"
+  }, 
+  "OAS1_0382_MR1_3": {
+    "tt": "train", 
+    "hash": 314, 
+    "file": "OAS1_0382_MR1_3.hdr"
+  }, 
+  "OAS1_0382_MR1_2": {
+    "tt": "train", 
+    "hash": 313, 
+    "file": "OAS1_0382_MR1_2.hdr"
+  }, 
+  "OAS1_0382_MR1_1": {
+    "tt": "train", 
+    "hash": 312, 
+    "file": "OAS1_0382_MR1_1.hdr"
+  }, 
+  "OAS1_0122_MR1_4": {
+    "tt": "train", 
+    "hash": 104, 
+    "file": "OAS1_0122_MR1_4.hdr"
+  }, 
+  "OAS1_0122_MR1_3": {
+    "tt": "train", 
+    "hash": 103, 
+    "file": "OAS1_0122_MR1_3.hdr"
+  }, 
+  "OAS1_0122_MR1_2": {
+    "tt": "test", 
+    "hash": 102, 
+    "file": "OAS1_0122_MR1_2.hdr"
+  }, 
+  "OAS1_0122_MR1_1": {
+    "tt": "train", 
+    "hash": 101, 
+    "file": "OAS1_0122_MR1_1.hdr"
+  }, 
+  "OAS1_0382_MR1_4": {
+    "tt": "train", 
+    "hash": 315, 
+    "file": "OAS1_0382_MR1_4.hdr"
+  }, 
+  "OAS1_0066_MR1_4": {
+    "tt": "train", 
+    "hash": 69, 
+    "file": "OAS1_0066_MR1_4.hdr"
+  }, 
+  "OAS1_0066_MR1_2": {
+    "tt": "train", 
+    "hash": 67, 
+    "file": "OAS1_0066_MR1_2.hdr"
+  }, 
+  "OAS1_0016_MR1_3": {
+    "tt": "test", 
+    "hash": 10, 
+    "file": "OAS1_0016_MR1_3.hdr"
+  }, 
+  "OAS1_0016_MR1_2": {
+    "tt": "train", 
+    "hash": 9, 
+    "file": "OAS1_0016_MR1_2.hdr"
+  }, 
+  "OAS1_0016_MR1_1": {
+    "tt": "train", 
+    "hash": 8, 
+    "file": "OAS1_0016_MR1_1.hdr"
+  }, 
+  "OAS1_0288_MR1_4": {
+    "tt": "train", 
+    "hash": 236, 
+    "file": "OAS1_0288_MR1_4.hdr"
+  }, 
+  "OAS1_0300_MR1_3": {
+    "tt": "train", 
+    "hash": 251, 
+    "file": "OAS1_0300_MR1_3.hdr"
+  }, 
+  "OAS1_0300_MR1_2": {
+    "tt": "test", 
+    "hash": 250, 
+    "file": "OAS1_0300_MR1_2.hdr"
+  }, 
+  "OAS1_0288_MR1_1": {
+    "tt": "train", 
+    "hash": 233, 
+    "file": "OAS1_0288_MR1_1.hdr"
+  }, 
+  "OAS1_0288_MR1_2": {
+    "tt": "train", 
+    "hash": 234, 
+    "file": "OAS1_0288_MR1_2.hdr"
+  }, 
+  "OAS1_0288_MR1_3": {
+    "tt": "train", 
+    "hash": 235, 
+    "file": "OAS1_0288_MR1_3.hdr"
+  }, 
+  "OAS1_0164_MR1_4": {
+    "tt": "train", 
+    "hash": 144, 
+    "file": "OAS1_0164_MR1_4.hdr"
+  }, 
+  "OAS1_0164_MR1_1": {
+    "tt": "train", 
+    "hash": 141, 
+    "file": "OAS1_0164_MR1_1.hdr"
+  }, 
+  "OAS1_0164_MR1_3": {
+    "tt": "test", 
+    "hash": 143, 
+    "file": "OAS1_0164_MR1_3.hdr"
+  }, 
+  "OAS1_0164_MR1_2": {
+    "tt": "train", 
+    "hash": 142, 
+    "file": "OAS1_0164_MR1_2.hdr"
+  }, 
+  "OAS1_0247_MR1_3": {
+    "tt": "train", 
+    "hash": 197, 
+    "file": "OAS1_0247_MR1_3.hdr"
+  }, 
+  "OAS1_0247_MR1_2": {
+    "tt": "train", 
+    "hash": 196, 
+    "file": "OAS1_0247_MR1_2.hdr"
+  }, 
+  "OAS1_0247_MR1_1": {
+    "tt": "train", 
+    "hash": 195, 
+    "file": "OAS1_0247_MR1_1.hdr"
+  }, 
+  "OAS1_0247_MR1_4": {
+    "tt": "train", 
+    "hash": 198, 
+    "file": "OAS1_0247_MR1_4.hdr"
+  }, 
+  "OAS1_0278_MR1_4": {
+    "tt": "train", 
+    "hash": 224, 
+    "file": "OAS1_0278_MR1_4.hdr"
+  }, 
+  "OAS1_0161_MR1_4": {
+    "tt": "train", 
+    "hash": 140, 
+    "file": "OAS1_0161_MR1_4.hdr"
+  }, 
+  "OAS1_0161_MR1_1": {
+    "tt": "train", 
+    "hash": 137, 
+    "file": "OAS1_0161_MR1_1.hdr"
+  }, 
+  "OAS1_0161_MR1_2": {
+    "tt": "train", 
+    "hash": 138, 
+    "file": "OAS1_0161_MR1_2.hdr"
+  }, 
+  "OAS1_0161_MR1_3": {
+    "tt": "test", 
+    "hash": 139, 
+    "file": "OAS1_0161_MR1_3.hdr"
+  }, 
+  "OAS1_0278_MR1_3": {
+    "tt": "train", 
+    "hash": 223, 
+    "file": "OAS1_0278_MR1_3.hdr"
+  }, 
+  "OAS1_0142_MR1_4": {
+    "tt": "test", 
+    "hash": 124, 
+    "file": "OAS1_0142_MR1_4.hdr"
+  }, 
+  "OAS1_0142_MR1_1": {
+    "tt": "train", 
+    "hash": 121, 
+    "file": "OAS1_0142_MR1_1.hdr"
+  }, 
+  "OAS1_0142_MR1_3": {
+    "tt": "train", 
+    "hash": 123, 
+    "file": "OAS1_0142_MR1_3.hdr"
+  }, 
+  "OAS1_0142_MR1_2": {
+    "tt": "test", 
+    "hash": 122, 
+    "file": "OAS1_0142_MR1_2.hdr"
+  }, 
+  "OAS1_0452_MR1_3": {
+    "tt": "train", 
+    "hash": 381, 
+    "file": "OAS1_0452_MR1_3.hdr"
+  }, 
+  "OAS1_0452_MR1_2": {
+    "tt": "test", 
+    "hash": 380, 
+    "file": "OAS1_0452_MR1_2.hdr"
+  }, 
+  "OAS1_0452_MR1_1": {
+    "tt": "train", 
+    "hash": 379, 
+    "file": "OAS1_0452_MR1_1.hdr"
+  }, 
+  "OAS1_0166_MR1_4": {
+    "tt": "test", 
+    "hash": 148, 
+    "file": "OAS1_0166_MR1_4.hdr"
+  }, 
+  "OAS1_0166_MR1_3": {
+    "tt": "train", 
+    "hash": 147, 
+    "file": "OAS1_0166_MR1_3.hdr"
+  }, 
+  "OAS1_0166_MR1_2": {
+    "tt": "train", 
+    "hash": 146, 
+    "file": "OAS1_0166_MR1_2.hdr"
+  }, 
+  "OAS1_0166_MR1_1": {
+    "tt": "train", 
+    "hash": 145, 
+    "file": "OAS1_0166_MR1_1.hdr"
+  }, 
+  "OAS1_0453_MR1_1": {
+    "tt": "test", 
+    "hash": 382, 
+    "file": "OAS1_0453_MR1_1.hdr"
+  }, 
+  "OAS1_0362_MR1_1": {
+    "tt": "train", 
+    "hash": 296, 
+    "file": "OAS1_0362_MR1_1.hdr"
+  }, 
+  "OAS1_0362_MR1_3": {
+    "tt": "train", 
+    "hash": 298, 
+    "file": "OAS1_0362_MR1_3.hdr"
+  }, 
+  "OAS1_0362_MR1_2": {
+    "tt": "train", 
+    "hash": 297, 
+    "file": "OAS1_0362_MR1_2.hdr"
+  }, 
+  "OAS1_0362_MR1_4": {
+    "tt": "train", 
+    "hash": 299, 
+    "file": "OAS1_0362_MR1_4.hdr"
+  }, 
+  "OAS1_0028_MR1_2": {
+    "tt": "train", 
+    "hash": 24, 
+    "file": "OAS1_0028_MR1_2.hdr"
+  }, 
+  "OAS1_0028_MR1_3": {
+    "tt": "train", 
+    "hash": 25, 
+    "file": "OAS1_0028_MR1_3.hdr"
+  }, 
+  "OAS1_0440_MR1_4": {
+    "tt": "train", 
+    "hash": 367, 
+    "file": "OAS1_0440_MR1_4.hdr"
+  }, 
+  "OAS1_0388_MR1_1": {
+    "tt": "train", 
+    "hash": 316, 
+    "file": "OAS1_0388_MR1_1.hdr"
+  }, 
+  "OAS1_0388_MR1_3": {
+    "tt": "train", 
+    "hash": 318, 
+    "file": "OAS1_0388_MR1_3.hdr"
+  }, 
+  "OAS1_0388_MR1_2": {
+    "tt": "train", 
+    "hash": 317, 
+    "file": "OAS1_0388_MR1_2.hdr"
+  }, 
+  "OAS1_0388_MR1_4": {
+    "tt": "train", 
+    "hash": 319, 
+    "file": "OAS1_0388_MR1_4.hdr"
+  }, 
+  "OAS1_0223_MR1_1": {
+    "tt": "train", 
+    "hash": 173, 
+    "file": "OAS1_0223_MR1_1.hdr"
+  }, 
+  "OAS1_0223_MR1_3": {
+    "tt": "train", 
+    "hash": 175, 
+    "file": "OAS1_0223_MR1_3.hdr"
+  }, 
+  "OAS1_0223_MR1_2": {
+    "tt": "train", 
+    "hash": 174, 
+    "file": "OAS1_0223_MR1_2.hdr"
+  }, 
+  "OAS1_0098_MR1_1": {
+    "tt": "train", 
+    "hash": 89, 
+    "file": "OAS1_0098_MR1_1.hdr"
+  }, 
+  "OAS1_0098_MR1_3": {
+    "tt": "train", 
+    "hash": 91, 
+    "file": "OAS1_0098_MR1_3.hdr"
+  }, 
+  "OAS1_0098_MR1_2": {
+    "tt": "train", 
+    "hash": 90, 
+    "file": "OAS1_0098_MR1_2.hdr"
+  }, 
+  "OAS1_0098_MR1_4": {
+    "tt": "test", 
+    "hash": 92, 
+    "file": "OAS1_0098_MR1_4.hdr"
+  }, 
+  "OAS1_0238_MR1_1": {
+    "tt": "train", 
+    "hash": 184, 
+    "file": "OAS1_0238_MR1_1.hdr"
+  }, 
+  "OAS1_0238_MR1_3": {
+    "tt": "train", 
+    "hash": 186, 
+    "file": "OAS1_0238_MR1_3.hdr"
+  }, 
+  "OAS1_0238_MR1_2": {
+    "tt": "train", 
+    "hash": 185, 
+    "file": "OAS1_0238_MR1_2.hdr"
+  }, 
+  "OAS1_0238_MR1_4": {
+    "tt": "train", 
+    "hash": 187, 
+    "file": "OAS1_0238_MR1_4.hdr"
+  }, 
+  "OAS1_0440_MR1_1": {
+    "tt": "test", 
+    "hash": 364, 
+    "file": "OAS1_0440_MR1_1.hdr"
+  }, 
+  "OAS1_0031_MR1_2": {
+    "tt": "train", 
+    "hash": 28, 
+    "file": "OAS1_0031_MR1_2.hdr"
+  }, 
+  "OAS1_0031_MR1_3": {
+    "tt": "train", 
+    "hash": 29, 
+    "file": "OAS1_0031_MR1_3.hdr"
+  }, 
+  "OAS1_0031_MR1_1": {
+    "tt": "train", 
+    "hash": 27, 
+    "file": "OAS1_0031_MR1_1.hdr"
+  }, 
+  "OAS1_0031_MR1_4": {
+    "tt": "test", 
+    "hash": 30, 
+    "file": "OAS1_0031_MR1_4.hdr"
+  }, 
+  "OAS1_0042_MR1_1": {
+    "tt": "test", 
+    "hash": 42, 
+    "file": "OAS1_0042_MR1_1.hdr"
+  }, 
+  "OAS1_0042_MR1_2": {
+    "tt": "train", 
+    "hash": 43, 
+    "file": "OAS1_0042_MR1_2.hdr"
+  }, 
+  "OAS1_0042_MR1_3": {
+    "tt": "train", 
+    "hash": 44, 
+    "file": "OAS1_0042_MR1_3.hdr"
+  }, 
+  "OAS1_0042_MR1_4": {
+    "tt": "train", 
+    "hash": 45, 
+    "file": "OAS1_0042_MR1_4.hdr"
+  }, 
+  "OAS1_0066_MR1_3": {
+    "tt": "train", 
+    "hash": 68, 
+    "file": "OAS1_0066_MR1_3.hdr"
+  }, 
+  "OAS1_0066_MR1_1": {
+    "tt": "train", 
+    "hash": 66, 
+    "file": "OAS1_0066_MR1_1.hdr"
+  }, 
+  "OAS1_0041_MR1_4": {
+    "tt": "train", 
+    "hash": 41, 
+    "file": "OAS1_0041_MR1_4.hdr"
+  }, 
+  "OAS1_0041_MR1_3": {
+    "tt": "train", 
+    "hash": 40, 
+    "file": "OAS1_0041_MR1_3.hdr"
+  }, 
+  "OAS1_0041_MR1_2": {
+    "tt": "train", 
+    "hash": 39, 
+    "file": "OAS1_0041_MR1_2.hdr"
+  }, 
+  "OAS1_0041_MR1_1": {
+    "tt": "train", 
+    "hash": 38, 
+    "file": "OAS1_0041_MR1_1.hdr"
+  }, 
+  "OAS1_0073_MR1_4": {
+    "tt": "train", 
+    "hash": 76, 
+    "file": "OAS1_0073_MR1_4.hdr"
+  }, 
+  "OAS1_0073_MR1_1": {
+    "tt": "train", 
+    "hash": 73, 
+    "file": "OAS1_0073_MR1_1.hdr"
+  }, 
+  "OAS1_0073_MR1_2": {
+    "tt": "test", 
+    "hash": 74, 
+    "file": "OAS1_0073_MR1_2.hdr"
+  }, 
+  "OAS1_0073_MR1_3": {
+    "tt": "train", 
+    "hash": 75, 
+    "file": "OAS1_0073_MR1_3.hdr"
+  }, 
+  "OAS1_0022_MR1_4": {
+    "tt": "train", 
+    "hash": 18, 
+    "file": "OAS1_0022_MR1_4.hdr"
+  }, 
+  "OAS1_0298_MR1_4": {
+    "tt": "train", 
+    "hash": 248, 
+    "file": "OAS1_0298_MR1_4.hdr"
+  }, 
+  "OAS1_0298_MR1_3": {
+    "tt": "train", 
+    "hash": 247, 
+    "file": "OAS1_0298_MR1_3.hdr"
+  }, 
+  "OAS1_0022_MR1_3": {
+    "tt": "train", 
+    "hash": 17, 
+    "file": "OAS1_0022_MR1_3.hdr"
+  }, 
+  "OAS1_0298_MR1_1": {
+    "tt": "train", 
+    "hash": 245, 
+    "file": "OAS1_0298_MR1_1.hdr"
+  }, 
+  "OAS1_0022_MR1_1": {
+    "tt": "test", 
+    "hash": 15, 
+    "file": "OAS1_0022_MR1_1.hdr"
+  }, 
+  "OAS1_0339_MR1_1": {
+    "tt": "train", 
+    "hash": 285, 
+    "file": "OAS1_0339_MR1_1.hdr"
+  }, 
+  "OAS1_0339_MR1_3": {
+    "tt": "train", 
+    "hash": 287, 
+    "file": "OAS1_0339_MR1_3.hdr"
+  }, 
+  "OAS1_0339_MR1_2": {
+    "tt": "train", 
+    "hash": 286, 
+    "file": "OAS1_0339_MR1_2.hdr"
+  }, 
+  "OAS1_0339_MR1_4": {
+    "tt": "train", 
+    "hash": 288, 
+    "file": "OAS1_0339_MR1_4.hdr"
+  }, 
+  "OAS1_0454_MR1_1": {
+    "tt": "train", 
+    "hash": 385, 
+    "file": "OAS1_0454_MR1_1.hdr"
+  }, 
+  "OAS1_0454_MR1_3": {
+    "tt": "train", 
+    "hash": 387, 
+    "file": "OAS1_0454_MR1_3.hdr"
+  }, 
+  "OAS1_0454_MR1_2": {
+    "tt": "train", 
+    "hash": 386, 
+    "file": "OAS1_0454_MR1_2.hdr"
+  }, 
+  "OAS1_0205_MR1_4": {
+    "tt": "train", 
+    "hash": 164, 
+    "file": "OAS1_0205_MR1_4.hdr"
+  }, 
+  "OAS1_0205_MR1_1": {
+    "tt": "train", 
+    "hash": 161, 
+    "file": "OAS1_0205_MR1_1.hdr"
+  }, 
+  "OAS1_0205_MR1_3": {
+    "tt": "test", 
+    "hash": 163, 
+    "file": "OAS1_0205_MR1_3.hdr"
+  }, 
+  "OAS1_0205_MR1_2": {
+    "tt": "train", 
+    "hash": 162, 
+    "file": "OAS1_0205_MR1_2.hdr"
+  }, 
+  "OAS1_0316_MR1_1": {
+    "tt": "train", 
+    "hash": 273, 
+    "file": "OAS1_0316_MR1_1.hdr"
+  }, 
+  "OAS1_0316_MR1_2": {
+    "tt": "test", 
+    "hash": 274, 
+    "file": "OAS1_0316_MR1_2.hdr"
+  }, 
+  "OAS1_0316_MR1_3": {
+    "tt": "test", 
+    "hash": 275, 
+    "file": "OAS1_0316_MR1_3.hdr"
+  }, 
+  "OAS1_0316_MR1_4": {
+    "tt": "train", 
+    "hash": 276, 
+    "file": "OAS1_0316_MR1_4.hdr"
+  }, 
+  "OAS1_0315_MR1_4": {
+    "tt": "train", 
+    "hash": 272, 
+    "file": "OAS1_0315_MR1_4.hdr"
+  }, 
+  "OAS1_0315_MR1_3": {
+    "tt": "train", 
+    "hash": 271, 
+    "file": "OAS1_0315_MR1_3.hdr"
+  }, 
+  "OAS1_0315_MR1_2": {
+    "tt": "train", 
+    "hash": 270, 
+    "file": "OAS1_0315_MR1_2.hdr"
+  }, 
+  "OAS1_0315_MR1_1": {
+    "tt": "train", 
+    "hash": 269, 
+    "file": "OAS1_0315_MR1_1.hdr"
+  }, 
+  "OAS1_0022_MR1_2": {
+    "tt": "train", 
+    "hash": 16, 
+    "file": "OAS1_0022_MR1_2.hdr"
+  }, 
+  "OAS1_0298_MR1_2": {
+    "tt": "train", 
+    "hash": 246, 
+    "file": "OAS1_0298_MR1_2.hdr"
+  }, 
+  "OAS1_0269_MR1_4": {
+    "tt": "train", 
+    "hash": 213, 
+    "file": "OAS1_0269_MR1_4.hdr"
+  }, 
+  "OAS1_0269_MR1_3": {
+    "tt": "train", 
+    "hash": 212, 
+    "file": "OAS1_0269_MR1_3.hdr"
+  }, 
+  "OAS1_0269_MR1_2": {
+    "tt": "train", 
+    "hash": 211, 
+    "file": "OAS1_0269_MR1_2.hdr"
+  }, 
+  "OAS1_0269_MR1_1": {
+    "tt": "train", 
+    "hash": 210, 
+    "file": "OAS1_0269_MR1_1.hdr"
+  }, 
+  "OAS1_0390_MR1_4": {
+    "tt": "test", 
+    "hash": 323, 
+    "file": "OAS1_0390_MR1_4.hdr"
+  }, 
+  "OAS1_0390_MR1_2": {
+    "tt": "train", 
+    "hash": 321, 
+    "file": "OAS1_0390_MR1_2.hdr"
+  }, 
+  "OAS1_0390_MR1_3": {
+    "tt": "test", 
+    "hash": 322, 
+    "file": "OAS1_0390_MR1_3.hdr"
+  }, 
+  "OAS1_0390_MR1_1": {
+    "tt": "train", 
+    "hash": 320, 
+    "file": "OAS1_0390_MR1_1.hdr"
+  }, 
+  "OAS1_0380_MR1_1": {
+    "tt": "test", 
+    "hash": 308, 
+    "file": "OAS1_0380_MR1_1.hdr"
+  }, 
+  "OAS1_0263_MR1_4": {
+    "tt": "test", 
+    "hash": 202, 
+    "file": "OAS1_0263_MR1_4.hdr"
+  }, 
+  "OAS1_0380_MR1_3": {
+    "tt": "train", 
+    "hash": 310, 
+    "file": "OAS1_0380_MR1_3.hdr"
+  }, 
+  "OAS1_0380_MR1_2": {
+    "tt": "train", 
+    "hash": 309, 
+    "file": "OAS1_0380_MR1_2.hdr"
+  }, 
+  "OAS1_0263_MR1_1": {
+    "tt": "train", 
+    "hash": 199, 
+    "file": "OAS1_0263_MR1_1.hdr"
+  }, 
+  "OAS1_0380_MR1_4": {
+    "tt": "train", 
+    "hash": 311, 
+    "file": "OAS1_0380_MR1_4.hdr"
+  }, 
+  "OAS1_0263_MR1_3": {
+    "tt": "train", 
+    "hash": 201, 
+    "file": "OAS1_0263_MR1_3.hdr"
+  }, 
+  "OAS1_0263_MR1_2": {
+    "tt": "train", 
+    "hash": 200, 
+    "file": "OAS1_0263_MR1_2.hdr"
+  }, 
+  "OAS1_0184_MR1_4": {
+    "tt": "train", 
+    "hash": 156, 
+    "file": "OAS1_0184_MR1_4.hdr"
+  }, 
+  "OAS1_0184_MR1_3": {
+    "tt": "train", 
+    "hash": 155, 
+    "file": "OAS1_0184_MR1_3.hdr"
+  }, 
+  "OAS1_0184_MR1_2": {
+    "tt": "train", 
+    "hash": 154, 
+    "file": "OAS1_0184_MR1_2.hdr"
+  }, 
+  "OAS1_0184_MR1_1": {
+    "tt": "train", 
+    "hash": 153, 
+    "file": "OAS1_0184_MR1_1.hdr"
+  }, 
+  "OAS1_0286_MR1_2": {
+    "tt": "train", 
+    "hash": 226, 
+    "file": "OAS1_0286_MR1_2.hdr"
+  }, 
+  "OAS1_0286_MR1_3": {
+    "tt": "train", 
+    "hash": 227, 
+    "file": "OAS1_0286_MR1_3.hdr"
+  }, 
+  "OAS1_0286_MR1_1": {
+    "tt": "test", 
+    "hash": 225, 
+    "file": "OAS1_0286_MR1_1.hdr"
+  }, 
+  "OAS1_0278_MR1_1": {
+    "tt": "train", 
+    "hash": 221, 
+    "file": "OAS1_0278_MR1_1.hdr"
+  }, 
+  "OAS1_0286_MR1_4": {
+    "tt": "train", 
+    "hash": 228, 
+    "file": "OAS1_0286_MR1_4.hdr"
+  }, 
+  "OAS1_0278_MR1_2": {
+    "tt": "train", 
+    "hash": 222, 
+    "file": "OAS1_0278_MR1_2.hdr"
+  }, 
+  "OAS1_0441_MR1_3": {
+    "tt": "train", 
+    "hash": 370, 
+    "file": "OAS1_0441_MR1_3.hdr"
+  }, 
+  "OAS1_0441_MR1_2": {
+    "tt": "train", 
+    "hash": 369, 
+    "file": "OAS1_0441_MR1_2.hdr"
+  }, 
+  "OAS1_0441_MR1_1": {
+    "tt": "train", 
+    "hash": 368, 
+    "file": "OAS1_0441_MR1_1.hdr"
+  }, 
+  "OAS1_0441_MR1_4": {
+    "tt": "train", 
+    "hash": 371, 
+    "file": "OAS1_0441_MR1_4.hdr"
+  }, 
+  "OAS1_0418_MR1_4": {
+    "tt": "train", 
+    "hash": 347, 
+    "file": "OAS1_0418_MR1_4.hdr"
+  }, 
+  "OAS1_0418_MR1_1": {
+    "tt": "train", 
+    "hash": 344, 
+    "file": "OAS1_0418_MR1_1.hdr"
+  }, 
+  "OAS1_0418_MR1_3": {
+    "tt": "train", 
+    "hash": 346, 
+    "file": "OAS1_0418_MR1_3.hdr"
+  }, 
+  "OAS1_0418_MR1_2": {
+    "tt": "train", 
+    "hash": 345, 
+    "file": "OAS1_0418_MR1_2.hdr"
+  }, 
+  "OAS1_0430_MR1_3": {
+    "tt": "train", 
+    "hash": 358, 
+    "file": "OAS1_0430_MR1_3.hdr"
+  }, 
+  "OAS1_0430_MR1_2": {
+    "tt": "train", 
+    "hash": 357, 
+    "file": "OAS1_0430_MR1_2.hdr"
+  }, 
+  "OAS1_0430_MR1_1": {
+    "tt": "test", 
+    "hash": 356, 
+    "file": "OAS1_0430_MR1_1.hdr"
+  }, 
+  "OAS1_0440_MR1_2": {
+    "tt": "test", 
+    "hash": 365, 
+    "file": "OAS1_0440_MR1_2.hdr"
+  }, 
+  "OAS1_0440_MR1_3": {
+    "tt": "train", 
+    "hash": 366, 
+    "file": "OAS1_0440_MR1_3.hdr"
+  }, 
+  "OAS1_0430_MR1_4": {
+    "tt": "train", 
+    "hash": 359, 
+    "file": "OAS1_0430_MR1_4.hdr"
+  }, 
+  "OAS1_0243_MR1_4": {
+    "tt": "train", 
+    "hash": 194, 
+    "file": "OAS1_0243_MR1_4.hdr"
+  }, 
+  "OAS1_0243_MR1_3": {
+    "tt": "train", 
+    "hash": 193, 
+    "file": "OAS1_0243_MR1_3.hdr"
+  }, 
+  "OAS1_0243_MR1_2": {
+    "tt": "train", 
+    "hash": 192, 
+    "file": "OAS1_0243_MR1_2.hdr"
+  }, 
+  "OAS1_0243_MR1_1": {
+    "tt": "train", 
+    "hash": 191, 
+    "file": "OAS1_0243_MR1_1.hdr"
+  }, 
+  "OAS1_0425_MR1_1": {
+    "tt": "train", 
+    "hash": 352, 
+    "file": "OAS1_0425_MR1_1.hdr"
+  }, 
+  "OAS1_0425_MR1_3": {
+    "tt": "train", 
+    "hash": 354, 
+    "file": "OAS1_0425_MR1_3.hdr"
+  }, 
+  "OAS1_0425_MR1_2": {
+    "tt": "train", 
+    "hash": 353, 
+    "file": "OAS1_0425_MR1_2.hdr"
+  }, 
+  "OAS1_0425_MR1_4": {
+    "tt": "train", 
+    "hash": 355, 
+    "file": "OAS1_0425_MR1_4.hdr"
+  }, 
+  "OAS1_0267_MR1_1": {
+    "tt": "test", 
+    "hash": 203, 
+    "file": "OAS1_0267_MR1_1.hdr"
+  }, 
+  "OAS1_0267_MR1_3": {
+    "tt": "train", 
+    "hash": 205, 
+    "file": "OAS1_0267_MR1_3.hdr"
+  }, 
+  "OAS1_0267_MR1_2": {
+    "tt": "train", 
+    "hash": 204, 
+    "file": "OAS1_0267_MR1_2.hdr"
+  }, 
+  "OAS1_0217_MR1_4": {
+    "tt": "train", 
+    "hash": 172, 
+    "file": "OAS1_0217_MR1_4.hdr"
+  }, 
+  "OAS1_0400_MR1_3": {
+    "tt": "train", 
+    "hash": 330, 
+    "file": "OAS1_0400_MR1_3.hdr"
+  }, 
+  "OAS1_0120_MR1_4": {
+    "tt": "train", 
+    "hash": 100, 
+    "file": "OAS1_0120_MR1_4.hdr"
+  }, 
+  "OAS1_0120_MR1_1": {
+    "tt": "train", 
+    "hash": 97, 
+    "file": "OAS1_0120_MR1_1.hdr"
+  }, 
+  "OAS1_0120_MR1_3": {
+    "tt": "train", 
+    "hash": 99, 
+    "file": "OAS1_0120_MR1_3.hdr"
+  }, 
+  "OAS1_0120_MR1_2": {
+    "tt": "train", 
+    "hash": 98, 
+    "file": "OAS1_0120_MR1_2.hdr"
+  }, 
+  "OAS1_0217_MR1_2": {
+    "tt": "train", 
+    "hash": 170, 
+    "file": "OAS1_0217_MR1_2.hdr"
+  }, 
+  "OAS1_0217_MR1_3": {
+    "tt": "train", 
+    "hash": 171, 
+    "file": "OAS1_0217_MR1_3.hdr"
+  }, 
+  "OAS1_0453_MR1_2": {
+    "tt": "test", 
+    "hash": 383, 
+    "file": "OAS1_0453_MR1_2.hdr"
+  }, 
+  "OAS1_0453_MR1_3": {
+    "tt": "train", 
+    "hash": 384, 
+    "file": "OAS1_0453_MR1_3.hdr"
+  }
+}

@@ -1,0 +1,422 @@
+{
+	"002_S_0559": {
+		"hash": 0,
+		"tt": "train",
+		"file": "ID_002_S_0559_Original.nii.gz"
+	},
+	"002_S_1261": {
+		"hash": 1,
+		"tt": "train",
+		"file": "ID_002_S_1261_Original.nii.gz"
+	},
+	"005_S_0553": {
+		"hash": 2,
+		"tt": "train",
+		"file": "ID_005_S_0553_Original.nii.gz"
+	},
+	"005_S_0602": {
+		"hash": 3,
+		"tt": "train",
+		"file": "ID_005_S_0602_Original.nii.gz"
+	},
+	"007_S_1206": {
+		"hash": 4,
+		"tt": "test",
+		"file": "ID_007_S_1206_Original.nii.gz"
+	},
+	"007_S_1222": {
+		"hash": 5,
+		"tt": "train",
+		"file": "ID_007_S_1222_Original.nii.gz"
+	},
+	"012_S_1009": {
+		"hash": 6,
+		"tt": "train",
+		"file": "ID_012_S_1009_Original.nii.gz"
+	},
+	"012_S_1212": {
+		"hash": 7,
+		"tt": "train",
+		"file": "ID_012_S_1212_Original.nii.gz"
+	},
+	"013_S_1276": {
+		"hash": 8,
+		"tt": "test",
+		"file": "ID_013_S_1276_Original.nii.gz"
+	},
+	"018_S_0369": {
+		"hash": 9,
+		"tt": "train",
+		"file": "ID_018_S_0369_Original.nii.gz"
+	},
+	"018_S_0425": {
+		"hash": 10,
+		"tt": "train",
+		"file": "ID_018_S_0425_Original.nii.gz"
+	},
+	"023_S_0031": {
+		"hash": 11,
+		"tt": "train",
+		"file": "ID_023_S_0031_Original.nii.gz"
+	},
+	"023_S_0058": {
+		"hash": 12,
+		"tt": "train",
+		"file": "ID_023_S_0058_Original.nii.gz"
+	},
+	"023_S_0061": {
+		"hash": 13,
+		"tt": "train",
+		"file": "ID_023_S_0061_Original.nii.gz"
+	},
+	"023_S_0926": {
+		"hash": 14,
+		"tt": "train",
+		"file": "ID_023_S_0926_Original.nii.gz"
+	},
+	"023_S_0963": {
+		"hash": 15,
+		"tt": "train",
+		"file": "ID_023_S_0963_Original.nii.gz"
+	},
+	"023_S_1190": {
+		"hash": 16,
+		"tt": "train",
+		"file": "ID_023_S_1190_Original.nii.gz"
+	},
+	"023_T_0031": {
+		"hash": 17,
+		"tt": "train",
+		"file": "ID_023_T_0031_Original.nii.gz"
+	},
+	"023_T_0061": {
+		"hash": 18,
+		"tt": "train",
+		"file": "ID_023_T_0061_Original.nii.gz"
+	},
+	"023_T_0926": {
+		"hash": 19,
+		"tt": "test",
+		"file": "ID_023_T_0926_Original.nii.gz"
+	},
+	"023_T_0963": {
+		"hash": 20,
+		"tt": "train",
+		"file": "ID_023_T_0963_Original.nii.gz"
+	},
+	"023_T_1190": {
+		"hash": 21,
+		"tt": "train",
+		"file": "ID_023_T_1190_Original.nii.gz"
+	},
+	"027_S_0403": {
+		"hash": 22,
+		"tt": "train",
+		"file": "ID_027_S_0403_Original.nii.gz"
+	},
+	"027_T_0403": {
+		"hash": 23,
+		"tt": "train",
+		"file": "ID_027_T_0403_Original.nii.gz"
+	},
+	"032_S_0479": {
+		"hash": 24,
+		"tt": "train",
+		"file": "ID_032_S_0479_Original.nii.gz"
+	},
+	"032_S_0677": {
+		"hash": 25,
+		"tt": "train",
+		"file": "ID_032_S_0677_Original.nii.gz"
+	},
+	"032_S_1169": {
+		"hash": 26,
+		"tt": "test",
+		"file": "ID_032_S_1169_Original.nii.gz"
+	},
+	"032_T_0479": {
+		"hash": 27,
+		"tt": "train",
+		"file": "ID_032_T_0479_Original.nii.gz"
+	},
+	"032_T_0677": {
+		"hash": 28,
+		"tt": "train",
+		"file": "ID_032_T_0677_Original.nii.gz"
+	},
+	"032_T_1169": {
+		"hash": 29,
+		"tt": "train",
+		"file": "ID_032_T_1169_Original.nii.gz"
+	},
+	"033_S_0920": {
+		"hash": 30,
+		"tt": "test",
+		"file": "ID_033_S_0920_Original.nii.gz"
+	},
+	"033_S_1016": {
+		"hash": 31,
+		"tt": "train",
+		"file": "ID_033_S_1016_Original.nii.gz"
+	},
+	"033_S_1086": {
+		"hash": 32,
+		"tt": "train",
+		"file": "ID_033_S_1086_Original.nii.gz"
+	},
+	"033_S_1098": {
+		"hash": 33,
+		"tt": "train",
+		"file": "ID_033_S_1098_Original.nii.gz"
+	},
+	"033_T_0920": {
+		"hash": 34,
+		"tt": "train",
+		"file": "ID_033_T_0920_Original.nii.gz"
+	},
+	"033_T_1016": {
+		"hash": 35,
+		"tt": "train",
+		"file": "ID_033_T_1016_Original.nii.gz"
+	},
+	"033_T_1086": {
+		"hash": 36,
+		"tt": "train",
+		"file": "ID_033_T_1086_Original.nii.gz"
+	},
+	"033_T_1098": {
+		"hash": 37,
+		"tt": "train",
+		"file": "ID_033_T_1098_Original.nii.gz"
+	},
+	"037_S_0303": {
+		"hash": 38,
+		"tt": "train",
+		"file": "ID_037_S_0303_Original.nii.gz"
+	},
+	"037_T_0303": {
+		"hash": 39,
+		"tt": "train",
+		"file": "ID_037_T_0303_Original.nii.gz"
+	},
+	"051_S_1123": {
+		"hash": 40,
+		"tt": "train",
+		"file": "ID_051_S_1123_Original.nii.gz"
+	},
+	"051_T_1123": {
+		"hash": 41,
+		"tt": "train",
+		"file": "ID_051_T_1123_Original.nii.gz"
+	},
+	"052_S_1250": {
+		"hash": 42,
+		"tt": "train",
+		"file": "ID_052_S_1250_Original.nii.gz"
+	},
+	"052_S_1251": {
+		"hash": 43,
+		"tt": "train",
+		"file": "ID_052_S_1251_Original.nii.gz"
+	},
+	"082_S_1256": {
+		"hash": 44,
+		"tt": "train",
+		"file": "ID_082_S_1256_Original.nii.gz"
+	},
+	"094_S_1241": {
+		"hash": 45,
+		"tt": "train",
+		"file": "ID_094_S_1241_Original.nii.gz"
+	},
+	"094_S_1267": {
+		"hash": 46,
+		"tt": "test",
+		"file": "ID_094_S_1267_Original.nii.gz"
+	},
+	"100_S_0015": {
+		"hash": 47,
+		"tt": "train",
+		"file": "ID_100_S_0015_Original.nii.gz"
+	},
+	"100_S_0035": {
+		"hash": 48,
+		"tt": "train",
+		"file": "ID_100_S_0035_Original.nii.gz"
+	},
+	"100_S_1286": {
+		"hash": 49,
+		"tt": "train",
+		"file": "ID_100_S_1286_Original.nii.gz"
+	},
+	"100_T_0015": {
+		"hash": 50,
+		"tt": "train",
+		"file": "ID_100_T_0015_Original.nii.gz"
+	},
+	"100_T_0035": {
+		"hash": 51,
+		"tt": "test",
+		"file": "ID_100_T_0035_Original.nii.gz"
+	},
+	"100_T_1286": {
+		"hash": 52,
+		"tt": "train",
+		"file": "ID_100_T_1286_Original.nii.gz"
+	},
+	"116_S_0382": {
+		"hash": 53,
+		"tt": "train",
+		"file": "ID_116_S_0382_Original.nii.gz"
+	},
+	"116_S_1232": {
+		"hash": 54,
+		"tt": "train",
+		"file": "ID_116_S_1232_Original.nii.gz"
+	},
+	"116_S_1249": {
+		"hash": 55,
+		"tt": "train",
+		"file": "ID_116_S_1249_Original.nii.gz"
+	},
+	"116_T_0382": {
+		"hash": 56,
+		"tt": "train",
+		"file": "ID_116_T_0382_Original.nii.gz"
+	},
+	"116_T_1232": {
+		"hash": 57,
+		"tt": "train",
+		"file": "ID_116_T_1232_Original.nii.gz"
+	},
+	"116_T_1249": {
+		"hash": 58,
+		"tt": "train",
+		"file": "ID_116_T_1249_Original.nii.gz"
+	},
+	"126_T_0605": {
+		"hash": 59,
+		"tt": "test",
+		"file": "ID_126_T_0605_Original.nii.gz"
+	},
+	"127_S_0260": {
+		"hash": 60,
+		"tt": "train",
+		"file": "ID_127_S_0260_Original.nii.gz"
+	},
+	"127_S_0622": {
+		"hash": 61,
+		"tt": "train",
+		"file": "ID_127_S_0622_Original.nii.gz"
+	},
+	"127_T_0260": {
+		"hash": 62,
+		"tt": "train",
+		"file": "ID_127_T_0260_Original.nii.gz"
+	},
+	"127_T_0622": {
+		"hash": 63,
+		"tt": "train",
+		"file": "ID_127_T_0622_Original.nii.gz"
+	},
+	"130_S_0886": {
+		"hash": 64,
+		"tt": "train",
+		"file": "ID_130_S_0886_Original.nii.gz"
+	},
+	"130_S_0969": {
+		"hash": 65,
+		"tt": "test",
+		"file": "ID_130_S_0969_Original.nii.gz"
+	},
+	"130_T_0886": {
+		"hash": 66,
+		"tt": "train",
+		"file": "ID_130_T_0886_Original.nii.gz"
+	},
+	"131_S_0441": {
+		"hash": 67,
+		"tt": "train",
+		"file": "ID_131_S_0441_Original.nii.gz"
+	},
+	"131_S_1301": {
+		"hash": 68,
+		"tt": "train",
+		"file": "ID_131_S_1301_Original.nii.gz"
+	},
+	"131_T_0441": {
+		"hash": 69,
+		"tt": "train",
+		"file": "ID_131_T_0441_Original.nii.gz"
+	},
+	"131_T_1301": {
+		"hash": 70,
+		"tt": "train",
+		"file": "ID_131_T_1301_Original.nii.gz"
+	},
+	"133_S_0488": {
+		"hash": 71,
+		"tt": "train",
+		"file": "ID_133_S_0488_Original.nii.gz"
+	},
+	"133_S_0493": {
+		"hash": 72,
+		"tt": "train",
+		"file": "ID_133_S_0493_Original.nii.gz"
+	},
+	"133_S_0525": {
+		"hash": 73,
+		"tt": "test",
+		"file": "ID_133_S_0525_Original.nii.gz"
+	},
+	"133_T_0433": {
+		"hash": 74,
+		"tt": "train",
+		"file": "ID_133_T_0433_Original.nii.gz"
+	},
+	"133_T_0488": {
+		"hash": 75,
+		"tt": "train",
+		"file": "ID_133_T_0488_Original.nii.gz"
+	},
+	"133_T_0493": {
+		"hash": 76,
+		"tt": "train",
+		"file": "ID_133_T_0493_Original.nii.gz"
+	},
+	"133_T_0525": {
+		"hash": 77,
+		"tt": "test",
+		"file": "ID_133_T_0525_Original.nii.gz"
+	},
+	"136_S_0086": {
+		"hash": 78,
+		"tt": "train",
+		"file": "ID_136_S_0086_Original.nii.gz"
+	},
+	"136_S_0184": {
+		"hash": 79,
+		"tt": "train",
+		"file": "ID_136_S_0184_Original.nii.gz"
+	},
+	"136_S_0196": {
+		"hash": 80,
+		"tt": "train",
+		"file": "ID_136_S_0196_Original.nii.gz"
+	},
+	"136_T_0086": {
+		"hash": 81,
+		"tt": "train",
+		"file": "ID_136_T_0086_Original.nii.gz"
+	},
+	"136_T_0184": {
+		"hash": 82,
+		"tt": "test",
+		"file": "ID_136_T_0184_Original.nii.gz"
+	},
+	"136_T_0196": {
+		"hash": 83,
+		"tt": "train",
+		"file": "ID_136_T_0196_Original.nii.gz"
+	}
+}

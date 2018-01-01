@@ -1,0 +1,16 @@
+{
+    "mean":
+    {
+        "k_space_real": "1.34096546e-03",
+        "k_space_imag": "-7.82427622e-13",
+        "k_space_real_gt": "1.34096830e-03",
+        "k_space_imag_gt": "-2.50698008e-13"
+    },
+    "variance":
+    {
+        "k_space_real" : "2.66869824e-02",
+        "k_space_imag" : "7.69697892e-03",
+        "k_space_real_gt" : "2.67107316e-02",
+        "k_space_imag_gt" : "7.68730240e-03"    
+    }
+}
