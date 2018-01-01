@@ -1,3 +1,2 @@
-# thesis
-Code for my thesis
-Include k-space with deep learning
+# MRI Acceleration project
+MRI acceleration using deep learning
