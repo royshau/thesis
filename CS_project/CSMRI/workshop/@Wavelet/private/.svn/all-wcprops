@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private
+END
+lshift.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/lshift.m
+END
+SoftThresh.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/SoftThresh.m
+END
+MirrorFilt.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/MirrorFilt.m
+END
+DownDyadHi.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/DownDyadHi.m
+END
+quadlength.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/quadlength.m
+END
+rshift.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/rshift.m
+END
+UpSampleN.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/UpSampleN.m
+END
+DownDyadLo.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/DownDyadLo.m
+END
+wavDenoise.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/wavDenoise.m
+END
+aconv.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/aconv.m
+END
+UpDyadHi.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/UpDyadHi.m
+END
+wavMask.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/wavMask.m
+END
+reverse.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/reverse.m
+END
+iconv.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/iconv.m
+END
+MakeONFilter.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/MakeONFilter.m
+END
+FWT2_PO.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/FWT2_PO.m
+END
+UpDyadLo.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/UpDyadLo.m
+END
+IWT2_PO.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/401/tutorials/ochrid2011/workshop/@Wavelet/private/IWT2_PO.m
+END
