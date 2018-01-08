@@ -1,0 +1,7 @@
+setenv FSLDIR /usr/lib/fsl
+
+python Create_segmentation_sh.py --data_dir /home/roysh/MRI_Project/Code/CS_project/CSMRI/data/rec_images --suffixes "['_CS_mask10','_CS_mask33', '_CS_mask50', '_CS_mask66','_CS_mask_33_row','_CS_mask_50_row','_CS_mask_66_row','_ZF_mask10','_ZF_mask33', '_ZF_mask50', '_ZF_mask66','_ZF_mask_33_row','_ZF_mask_50_row','_ZF_mask_66_row']" --num_of_cases -1
+
+python Create_segmentation_sh.py --data_dir /home/roysh/MRI_Project/Code/CS_project/CSMRI/data/input --suffixes "['']" --num_of_cases -1
+
+cd /usr/lib/fsl/5.0

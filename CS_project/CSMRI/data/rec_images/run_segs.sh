@@ -1,0 +1,14 @@
+./segmentations_CS_mask10.sh
+./segmentations_CS_mask33.sh
+./segmentations_CS_mask50.sh
+./segmentations_CS_mask66.sh
+./segmentations_CS_mask_33_row.sh
+./segmentations_CS_mask_50_row.sh
+./segmentations_CS_mask_66_row.sh
+./segmentations_ZF_mask10.sh
+./segmentations_ZF_mask33.sh
+./segmentations_ZF_mask50.sh
+./segmentations_ZF_mask66.sh
+./segmentations_ZF_mask_33_row.sh
+./segmentations_ZF_mask_50_row.sh
+./segmentations_ZF_mask_66_row.sh

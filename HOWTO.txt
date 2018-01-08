@@ -42,7 +42,7 @@ run bin/freeview
 
 7.
 FSL segmentation:
-setenv FSLDIR /media/ohadsh/sheard/Ohad/thesis/tools/fsl - already in ~/.tcshrc
+setenv FSLDIR /home/roysh/MRI_Project/tools/fsl - already in ~/.tcshrc
 setFSL -> which means $FSLDIR/etc/fslconf/fsl.csh
 cd $FSLDIR/bin
 fast -I 1 -v /media/ohadsh/sheard/Ohad/thesis/tools/examples/new_image.nii.gz

@@ -1,0 +1,42 @@
+Working on : data/input/IXI012-HH-1211-T1/IXI012-HH-1211-T1.nii.gz mask: mask10
+Working on : data/input/IXI573-IOP-1155-T1/IXI573-IOP-1155-T1.nii.gz mask: mask10
+Working on : data/input/IXI002-Guys-0828-T1/IXI002-Guys-0828-T1.nii.gz mask: mask10
+Mask: mask10 
+ Mean CS PSNR : 32.2480970493 , STD : 4.61356129374 
+ Mean ZF PSNR: 27.2085401276 , STD : 3.09522046326
+Working on : data/input/IXI012-HH-1211-T1/IXI012-HH-1211-T1.nii.gz mask: mask33
+Working on : data/input/IXI573-IOP-1155-T1/IXI573-IOP-1155-T1.nii.gz mask: mask33
+Working on : data/input/IXI002-Guys-0828-T1/IXI002-Guys-0828-T1.nii.gz mask: mask33
+Mask: mask33 
+ Mean CS PSNR : 39.7686208637 , STD : 4.42928932937 
+ Mean ZF PSNR: 32.3487363368 , STD : 3.16485342518
+Working on : data/input/IXI012-HH-1211-T1/IXI012-HH-1211-T1.nii.gz mask: mask50
+Working on : data/input/IXI573-IOP-1155-T1/IXI573-IOP-1155-T1.nii.gz mask: mask50
+Working on : data/input/IXI002-Guys-0828-T1/IXI002-Guys-0828-T1.nii.gz mask: mask50
+Mask: mask50 
+ Mean CS PSNR : 43.8320513617 , STD : 4.25103271292 
+ Mean ZF PSNR: 36.814357546 , STD : 3.37987518466
+Working on : data/input/IXI012-HH-1211-T1/IXI012-HH-1211-T1.nii.gz mask: mask66
+Working on : data/input/IXI573-IOP-1155-T1/IXI573-IOP-1155-T1.nii.gz mask: mask66
+Working on : data/input/IXI002-Guys-0828-T1/IXI002-Guys-0828-T1.nii.gz mask: mask66
+Mask: mask66 
+ Mean CS PSNR : 47.9116021032 , STD : 4.2673940637 
+ Mean ZF PSNR: 41.2556151911 , STD : 3.5024531331
+Working on : data/input/IXI012-HH-1211-T1/IXI012-HH-1211-T1.nii.gz mask: mask_33_row
+Working on : data/input/IXI573-IOP-1155-T1/IXI573-IOP-1155-T1.nii.gz mask: mask_33_row
+Working on : data/input/IXI002-Guys-0828-T1/IXI002-Guys-0828-T1.nii.gz mask: mask_33_row
+Mask: mask_33_row 
+ Mean CS PSNR : 36.2136498597 , STD : 4.3204887084 
+ Mean ZF PSNR: 32.2265000728 , STD : 3.27878072654
+Working on : data/input/IXI012-HH-1211-T1/IXI012-HH-1211-T1.nii.gz mask: mask_50_row
+Working on : data/input/IXI573-IOP-1155-T1/IXI573-IOP-1155-T1.nii.gz mask: mask_50_row
+Working on : data/input/IXI002-Guys-0828-T1/IXI002-Guys-0828-T1.nii.gz mask: mask_50_row
+Mask: mask_50_row 
+ Mean CS PSNR : 41.5762980497 , STD : 4.28475436449 
+ Mean ZF PSNR: 35.673924928 , STD : 3.18596249965
+Working on : data/input/IXI012-HH-1211-T1/IXI012-HH-1211-T1.nii.gz mask: mask_66_row
+Working on : data/input/IXI573-IOP-1155-T1/IXI573-IOP-1155-T1.nii.gz mask: mask_66_row
+Working on : data/input/IXI002-Guys-0828-T1/IXI002-Guys-0828-T1.nii.gz mask: mask_66_row
+Mask: mask_66_row 
+ Mean CS PSNR : 45.4585868202 , STD : 4.13729114434 
+ Mean ZF PSNR: 39.9947802326 , STD : 3.31166197087
