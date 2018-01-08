@@ -15,5 +15,6 @@ def ifft2c(x):
 mat = imp.loadmat('brain.mat')
 brain = np.array(mat['im'])
 print(fft2c(brain).shape)
+
 plt.imshow(fft2c(brain),cmap='gray')
 plt.show()
