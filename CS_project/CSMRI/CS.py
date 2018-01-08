@@ -12,7 +12,6 @@ def CS(kspace,mask,params):
         rec_brain = ifft2c(rec_kspace)
         if i%10==0:
             if np.sum(abs(rec_brain-rec_brain_old))<params['tol']:
-                print(i)
                 return rec_kspace
             rec_brain_old = rec_brain
     return rec_kspace
