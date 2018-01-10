@@ -39,3 +39,4 @@ for mask_name in masks_names:
     PSNR_ZF_std = np.std(PSNR_ZF)
 
     print('Mask: {4} \n Mean CS PSNR : {0} , STD : {1} \n Mean ZF PSNR: {2} , STD : {3}'.format(PSNR_CS_mean, PSNR_CS_std,PSNR_ZF_mean,PSNR_ZF_std,mask_name))
+
