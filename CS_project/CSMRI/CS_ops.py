@@ -90,6 +90,7 @@ def calc_dice(im1, im2):
     The order of inputs for `dice` is irrelevant. The result will be
     identical if `im1` and `im2` are switched.
     """
+    eps = 2e-16
     im1 = np.asarray(im1).astype(np.bool)
     im2 = np.asarray(im2).astype(np.bool)
 
@@ -98,5 +99,5 @@ def calc_dice(im1, im2):
 
     # Compute Dice coefficient
     intersection = np.logical_and(im1, im2)
-
     return 2. * intersection.sum() / (im1.sum() + im2.sum())
+

@@ -32,18 +32,20 @@ for mask_name in masks_names:
 
         # for i in xrange(data_org.shape[2]):
         for cls in classes:
-            class_org = data_org == cls
-            class_CS = data_CS == cls
-            class_ZF = data_ZF == cls
-            # print(class_CS[:,:,70].sum())
-            # print(class_org[:, :, 70].sum())
-            # plt.figure()
-            # plt.imshow(class_CS[:,:,70])
-            # plt.figure()
-            # plt.imshow(class_org[:, :, 70])
-            # plt.show()
-            DICE_CS[cls-1] = np.append(DICE_CS[cls-1], calc_dice(class_CS,class_org))
-            DICE_ZF[cls-1] = np.append(DICE_ZF[cls-1], calc_dice(class_ZF, class_org))
+            for i in xrange(data_org.shape[2]):
+                class_org = data_org[:,:,i] == cls
+                class_CS = data_CS[:,:,i] == cls
+                class_ZF = data_ZF[:,:,i] == cls
+                # print(class_CS[:,:,70].sum())
+                # print(class_org[:, :, 70].sum())
+                # plt.figure()
+                # plt.imshow(class_CS[:,:,70])
+                # plt.figure()
+                # plt.imshow(class_org[:, :, 70])
+                # plt.show()
+                if (class_org.sum()!=0):
+                    DICE_CS[cls-1] = np.append(DICE_CS[cls-1], calc_dice(class_CS,class_org))
+                    DICE_ZF[cls-1] = np.append(DICE_ZF[cls-1], calc_dice(class_ZF, class_org))
     WM_CS_mean = np.mean(DICE_CS[2])
     WM_CS_std = np.std(DICE_CS[2])
     WM_ZF_mean = np.mean(DICE_ZF[2])
