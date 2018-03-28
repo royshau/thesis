@@ -1,43 +1,11 @@
-{"SchizReg": {"data":"/media/ohadsh/sheard/Ohad/thesis/data/SchizData/SchizReg/Images3D/",
-              "labels": "/media/ohadsh/sheard/Ohad/thesis/data/SchizData/SchizReg/Labels3D/",
-              "info": "/home/ohadsh/work/python/thesis/appcode/mri/data/SchizReg/"},
-
-  "SchizDataNonReg": {"data":"/media/ohadsh/sheard/Ohad/thesis/data/SchizDataNonReg/SchizReg/Images3D/",
-              "labels": "/media/ohadsh/sheard/Ohad/thesis/data/SchizData/SchizDataNonReg/Labels3D/",
-              "info": ""},
-
-  "ADNI_Normal": {"data":"/media/ohadsh/sheard/Ohad/thesis/data/ADNI/ADNI/Normal/",
-                  "labels": "/media/ohadsh/sheard/Ohad/thesis/data/ADNI/ADNI/Normal/",
-                  "info": "/home/ohadsh/work/python/thesis/appcode/mri/data/ADNI/Normal/",
-                  "suffix": "*/*_Original.nii.gz"},
-
-  "ADNI_AD":     {"data":"/media/ohadsh/sheard/Ohad/thesis/data/ADNI/ADNI/AD/",
-                  "labels": "/media/ohadsh/sheard/Ohad/thesis/data/ADNI/ADNI/AD/",
-                  "info": "/home/ohadsh/work/python/thesis/appcode/mri/data/ADNI/AD/",
-                  "suffix": "*/*_Original.nii.gz"},
-
-  "ADNI_MCI":    {"data":"/media/ohadsh/sheard/Ohad/thesis/data/ADNI/ADNI/MCI/",
-                  "labels": "/media/ohadsh/sheard/Ohad/thesis/data/ADNI/ADNI/MCI/",
-                  "info": "/home/ohadsh/work/python/thesis/appcode/mri/data/ADNI/MCI/",
-                  "suffix": "*/*_Original.nii.gz"},
-
-  "IXI_T1":    {  "data":"/media/ohadsh/sheard/Ohad/thesis/data/IXI/IXI-T1/",
-                  "labels": "/media/ohadsh/sheard/Ohad/thesis/data/IXI/IXI-T1/",
-                  "info": "/home/ohadsh/work/python/thesis/appcode/mri/data/IXI/T1/",
+{
+  "IXI_T1":    {  "data":"/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T1",
+                  "labels": "/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T1",
+                  "info": "/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T1",
                   "suffix": "*/*.nii.gz"},
 
-  "IXI_T2":    {  "data":"/media/ohadsh/sheard/Ohad/thesis/data/IXI/IXI-T2/",
-                  "labels": "/media/ohadsh/sheard/Ohad/thesis/data/IXI/IXI-T2/",
-                  "info": "/home/ohadsh/work/python/thesis/appcode/mri/data/IXI/T2/",
-                  "suffix": "*/*.nii.gz"},
-  "OASIS_REGULAR": {  "data":"/media/ohadsh/sheard/Ohad/thesis/data/OASIS/RAW/REGULAR/",
-                  "labels": "/media/ohadsh/sheard/Ohad/thesis/data/OASIS/RAW/REGULAR/",
-                  "info": "/home/ohadsh/work/python/thesis/appcode/mri/data/OASIS/REGULAR/",
-                  "suffix": "*/*.hdr"},
-
-  "OASIS_AD": {  "data":"/media/ohadsh/sheard/Ohad/thesis/data/OASIS/RAW/AD/",
-                  "labels": "/media/ohadsh/sheard/Ohad/thesis/data/OASIS/RAW/AD/",
-                  "info": "/home/ohadsh/work/python/thesis/appcode/mri/data/OASIS/AD/",
-                  "suffix": "*/*.hdr"}
-
+  "IXI_T2":    {  "data":"/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T2",
+                  "labels": "/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T2",
+                  "info": "/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T2",
+                  "suffix": "*/*.nii.gz"}
 }

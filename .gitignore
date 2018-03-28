@@ -1,3 +1,5 @@
 *.pyc
 *.core
 *.nii.gz
+*.png
+*.sh

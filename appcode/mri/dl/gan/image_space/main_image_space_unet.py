@@ -22,7 +22,7 @@ from appcode.mri.k_space.k_space_data_set import KspaceDataSet
 from common.deep_learning.helpers import *
 
 # k space data set on loca SSD
-base_dir = '/media/ohadsh/Data/ohadsh/work/data/T1/sagittal/'
+base_dir = '/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T1/shuffle'
 # base_dir = '/sheard/Ohad/thesis/data/IXI/data_for_train/T1/sagittal_subset_100/'
 print("Working on data - %s" % base_dir)
 # print("working on 140 lines images")
@@ -72,7 +72,7 @@ flags.DEFINE_string('train_dir', "",
                            """and checkpoint.""")
 logfile = open(os.path.join(FLAGS.train_dir, 'results_%s.log' % str(datetime.datetime.now()).replace(' ', '')), 'w')
 
-mask_single = get_rv_mask(mask_main_dir='/media/ohadsh/Data/ohadsh/work/matlab/thesis/', factor=FLAGS.random_sampling_factor)
+mask_single = get_rv_mask(mask_main_dir='/home/roysh/MRI_Project/Code/matlab/', factor=FLAGS.random_sampling_factor)
 
 
 def feed_data(data_set, y_input, train_phase, tt='train', batch_size=10):

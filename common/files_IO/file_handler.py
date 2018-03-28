@@ -76,9 +76,7 @@ class FileHandler:
             # N, h, w
             ret = ret.transpose(np.roll(np.arange(len(ret.shape)), 1))
         else:
-            ret = data.reshape(n / self.block_size, self.info['width'], self.info['height'], ch).transpose().squeeze()
-            # N, h, w
-            ret = ret.transpose(np.roll(np.arange(len(ret.shape)), 1))
-
+            ret = data.reshape(self.info['width'], self.info['height'], ch, n / self.block_size, order='F').squeeze().transpose()
+            ret = np.flip(ret,2)
         return ret
 
