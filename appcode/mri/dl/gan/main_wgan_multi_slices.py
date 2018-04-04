@@ -52,8 +52,8 @@ flags.DEFINE_integer('iters_no_adv', 1, 'Iters with adv_w=0')
 
 # flags.DEFINE_integer('print_test', 10000, 'Print test frequency')
 # flags.DEFINE_integer('print_train', 1000, 'Print train frequency')
-flags.DEFINE_integer('print_test', 1, 'Print test frequency')
-flags.DEFINE_integer('print_train', 1, 'Print train frequency')
+flags.DEFINE_integer('print_test', 50, 'Print test frequency')
+flags.DEFINE_integer('print_train', 10, 'Print train frequency')
 
 flags.DEFINE_integer('num_D_updates', 5, 'Discriminator update freq')
 flags.DEFINE_integer('random_sampling_factor', 6, 'Random mask sampling factor')
@@ -101,7 +101,6 @@ def feed_data(data_set, y_input, train_phase, tt='train', batch_size=10):
 
     # start_line = int(10*random.random() - 5)
     # mask_single = get_random_mask(w=DIMS_OUT[2], h=DIMS_OUT[1], factor=sampling_factor, start_line=start_line, keep_center=keep_center)
-    pdb.set_trace()
     feed = {y_input['real']: real,
             y_input['imag']: imag,
             y_input['mask']: mask_single[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2),

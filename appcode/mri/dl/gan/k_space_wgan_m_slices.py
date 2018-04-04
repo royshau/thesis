@@ -24,7 +24,7 @@ class KspaceWgan(BasicModel):
         real_input = self.input['real'][:,1,:,:]
         real_input = tf.reshape(real_input,(-1,1,self.dims_in[1],self.dims_in[2]))
         self.input_d['real'] = real_input
-        imag_input = self.input['real'][:,1,:,:]
+        imag_input = self.input['imag'][:,1,:,:]
         imag_input = tf.reshape(imag_input,(-1,1,self.dims_in[1],self.dims_in[2]))
         self.input_d['imag'] = imag_input
         # HACK
@@ -98,11 +98,31 @@ class KspaceWgan(BasicModel):
         """
         Define the model
         """
+
         mask_not = tf.cast(tf.logical_not(tf.cast(self.labels['mask'], tf.bool)), tf.float32)
 
         # Create the inputs
         x_real = self.input['real'] * self.input['mask']
         x_imag = self.input['imag'] * self.input['mask']
+        # print(self.input['real'][:, 0, :, :])
+        # # Output to Tensorboard:
+        # input_real = tf.concat(axis=0, values=[self.input['real'][:,0,:,:],x_real[:,0,:,:]])
+        # input_imag = tf.concat(axis=0, values=[self.input['imag'][:,0,:,:],x_imag[:,0,:,:]])
+        #
+        # # Input d holds real&imaginary values. The discriminative decision based on reconstructed image
+        # input_to_discriminator = self.get_reconstructed_image(real=input_real, imag=input_imag, name='Both')
+        #
+        # org, fake = tf.split(input_to_discriminator, num_or_size_splits=2, axis=0)
+        #
+        # org = tf.reshape(tf.abs(tf.complex(real=tf.squeeze(org[:, 0, :, :]), imag=tf.squeeze(org[:, 1, :, :]))),
+        #                  shape=[-1, 1, self.dims_out[1], self.dims_out[2]])
+        # fake = tf.reshape(tf.abs(tf.complex(real=tf.squeeze(fake[:, 0, :, :]), imag=tf.squeeze(fake[:, 1, :, :]))),
+        #                   shape=[-1, 1, self.dims_out[1], self.dims_out[2]])
+        #
+        # tf.summary.image('G_input_slice0', tf.transpose(org, (0, 2, 3, 1)), collections='Input',
+        #                  max_outputs=4)
+        # tf.summary.image('G_masked_input_slice0', tf.transpose(fake, (0, 2, 3, 1)), collections='Input',
+        #                  max_outputs=4)
 
         print "Noise level: (-0.01,0.01)"
         minval = -0.01
