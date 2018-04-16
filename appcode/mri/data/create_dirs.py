@@ -13,4 +13,4 @@ for line in ref:
 	line = line.split('\n')[0]
 	dirname = line.split('.')[0].split('*')
 	os.mkdir(dirname)
-	shutil.copy("./%s" % line, os.path.join("./%s" % dirname, line))
+	shutil.copy("./%s" % line, os.path.join("./T1/%s" % dirname, line))
