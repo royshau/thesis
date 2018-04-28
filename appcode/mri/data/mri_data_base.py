@@ -28,8 +28,9 @@ class MriDataBase:
         """
         self.data_name = data_name
         self.nifty_or_dicom = nifti_or_dicom
-        self.data_path = data_to_path[data_name]["data"]
-        self.labels_path = data_to_path[data_name]["labels"]
+        curr_dir = os.getcwd()
+        self.data_path = os.path.join(curr_dir,data_to_path[data_name]["data"])
+        self.labels_path = os.path.join(curr_dir,data_to_path[data_name]["labels"])
         # New method for ADNI
         if "suffix" in data_to_path[data_name]:
             self.items = sorted(glob.glob(os.path.join(data_to_path[data_name]["data"], data_to_path[data_name]["suffix"])))
