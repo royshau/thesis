@@ -26,7 +26,7 @@ import random
 import time
 
 # k space data set on loca SSD
-base_dir = '/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T1/shuffle'
+base_dir = '/home/rorory/projects/MRI/thesis/appcode/mri/data/IXI/T1/shuffle'
 # print("working on 140 lines images")
 # base_dir = '/sheard/Ohad/thesis/data/SchizData/SchizReg/train/2017_03_02_10_percent/shuffle/'
 # file_names = {'x_r': 'k_space_real', 'x_i': 'k_space_imag', 'y_r': 'k_space_real_gt', 'y_i': 'k_space_imag_gt'}
@@ -74,7 +74,7 @@ flags.DEFINE_string('train_dir', "",
                            """and checkpoint.""")
 logfile = open(os.path.join(FLAGS.train_dir, 'results_%s.log' % str(datetime.datetime.now()).replace(' ', '')), 'w')
 
-mask_single = get_rv_mask(mask_main_dir='/home/roysh/MRI_Project/Code/matlab/', factor=FLAGS.random_sampling_factor)
+mask_single = get_rv_mask(mask_main_dir='/home/rorory/projects/MRI/thesis/matlab/', factor=FLAGS.random_sampling_factor)
 
 
 def feed_data(data_set, y_input, train_phase, tt='train', batch_size=10):
