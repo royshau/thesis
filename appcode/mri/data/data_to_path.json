@@ -1,7 +1,7 @@
 {
-  "IXI_T1":    {  "data":"/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T1",
-                  "labels": "/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T1",
-                  "info": "/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T1",
+  "IXI_T1":    {  "data":"/projects/MRI/thesis/appcode/mri/data/IXI/T1",
+                  "labels": "/projects/MRI/thesis/appcode/mri/data/IXI/T1",
+                  "info": "/projects/MRI/thesis/appcode/mri/data/IXI/T1",
                   "suffix": "*/*.nii.gz"},
 
   "IXI_T2":    {  "data":"/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T2",
