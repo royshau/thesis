@@ -26,7 +26,7 @@ import random
 import time
 
 # k space data set on loca SSD
-base_dir = '/home/rorory/projects/MRI/thesis/appcode/mri/data/IXI/T1/shuffle'
+base_dir = '/home/rorory/projects/MRI/thesis/appcode/mri/data/IXI/T1/shuffle/shuffle'
 # print("working on 140 lines images")
 # base_dir = '/sheard/Ohad/thesis/data/SchizData/SchizReg/train/2017_03_02_10_percent/shuffle/'
 # file_names = {'x_r': 'k_space_real', 'x_i': 'k_space_imag', 'y_r': 'k_space_real_gt', 'y_i': 'k_space_imag_gt'}
