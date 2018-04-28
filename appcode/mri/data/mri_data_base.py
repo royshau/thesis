@@ -42,7 +42,7 @@ class MriDataBase:
             self.items = sorted([item for item in os.listdir(data_to_path[data_name]["data"]) if file_suffix in item])
 
         self.data = dict(img=[],meta_data=[], labels=[])
-        self.info = self.set_info(data_to_path[data_name]["info"])
+        self.info = self.set_info(os.path.join(curr_dir,data_to_path[data_name]["info"]))
 
     def get_source_data(self, item='all'):
         """
