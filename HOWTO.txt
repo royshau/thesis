@@ -31,6 +31,8 @@ cd ~/work/python/thesis/appcode/mri/k_space; set BASE=/sheard/Ohad/thesis/data/I
 
 5. Train and have fun
 
+PYTHONPATH=$PYTHONPATH:/home/rorory/projects/MRI/thesis/ python appcode/mri/dl/gan/main_wgan_multi_slices_GC.py --mode train --tt train --train_dir /home/rorory/projects/MRI/thesis/appcode/mri/data/IXI/T1/train_28_4
+
 rsync -raP /sheard/Ohad/thesis/data/SchizData/SchizReg/train/24_05_2016/shuffle/* ohadsh@132.72.48.22:/home/ohadsh/work/data/SchizReg/
 snx -s vpn1.bgu.ac.il -u ohas@vpn
 6013
