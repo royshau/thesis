@@ -69,21 +69,21 @@ class MriDataBase:
         :return: dictionary
         """
         ret_dic = {}
-        try:
-            # NEW METHOD
-            with open(os.path.join(info_path, 'data_info.json'), 'r') as f:
-                info = json.load(f)
-            ret_dic["case_to_hash"] = {case: meta['hash'] for (case,meta) in info.iteritems()}
-            ret_dic["hash_to_case"] = {meta['hash']: case for (case,meta) in info.iteritems()}
-            ret_dic["train_test_list"] = {case: meta['tt'] for (case, meta) in info.iteritems()}
-            ret_dic["file"] = {case: meta['file'] for (case, meta) in info.iteritems()}
-        except:
-            # OLD METHOD
-            with open(os.path.join(info_path, 'case_to_hash.json'), 'r') as f:
-                ret_dic["case_to_hash"] = json.load(f)
+#         try:
+        # NEW METHOD
+        with open(os.path.join(info_path, 'data_info.json'), 'r') as f:
+            info = json.load(f)
+        ret_dic["case_to_hash"] = {case: meta['hash'] for (case,meta) in info.iteritems()}
+        ret_dic["hash_to_case"] = {meta['hash']: case for (case,meta) in info.iteritems()}
+        ret_dic["train_test_list"] = {case: meta['tt'] for (case, meta) in info.iteritems()}
+        ret_dic["file"] = {case: meta['file'] for (case, meta) in info.iteritems()}
+#         except:
+#             # OLD METHOD
+#             with open(os.path.join(info_path, 'case_to_hash.json'), 'r') as f:
+#                 ret_dic["case_to_hash"] = json.load(f)
 
-            with open(os.path.join(info_path, 'train_test_list.json'), 'r') as f:
-                ret_dic["train_test_list"] = json.load(f)
+#             with open(os.path.join(info_path, 'train_test_list.json'), 'r') as f:
+#                 ret_dic["train_test_list"] = json.load(f)
 
         return ret_dic
 
