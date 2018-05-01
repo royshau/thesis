@@ -24,6 +24,7 @@ import inspect
 import pdb
 import random
 import time
+import sys
 
 # k space data set on loca SSD
 base_dir = '/home/rorory/projects/MRI/thesis/appcode/mri/data/IXI/T1/shuffle/shuffle'
@@ -50,18 +51,17 @@ flags.DEFINE_float('gen_loss_context', 1.0, 'Generative loss, context weight.')
 flags.DEFINE_float('gen_loss_adversarial', 0.1, 'Generative loss, adversarial weight.')
 flags.DEFINE_integer('iters_no_adv', 1, 'Iters with adv_w=0')
 
-flags.DEFINE_integer('print_test', 10000, 'Print test frequency')
-flags.DEFINE_integer('print_train', 1000, 'Print train frequency')
+flags.DEFINE_integer('print_test', 5000, 'Print test frequency')
+flags.DEFINE_integer('print_train', 500, 'Print train frequency')
 # flags.DEFINE_integer('print_test', 50, 'Print test frequency')
 # flags.DEFINE_integer('print_train', 10, 'Print train frequency')
 
 flags.DEFINE_integer('num_D_updates', 5, 'Discriminator update freq')
-flags.DEFINE_integer('random_sampling_factor', 6, 'Random mask sampling factor')
+flags.DEFINE_integer('random_sampling_factor', 4, 'Random mask sampling factor')
 
 flags.DEFINE_boolean('to_show', False, 'View data')
 flags.DEFINE_string('database', 'IXI_T1', "data base name - for file info")
 flags.DEFINE_boolean('dump_debug', False, 'wide_debug_tensorboard')
-
 keep_center = 0.05
 DIMS_IN = np.array([3, 256, 256])
 DIMS_OUT = np.array([1, 256, 256])
@@ -72,6 +72,7 @@ DIMS_OUT = np.array([1, 256, 256])
 flags.DEFINE_string('train_dir', "",
                            """Directory where to write event logs """
                            """and checkpoint.""")
+FLAGS(sys.argv, known_only=True)
 logfile = open(os.path.join(FLAGS.train_dir, 'results_%s.log' % str(datetime.datetime.now()).replace(' ', '')), 'w')
 
 mask_single = get_rv_mask(mask_main_dir='/home/rorory/projects/MRI/thesis/matlab/', factor=FLAGS.random_sampling_factor)
@@ -83,16 +84,17 @@ def feed_data(data_set, y_input, train_phase, tt='train', batch_size=10):
     :param data_set: data set object
     :param x_input: x input placeholder list
     :param y_input: y input placeholder list
+    :param y_input: y input placeholder list
     :param tt: 'train' or 'test
     :param batch_size: number of examples
     :return:
     """
     if tt == 'train':
-        next_batch = copy.deepcopy(data_set.train.next_batch(batch_size))
+        next_batch = data_set.train.next_batch(batch_size)
         t_phase = True
     else:
         t_phase = False
-        next_batch = copy.deepcopy(data_set.test.next_batch(batch_size))
+        next_batch = data_set.test.next_batch(batch_size)
 
     real = next_batch[file_names['y_r']]
     imag = next_batch[file_names['y_i']]
@@ -172,10 +174,12 @@ def train_model(mode, checkpoint=None):
     print("Learning_rate = %f" % FLAGS.learning_rate)
     
     with open(os.path.join(FLAGS.train_dir, 'FLAGS.json'), 'w') as f:
-        json.dump(FLAGS.__dict__, f)
+        #json.dump(FLAGS.__dict__, f)
+	print('Log not dumpped! fix needed!')
 
     # Import data
-    data_set = KspaceDataSet(base_dir, file_names.values(), stack_size=50, data_base=FLAGS.database)
+    with tf.device('/cpu:0'):
+    	data_set = KspaceDataSet(base_dir, file_names.values(), stack_size=250, data_base=FLAGS.database)
 
     net = load_graph()
 
@@ -318,8 +322,11 @@ def evaluate_checkpoint(tt='test', checkpoint=None, output_file=None, output_fil
 
 def main(args):
 
+    print('Initializing')
     if args.mode == 'train' or args.mode == 'resume':
+
         # Copy scripts to training dir
+	print('Training') 
         shutil.copy(os.path.abspath(__file__), args.train_dir)
         model_file = inspect.getfile(KspaceWgan)
         model_file = model_file.split('.py')[0]+'.py'
@@ -360,6 +367,6 @@ if __name__ == '__main__':
     # elif args.mode == 'predict':
     #     assert args.tt and args.checkpoint and args.output_dir , "Must have tt, checkpoint and output_dir for predict"
     elif args.mode == 'resume':
-        assert args.checkpoint, "Must have checkpoint for resume"
-
+         print('training')
+	 assert args.checkpoint, "Must have checkpoint for resume"
     main(args)

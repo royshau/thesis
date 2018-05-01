@@ -12,6 +12,7 @@ base_dir = 'appcode/mri/data/IXI/T1/base'
 shuffle_out = 'appcode/mri/data/IXI/T1/shuffle'
 curr_dir = os.getcwd()
 output_dir = os.path.join(curr_dir,output_dir)
+print(output_dir)
 base_dir = os.path.join(curr_dir,base_dir)
 shuffle_out = os.path.join(curr_dir,shuffle_out)
 data_source = MriDataBase('IXI_T1')
