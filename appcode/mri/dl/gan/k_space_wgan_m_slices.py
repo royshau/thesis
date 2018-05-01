@@ -169,8 +169,14 @@ class KspaceWgan(BasicModel):
         self.conv_1_bn = ops.batch_norm(self.conv_1, self.train_phase, decay=0.98, name="G_bn1")
         self.relu_1 = tf.nn.relu(self.conv_1_bn)
 
+        out_dim = 16
+
+        self.conv_1_1 = ops.conv2d(self.conv_1_bn, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="G_conv_1.1")
+        self.conv_1_1_bn = ops.batch_norm(self.conv_1_1, self.train_phase, decay=0.98, name="G_bn1_1")
+        self.relu_1_1 = tf.nn.relu(self.conv_1_1_bn)
+        
         out_dim = 32
-        self.conv_2 = ops.conv2d(self.relu_1, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="G_conv_2")
+        self.conv_2 = ops.conv2d(self.relu_1_1, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="G_conv_2")
         self.conv_2_bn = ops.batch_norm(self.conv_2, self.train_phase, decay=0.98, name="G_bn2")
         self.relu_2 = tf.nn.relu(self.conv_2_bn)
 
