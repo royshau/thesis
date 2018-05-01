@@ -37,18 +37,18 @@ flags = tf.app.flags
 FLAGS = flags.FLAGS
 
 flags.DEFINE_integer('max_steps', 5000000, 'Number of steps to run trainer.')
-flags.DEFINE_float('learning_rate', 0.00005, 'Initial learning rate.')
+flags.DEFINE_float('learning_rate', 0.0005, 'Initial learning rate.')
 # flags.DEFINE_float('regularization_weight', 5e-4, 'L2 Norm regularization weight.')
 flags.DEFINE_float('reg_w', 5e-4, 'L2 Norm regularization weight.')
 flags.DEFINE_float('reg_b', 5e-4, 'L2 Norm regularization weight.')
 # flags.DEFINE_integer('mini_batch_size', 10, 'Size of mini batch')
-flags.DEFINE_integer('mini_batch_size', 5, 'Size of mini batch')
+flags.DEFINE_integer('mini_batch_size', 16, 'Size of mini batch')
 flags.DEFINE_integer('mini_batch_predict', 200, 'Size of mini batch for predict')
 flags.DEFINE_integer('max_predict', 5000, 'Number of steps to run trainer.')
 
-flags.DEFINE_float('gen_loss_context', 1.0, 'Generative loss, context weight.')
+flags.DEFINE_float('gen_loss_context', 1.5, 'Generative loss, context weight.')
 # flags.DEFINE_float('gen_loss_adversarial', 1.0, 'Generative loss, adversarial weight.')
-flags.DEFINE_float('gen_loss_adversarial', 0.1, 'Generative loss, adversarial weight.')
+flags.DEFINE_float('gen_loss_adversarial', 1.0, 'Generative loss, adversarial weight.')
 flags.DEFINE_integer('iters_no_adv', 1, 'Iters with adv_w=0')
 
 flags.DEFINE_integer('print_test', 5000, 'Print test frequency')
@@ -179,7 +179,7 @@ def train_model(mode, checkpoint=None):
 
     # Import data
     with tf.device('/cpu:0'):
-    	data_set = KspaceDataSet(base_dir, file_names.values(), stack_size=250, data_base=FLAGS.database)
+    	data_set = KspaceDataSet(base_dir, file_names.values(), stack_size=256, data_base=FLAGS.database)
 
     net = load_graph()
 
