@@ -11,7 +11,7 @@ import tensorflow as tf
 import numpy as np
 from appcode.mri.k_space.k_space_data_set import KspaceDataSet
 from appcode.mri.k_space.data_creator import get_random_mask, get_random_gaussian_mask, get_rv_mask
-from appcode.mri.dl.gan.k_space_wgan_m_slices import KspaceWgan
+from appcode.mri.dl.gan.k_space_wgan_multi_mask import KspaceWgan
 from common.deep_learning.helpers import *
 import copy
 import os
@@ -27,7 +27,7 @@ import time
 import sys
 
 # k space data set on loca SSD
-base_dir = '/media/rrtammyfs/labDatabase/IXI/IXI-T1/shuffle/'
+base_dir = '/HOME/data/shuffle'
 # print("working on 140 lines images")
 # base_dir = '/sheard/Ohad/thesis/data/SchizData/SchizReg/train/2017_03_02_10_percent/shuffle/'
 # file_names = {'x_r': 'k_space_real', 'x_i': 'k_space_imag', 'y_r': 'k_space_real_gt', 'y_i': 'k_space_imag_gt'}
@@ -37,12 +37,12 @@ flags = tf.app.flags
 FLAGS = flags.FLAGS
 
 flags.DEFINE_integer('max_steps', 5000000, 'Number of steps to run trainer.')
-flags.DEFINE_float('learning_rate', 0.0005, 'Initial learning rate.')
+flags.DEFINE_float('learning_rate', 0.00005, 'Initial learning rate.')
 # flags.DEFINE_float('regularization_weight', 5e-4, 'L2 Norm regularization weight.')
 flags.DEFINE_float('reg_w', 5e-4, 'L2 Norm regularization weight.')
 flags.DEFINE_float('reg_b', 5e-4, 'L2 Norm regularization weight.')
 # flags.DEFINE_integer('mini_batch_size', 10, 'Size of mini batch')
-flags.DEFINE_integer('mini_batch_size', 16, 'Size of mini batch')
+flags.DEFINE_integer('mini_batch_size', 4, 'Size of mini batch')
 flags.DEFINE_integer('mini_batch_predict', 200, 'Size of mini batch for predict')
 flags.DEFINE_integer('max_predict', 5000, 'Number of steps to run trainer.')
 
@@ -52,7 +52,7 @@ flags.DEFINE_float('gen_loss_adversarial', 1.0, 'Generative loss, adversarial we
 flags.DEFINE_integer('iters_no_adv', 1, 'Iters with adv_w=0')
 
 flags.DEFINE_integer('print_test', 5000, 'Print test frequency')
-flags.DEFINE_integer('print_train', 500, 'Print train frequency')
+flags.DEFINE_integer('print_train', 20, 'Print train frequency')
 # flags.DEFINE_integer('print_test', 50, 'Print test frequency')
 # flags.DEFINE_integer('print_train', 10, 'Print train frequency')
 
@@ -75,7 +75,8 @@ flags.DEFINE_string('train_dir', "",
 FLAGS(sys.argv, known_only=True)
 logfile = open(os.path.join(FLAGS.train_dir, 'results_%s.log' % str(datetime.datetime.now()).replace(' ', '')), 'w')
 
-mask_single = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor=FLAGS.random_sampling_factor)
+mask_1 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='_4_1')
+mask_2 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='_4_2')
 
 #Select GPU 2
 os.environ["CUDA_VISIBLE_DEVICES"] = '2'
@@ -92,7 +93,7 @@ def get_case_idx(case_hash, meta_data):
     slice_idx_abs = idx[slice_idx_rel]
     return slice_idx_abs
 
-def feed_data(data_set, y_input, train_phase, tt='train', batch_size=10):
+def feed_data(data_set,i, y_input, train_phase, tt='train', batch_size=10):
     """
     Feed data into dictionary
     :param data_set: data set object
@@ -115,11 +116,19 @@ def feed_data(data_set, y_input, train_phase, tt='train', batch_size=10):
     if len(real) == 0 or len(imag) == 0:
         return None
 
+    if i%2 ==0:
+        mask_1_feed = mask_1[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2)
+        mask_2_feed = mask_2[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
+    else:
+        mask_1_feed = mask_2[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2)
+        mask_2_feed = mask_1[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
+
     # start_line = int(10*random.random() - 5)
     # mask_single = get_random_mask(w=DIMS_OUT[2], h=DIMS_OUT[1], factor=sampling_factor, start_line=start_line, keep_center=keep_center)
     feed = {y_input['real']: real,
             y_input['imag']: imag,
-            y_input['mask']: mask_single[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2),
+            y_input['mask_1']: mask_1_feed,
+            y_input['mask_2']: mask_2_feed,
             train_phase: t_phase
            }
     return feed
@@ -169,11 +178,13 @@ def load_graph():
     # Init inputs as placeholders
     y_input = {'real': tf.placeholder(tf.float32, shape=[None, DIMS_IN[0], DIMS_IN[1], DIMS_IN[2]], name='y_input_real'),
                'imag': tf.placeholder(tf.float32, shape=[None, DIMS_IN[0], DIMS_IN[1], DIMS_IN[2]], name='y_input_imag'),
-               'mask': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask')}
+               'mask_1': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask_1'),
+               'mask_2': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask_2')
+               }
 
     tf.add_to_collection("placeholders", y_input['real'])
     tf.add_to_collection("placeholders", y_input['imag'])
-    tf.add_to_collection("placeholders", y_input['mask'])
+    tf.add_to_collection("placeholders", y_input['mask_1'])
 
     train_phase = tf.placeholder(tf.bool, name='phase_train')
     adv_loss_w = tf.placeholder(tf.float32, name='adv_loss_w')
@@ -238,7 +249,7 @@ def train_model(mode, checkpoint=None):
 
         if i % FLAGS.print_test == 0:
             # Record summary data and the accuracy
-            feed = feed_data(data_set, net.labels, net.train_phase,
+            feed = feed_data(data_set,i, net.labels, net.train_phase,
                              tt='test', batch_size=FLAGS.mini_batch_size)
             if feed is not None:
                 feed[net.adv_loss_w] = gen_loss_adversarial
@@ -249,7 +260,7 @@ def train_model(mode, checkpoint=None):
             # Training
             # Update D network
             for it in np.arange(FLAGS.num_D_updates):
-                feed = feed_data(data_set, net.labels, net.train_phase,
+                feed = feed_data(data_set,i, net.labels, net.train_phase,
                                  tt='train', batch_size=FLAGS.mini_batch_size)
                 if (feed is not None) and (feed[feed.keys()[0]].shape[0] == FLAGS.mini_batch_size):
                     feed[net.adv_loss_w] = gen_loss_adversarial
@@ -259,7 +270,7 @@ def train_model(mode, checkpoint=None):
                     _ = sess.run([net.clip_weights])
 
             # Update G network
-            feed = feed_data(data_set, net.labels, net.train_phase,
+            feed = feed_data(data_set,i, net.labels, net.train_phase,
                              tt='train', batch_size=FLAGS.mini_batch_size)
             if (feed is not None) and (feed[feed.keys()[0]].shape[0] == FLAGS.mini_batch_size):
                 feed[net.adv_loss_w] = gen_loss_adversarial
