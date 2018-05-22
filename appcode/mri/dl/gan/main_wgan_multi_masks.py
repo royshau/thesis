@@ -44,15 +44,15 @@ flags.DEFINE_float('reg_b', 5e-4, 'L2 Norm regularization weight.')
 # flags.DEFINE_integer('mini_batch_size', 10, 'Size of mini batch')
 flags.DEFINE_integer('mini_batch_size', 4, 'Size of mini batch')
 flags.DEFINE_integer('mini_batch_predict', 200, 'Size of mini batch for predict')
-flags.DEFINE_integer('max_predict', 5000, 'Number of steps to run trainer.')
+flags.DEFINE_integer('max_predict', 50000, 'Number of steps to run trainer.')
 
-flags.DEFINE_float('gen_loss_context', 1.5, 'Generative loss, context weight.')
+flags.DEFINE_float('gen_loss_context', 1.0, 'Generative loss, context weight.')
 # flags.DEFINE_float('gen_loss_adversarial', 1.0, 'Generative loss, adversarial weight.')
-flags.DEFINE_float('gen_loss_adversarial', 1.0, 'Generative loss, adversarial weight.')
+flags.DEFINE_float('gen_loss_adversarial', 0.1, 'Generative loss, adversarial weight.')
 flags.DEFINE_integer('iters_no_adv', 1, 'Iters with adv_w=0')
 
 flags.DEFINE_integer('print_test', 5000, 'Print test frequency')
-flags.DEFINE_integer('print_train', 20, 'Print train frequency')
+flags.DEFINE_integer('print_train', 500, 'Print train frequency')
 # flags.DEFINE_integer('print_test', 50, 'Print test frequency')
 # flags.DEFINE_integer('print_train', 10, 'Print train frequency')
 
@@ -203,7 +203,7 @@ def train_model(mode, checkpoint=None):
 	print('Log not dumpped! fix needed!')
 
     # Import data
-    data_set = KspaceDataSet(base_dir, file_names.values(), stack_size=256, data_base=FLAGS.database,memmap=False)
+    data_set = KspaceDataSet(base_dir, file_names.values(), stack_size=255, data_base=FLAGS.database,memmap=False)
     #data_set_mem = KspaceDataSet(base_dir, file_names.values(), stack_size=256, data_base=FLAGS.database, memmap=True)
     #data_set_tt = getattr(data_set_mem,'train')
 
@@ -247,42 +247,46 @@ def train_model(mode, checkpoint=None):
     # Train the model, and feed in test data and record summaries every 10 steps
     for i in range(start_iter, FLAGS.max_steps):
 
-        if i % FLAGS.print_test == 0:
-            # Record summary data and the accuracy
-            feed = feed_data(data_set,i, net.labels, net.train_phase,
-                             tt='test', batch_size=FLAGS.mini_batch_size)
-            if feed is not None:
-                feed[net.adv_loss_w] = gen_loss_adversarial
-                run_evaluation(sess, feed, step=i, net=net, writer=writer['test'], tt='TEST')
-                save_checkpoint(sess=sess, saver=saver, step=i)
+        try:
+            if i % FLAGS.print_test == 0:
+                # Record summary data and the accuracy
+                feed = feed_data(data_set,i, net.labels, net.train_phase,
+                                 tt='test', batch_size=FLAGS.mini_batch_size)
+                if feed is not None:
+                    feed[net.adv_loss_w] = gen_loss_adversarial
+                    run_evaluation(sess, feed, step=i, net=net, writer=writer['test'], tt='TEST')
+                    save_checkpoint(sess=sess, saver=saver, step=i)
 
-        else:
-            # Training
-            # Update D network
-            for it in np.arange(FLAGS.num_D_updates):
+            else:
+                # Training
+                # Update D network
+                for it in np.arange(FLAGS.num_D_updates):
+                    feed = feed_data(data_set,i, net.labels, net.train_phase,
+                                     tt='train', batch_size=FLAGS.mini_batch_size)
+                    if (feed is not None) and (feed[feed.keys()[0]].shape[0] == FLAGS.mini_batch_size):
+                        feed[net.adv_loss_w] = gen_loss_adversarial
+
+                        _, d_loss_fake, d_loss_real, d_loss = \
+                            sess.run([net.train_op_d, net.d_loss_fake, net.d_loss_real, net.d_loss], feed_dict=feed)
+                        _ = sess.run([net.clip_weights])
+
+                # Update G network
                 feed = feed_data(data_set,i, net.labels, net.train_phase,
                                  tt='train', batch_size=FLAGS.mini_batch_size)
                 if (feed is not None) and (feed[feed.keys()[0]].shape[0] == FLAGS.mini_batch_size):
                     feed[net.adv_loss_w] = gen_loss_adversarial
+                    _, g_loss = sess.run([net.train_op_g, net.g_loss], feed_dict=feed)
 
-                    _, d_loss_fake, d_loss_real, d_loss = \
-                        sess.run([net.train_op_d, net.d_loss_fake, net.d_loss_real, net.d_loss], feed_dict=feed)
-                    _ = sess.run([net.clip_weights])
+                if i % FLAGS.print_train == 0:
+                    run_evaluation(sess, feed, step=i, net=net, writer=writer['train'], tt='TRAIN')
 
-            # Update G network
-            feed = feed_data(data_set,i, net.labels, net.train_phase,
-                             tt='train', batch_size=FLAGS.mini_batch_size)
-            if (feed is not None) and (feed[feed.keys()[0]].shape[0] == FLAGS.mini_batch_size):
-                feed[net.adv_loss_w] = gen_loss_adversarial
-                _, g_loss = sess.run([net.train_op_g, net.g_loss], feed_dict=feed)
-
-            if i % FLAGS.print_train == 0:
-                run_evaluation(sess, feed, step=i, net=net, writer=writer['train'], tt='TRAIN')
-
-            # import pdb
-            # pdb.set_trace()
-            # print(dbg[0].mean(), dbg[1].mean())
-
+                # import pdb
+                # pdb.set_trace()
+                # print(dbg[0].mean(), dbg[1].mean())
+        except KeyboardInterrupt:
+            raise
+        except:
+            print('Error in iteration')
     logfile.close()
 
 
@@ -320,11 +324,12 @@ def evaluate_checkpoint(tt='test', checkpoint=None, output_file=None, output_fil
         f_out_imag = open(os.path.join(output_file, "000000.predict_imag.bin"), 'w')
 
     gen_loss_adversarial = 1.0
-
+    i = 0
     print("Evaluate Model using checkpoint: %s, data=%s" % (checkpoint, tt))
     while data_set_tt.epoch == 0:
             # Running over all data until epoch > 0
-            feed = feed_data(data_set, net.labels, net.train_phase,
+            i+=1
+            feed = feed_data(data_set,i, net.labels, net.train_phase,
                              tt=tt, batch_size=FLAGS.mini_batch_size)
             if feed is not None:
                 feed[net.adv_loss_w] = gen_loss_adversarial

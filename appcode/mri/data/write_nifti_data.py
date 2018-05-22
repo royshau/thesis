@@ -3,7 +3,7 @@ import os
 import argparse
 import nibabel as nib
 import numpy as np
-REFERECE = '/media/ohadsh/sheard/Ohad/thesis/tools/examples/IXI389-Guys-0930-T1.nii.gz'
+REFERECE = '/media/rrtammyfs/labDatabase/IXI/IXI-T1/078-Guys-0751-T1/IXI078-Guys-0751-T1.nii.gz'
 
 
 def write_nifti_data(data, output_path, reference=REFERECE, name=None):

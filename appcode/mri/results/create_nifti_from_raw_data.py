@@ -7,6 +7,7 @@ from appcode.mri.data.mri_data_base import MriDataBase
 from common.files_IO.file_handler import FileHandler
 from appcode.mri.k_space.utils import get_image_from_kspace
 from appcode.mri.k_space.data_creator import get_rv_mask
+import matplotlib.pyplot as plt
 
 file_names = ['k_space_real_gt', 'k_space_imag_gt', 'meta_data']
 import argparse
@@ -16,7 +17,7 @@ predict_names = {'real': '000000.predict_real.bin', 'imag': '000000.predict_imag
 import matplotlib.pyplot as plt
 
 META_KEYS = {'hash':0, 'slice': 1, 'bit_pix':2, 'aug':3, 'norm_factor':4}
-MASKS_DIR = '/media/ohadsh/Data/ohadsh/work/matlab/thesis/'
+MASKS_DIR = '/HOME/thesis/matlab/'
 
 
 def create_nifti_from_raw_data(data_dir, predict_path, output_path, data_base, batch_size, num_of_cases=-1,
@@ -60,11 +61,10 @@ def create_nifti_from_raw_data(data_dir, predict_path, output_path, data_base, b
     # For each case, create indices, build a nifty from real image and predict
     done = 1
     for case in all_cases:
-        try:
             idx = get_case_idx(case, meta_data)
             name = db.info['hash_to_case'][case]
             print("Working on case : %s, number= (%d / %d)" % (name, done, num_of_cases))
-            ref = os.path.join(db.data_path, name, "IXI"+name+".nii.gz")
+            ref = os.path.join('/media/rrtammyfs/labDatabase/IXI/IXI-T1/', name, "IXI"+name+".nii.gz")
 
             if not os.path.exists(ref):
                 ref = None
@@ -74,16 +74,24 @@ def create_nifti_from_raw_data(data_dir, predict_path, output_path, data_base, b
                 os.makedirs(res_out_path)
 
             # Data creation
-            org_real = data_set_tt.files_obj['k_space_real_gt'].memmap[idx]
-            org_imag = data_set_tt.files_obj['k_space_imag_gt'].memmap[idx]
+
+            org_real = data_set_tt.files_obj['k_space_real_gt'].memmap[idx][:,1,:,:]
+            org_imag = data_set_tt.files_obj['k_space_imag_gt'].memmap[idx][:,1,:,:]
+            # print(org_real.shape)
             data = get_image_from_kspace(org_real, org_imag).transpose(1, 2, 0)
+            # print(data.shape)
+            # plt.imshow(data[:,:,10],cmap='gray')
+            # plt.show()
             # data = norm_data(data)
             write_nifti_data(data, output_path=res_out_path, reference=ref, name=name)
 
             # Predict from network
             pred_real = f_predict['real'].memmap[idx]
             pred_imag = f_predict['imag'].memmap[idx]
-
+            # print(data.shape)
+            # plt.imshow(data[:,:,10],cmap='gray')
+            # plt.show()
+            # data = norm_data(data)
             if source == 'k_space':
                 data = get_image_from_kspace(pred_real, pred_imag).transpose(2, 1, 0)
             else:
@@ -107,9 +115,6 @@ def create_nifti_from_raw_data(data_dir, predict_path, output_path, data_base, b
                 write_nifti_data(data, output_path=res_out_path, reference=ref, name=name + "_CS")
 
             done += 1
-        except:
-            print "BAD: (min, max) = (%d, %d)" % (idx.min(), idx.max())
-            continue
 
 
 def get_case_idx(case_hash, meta_data):
@@ -118,7 +123,7 @@ def get_case_idx(case_hash, meta_data):
     :param meta_data:
     :return:
     """
-    idx = np.where(meta_data[:, META_KEYS['hash']] == case_hash)[0]
+    idx = (np.where(meta_data[:, META_KEYS['hash']] == case_hash)[0]-1)/3
     slice_idx_rel = np.argsort(meta_data[idx, META_KEYS['slice']])
     slice_idx_abs = idx[slice_idx_rel]
     return slice_idx_abs
@@ -144,7 +149,7 @@ if __name__ == '__main__':
     parser.add_argument('--predict_path', dest='predict_path', type=str, help='run path')
     parser.add_argument('--output_path', dest='output_path', default='./', type=str, help='out path')
     parser.add_argument('--source', dest='source', default='k_space', type=str, help='source')
-    parser.add_argument('--random_sampling_factor', dest='random_sampling_factor', type=int, default=None,
+    parser.add_argument('--random_sampling_factor', dest='random_sampling_factor', type=str, default=None,
                         help='Random sampling factor for zero padding')
     parser.add_argument('--cs_path', dest='cs_path', default=None, type=str, help='CS path')
     args = parser.parse_args()

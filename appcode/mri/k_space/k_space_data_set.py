@@ -23,8 +23,8 @@ class KspaceDataSet:
         self.files_info = get_info(data_base)
         self.train = DataSet(os.path.join(base_dir, "train"), file_names, stack_size,
                              shuffle=shuffle, files_info=self.files_info, memmap=memmap)
-        ## self.test = DataSet(os.path.join(base_dir, "test"), file_names, stack_size,
-        self.test = DataSet(os.path.join(base_dir, "train"), file_names, stack_size,
+        self.test = DataSet(os.path.join(base_dir, "test"), file_names, stack_size,
+        #self.test = DataSet(os.path.join(base_dir, "train"), file_names, stack_size,
                             shuffle=shuffle, files_info=self.files_info, memmap=memmap)
         self.stack_size = stack_size
 
