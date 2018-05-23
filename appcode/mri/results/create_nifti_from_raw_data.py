@@ -79,10 +79,7 @@ def create_nifti_from_raw_data(data_dir, predict_path, output_path, data_base, b
             org_imag = data_set_tt.files_obj['k_space_imag_gt'].memmap[idx][:,1,:,:]
             # print(org_real.shape)
             data = get_image_from_kspace(org_real, org_imag).transpose(1, 2, 0)
-            # print(data.shape)
-            # plt.imshow(data[:,:,10],cmap='gray')
-            # plt.show()
-            # data = norm_data(data)
+            #data = norm_data(data)
             write_nifti_data(data, output_path=res_out_path, reference=ref, name=name)
 
             # Predict from network
@@ -97,6 +94,7 @@ def create_nifti_from_raw_data(data_dir, predict_path, output_path, data_base, b
             else:
                 data = 256*np.abs(pred_real+ 1j * pred_imag).transpose(2, 1, 0)
             # data = norm_data(data)
+            #data = norm_data(data)
             write_nifti_data(data, output_path=res_out_path, reference=ref, name=name+"_predict")
 
             # Zero Padding
@@ -123,7 +121,7 @@ def get_case_idx(case_hash, meta_data):
     :param meta_data:
     :return:
     """
-    idx = (np.where(meta_data[:, META_KEYS['hash']] == case_hash)[0]-1)/3
+    idx = np.where(meta_data[:, META_KEYS['hash']] == case_hash)[0]
     slice_idx_rel = np.argsort(meta_data[idx, META_KEYS['slice']])
     slice_idx_abs = idx[slice_idx_rel]
     return slice_idx_abs

@@ -42,11 +42,11 @@ flags.DEFINE_float('learning_rate', 0.00005, 'Initial learning rate.')
 flags.DEFINE_float('reg_w', 5e-4, 'L2 Norm regularization weight.')
 flags.DEFINE_float('reg_b', 5e-4, 'L2 Norm regularization weight.')
 # flags.DEFINE_integer('mini_batch_size', 10, 'Size of mini batch')
-flags.DEFINE_integer('mini_batch_size', 4, 'Size of mini batch')
+flags.DEFINE_integer('mini_batch_size', 5, 'Size of mini batch')
 flags.DEFINE_integer('mini_batch_predict', 200, 'Size of mini batch for predict')
 flags.DEFINE_integer('max_predict', 50000, 'Number of steps to run trainer.')
 
-flags.DEFINE_float('gen_loss_context', 1.0, 'Generative loss, context weight.')
+flags.DEFINE_float('gen_loss_context', 10, 'Generative loss, context weight.')
 # flags.DEFINE_float('gen_loss_adversarial', 1.0, 'Generative loss, adversarial weight.')
 flags.DEFINE_float('gen_loss_adversarial', 0.1, 'Generative loss, adversarial weight.')
 flags.DEFINE_integer('iters_no_adv', 1, 'Iters with adv_w=0')
@@ -75,11 +75,11 @@ flags.DEFINE_string('train_dir', "",
 FLAGS(sys.argv, known_only=True)
 logfile = open(os.path.join(FLAGS.train_dir, 'results_%s.log' % str(datetime.datetime.now()).replace(' ', '')), 'w')
 
-mask_1 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='_4_1')
-mask_2 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='_4_2')
+mask_1 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='_2_r_1')
+mask_2 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='_2_r_2')
 
 #Select GPU 2
-os.environ["CUDA_VISIBLE_DEVICES"] = '2'
+os.environ["CUDA_VISIBLE_DEVICES"] = '3'
 
 def get_case_idx(case_hash, meta_data):
     """ Get case indices given cash hash and meta data memmap
@@ -129,7 +129,7 @@ def feed_data(data_set,i, y_input, train_phase, tt='train', batch_size=10):
             y_input['imag']: imag,
             y_input['mask_1']: mask_1_feed,
             y_input['mask_2']: mask_2_feed,
-            train_phase: t_phase
+            train_phase: 'train' #Force Train
            }
     return feed
 

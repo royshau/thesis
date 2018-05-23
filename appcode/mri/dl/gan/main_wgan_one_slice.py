@@ -44,7 +44,7 @@ flags.DEFINE_float('reg_b', 5e-4, 'L2 Norm regularization weight.')
 # flags.DEFINE_integer('mini_batch_size', 10, 'Size of mini batch')
 flags.DEFINE_integer('mini_batch_size', 5, 'Size of mini batch')
 flags.DEFINE_integer('mini_batch_predict', 200, 'Size of mini batch for predict')
-flags.DEFINE_integer('max_predict', 5000, 'Number of steps to run trainer.')
+flags.DEFINE_integer('max_predict', 50000, 'Number of steps to run trainer.')
 
 flags.DEFINE_float('gen_loss_context', 1.0, 'Generative loss, context weight.')
 # flags.DEFINE_float('gen_loss_adversarial', 1.0, 'Generative loss, adversarial weight.')

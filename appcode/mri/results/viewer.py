@@ -10,7 +10,7 @@ import sys
 import matplotlib.patches as patches
 NII_SUFFIX = '.nii.gz'
 SEG_SUFFIX = '_seg'
-BRAIN_SUFFIX = '_brain'
+BRAIN_SUFFIX = ''
 # IMG_FORMAT = 'eps'
 IMG_FORMAT = 'png'
 ROI_FORMAT = 'roi'
@@ -225,7 +225,7 @@ class Viewer(object):
 
             print("Viewing case: %s, slice: %d" % (case_name, i[0]))
             plt.draw()
-
+            plt.show()
             fig.canvas.mpl_connect('key_press_event', on_key)
             sys.stdout.flush()
             if not plt.waitforbuttonpress():
