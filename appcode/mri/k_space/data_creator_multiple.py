@@ -11,14 +11,17 @@ import matplotlib.pyplot as plt
 from common.viewers.imshow import imshow
 import scipy.signal
 import random
-# MAX_IM_VAL = 2.0**16 - 1
+from threading import Thread , BoundedSemaphore
+threadLimiter = BoundedSemaphore(10)
+import shutil
 
+# MAX_IM_VAL = 2.0**16 - 1
 
 class DataCreatorMulti:
     """
     DataCreator - Class of data creator object. Gets MriDataBase object and create example for training
     """
-    def __init__(self, mri_data_base, output_path, axial_limits=np.array([10, 90]), data_base='SchizReg', rot=0):
+    def __init__(self, mri_data_base, output_path, axial_limits=np.array([35, 115]), data_base='SchizReg', rot=0):
         """
         Constructor
         :type mri_data_base: MriDataBase
@@ -34,18 +37,10 @@ class DataCreatorMulti:
         self.file_info = get_info(data_base)
         self.rot = rot
 
-    def create_examples(self, item='all', debug=False, trans=None):
-        """
-        Data creation
-        :param item: case name or all cases
-        :return:
-        """
-        data_base = self.mri_data_base
-        items = self.mri_data_base.items if item == "all" else [item]
-
-        # For all cases in items
-        for case in items:
+    def create_example(self,case,data_base):
             try:
+                flag = 1
+                threadLimiter.acquire()
                 case_name = case.split('.')[0]
                 case_name = case_name.split('/')[0]
                 print "Working on case: " + case_name
@@ -53,25 +48,30 @@ class DataCreatorMulti:
                 # Set output path and create dir
                 if case_name not in self.mri_data_base.info["train_test_list"]:
                     print "case:  - not in tt list, add 1 as prefix -" + case_name
-                    continue
+                    return
 
                 tt = self.mri_data_base.info["train_test_list"][case_name]
 
                 out_path = os.path.join(self.base_out_path, tt, case_name)
-                os.makedirs(out_path)
+                try:
+                    os.makedirs(out_path)
+                except:
+                    print('dir already exists')
+                    if flag == 1:
+                        threadLimiter.release()
+                        flag =0
+                    return
                 counter = 0
 
                 # Read source data and create k_space + dummy image
                 source_data = data_base.get_source_data(case)
                 image_3d = source_data['img'][0].squeeze()
-                if trans is not None:
-                    image_3d = image_3d.transpose(trans)
 
                 ## HACK - padding image:
                 pad = 256
                 print "PADDING IMAGE TO FIX SIZE! 256-%d " % pad
                 if image_3d.shape[1] > pad:
-                    continue
+                    return
                 image_3d = pad_image_with_zeros_fixed(dat=image_3d, to_size=[256, pad])
 
                 # Rotate if needed
@@ -84,31 +84,53 @@ class DataCreatorMulti:
                 meta_data = source_data['meta_data'][0]
 
                 # Set image sizes
-                w = image_3d[:,:,0].shape[0]
-                h = image_3d[:,:,0].shape[1]
+                w = image_3d[:, :, 0].shape[0]
+                h = image_3d[:, :, 0].shape[1]
 
                 # For each Z in axial limits, create masks and dump examples
-                for z in range(self.axial_limits[0], self.axial_limits[1]+1):
+                for z in range(self.axial_limits[0], self.axial_limits[1] + 1):
                     # Set ground truth
-                    image_2d_gt = np.stack((image_3d[:, :, z-1],image_3d[:, :, z],image_3d[:, :, z+1]),axis=2)
-                    k_space_2d_gt = np.stack((k_space_3d[:, :, z-1],k_space_3d[:, :, z],k_space_3d[:, :, z+1]),axis=2)
+                    k_space_2d_gt = np.stack((k_space_3d[:, :, z - 1], k_space_3d[:, :, z], k_space_3d[:, :, z + 1]),
+                                             axis=2)
                     k_space_real_gt = k_space_2d_gt.real
                     k_space_imag_gt = k_space_2d_gt.imag
 
                     # Subsample with factor = factor
 
-                    aug=0
+                    aug = 0
                     # Dump example
                     meta_data_to_write = self.create_meta_data(meta_data, case_name, z, aug, norm_factor)
                     self.dump_example(out_path, counter,
-                                 dict(k_space_real_gt=k_space_real_gt, k_space_imag_gt=k_space_imag_gt,
-                                      meta_data=meta_data_to_write, image_gt=image_2d_gt), debug)
+                                      dict(k_space_real_gt=k_space_real_gt, k_space_imag_gt=k_space_imag_gt,
+                                           meta_data=meta_data_to_write), False)
                     # Add to counter
                     counter += 1
-                # print "ONE EXAMPLE"
-                # exit()
             except:
-                continue
+                shutil.rmtree(out_path, ignore_errors=True)
+                self.create_example(self, case, data_base)
+            finally:
+                if flag == 1:
+                    threadLimiter.release()
+                    flag = 0
+
+                    # print "ONE EXAMPLE"
+            # exit()
+
+    def create_examples(self, item='all', debug=False, trans=None):
+        """
+        Data creation
+        :param item: case name or all cases
+        :return:
+        """
+        data_base = self.mri_data_base
+        items = self.mri_data_base.items if item == "all" else [item]
+
+        # For all cases in items
+        for case in items:
+            t = Thread(target=self.create_example, args=(case,data_base))
+            t.start()
+        t.join()
+
     def create_meta_data(self, meta_data, case, axial_slice, aug, norm_factor):
         """
         Create meta data vector

@@ -7,17 +7,17 @@ from appcode.mri.k_space.utils import get_image_from_kspace
 import os
 from appcode.mri.k_space.k_space_data_set import KspaceDataSet
 
-output_dir = 'appcode/mri/data/IXI/T1'
-base_dir = 'appcode/mri/data/IXI/T1/base'
-shuffle_out = 'appcode/mri/data/IXI/T1/shuffle'
-curr_dir = os.getcwd()
+output_dir = '/HOME/data'
+base_dir = '/HOME/data/base'
+shuffle_out = '/HOME/data/'
+curr_dir = ''
 output_dir = os.path.join(curr_dir,output_dir)
 print(output_dir)
 base_dir = os.path.join(curr_dir,base_dir)
 shuffle_out = os.path.join(curr_dir,shuffle_out)
 data_source = MriDataBase('IXI_T1')
 data_creator = DataCreatorMulti(data_source, output_dir)
-data_creator.create_examples()
+#data_creator.create_examples()
 shuffle_data(base_dir,shuffle_out,'["train", "test"]',123,'IXI_T1')
 file_names = {'y_r': 'k_space_real_gt', 'y_i': 'k_space_imag_gt'}
 

@@ -11,7 +11,7 @@ import tensorflow as tf
 import numpy as np
 from appcode.mri.k_space.k_space_data_set import KspaceDataSet
 from appcode.mri.k_space.data_creator import get_random_mask, get_random_gaussian_mask, get_rv_mask
-from appcode.mri.dl.gan.k_space_wgan_multi_mask import KspaceWgan
+from appcode.mri.dl.gan.k_space_wgan_im_loss_1d import KspaceWgan
 from common.deep_learning.helpers import *
 import copy
 import os
@@ -36,17 +36,19 @@ file_names = {'y_r': 'k_space_real_gt', 'y_i': 'k_space_imag_gt' , 'm_d':'meta_d
 flags = tf.app.flags
 FLAGS = flags.FLAGS
 
-flags.DEFINE_integer('max_steps', 5000000, 'Number of steps to run trainer.')
-flags.DEFINE_float('learning_rate', 0.00005, 'Initial learning rate.')
+flags.DEFINE_integer('max_steps', 50000000, 'Number of steps to run trainer.')
+flags.DEFINE_float('learning_rate', 0.0001, 'Initial learning rate.')
 # flags.DEFINE_float('regularization_weight', 5e-4, 'L2 Norm regularization weight.')
 flags.DEFINE_float('reg_w', 5e-4, 'L2 Norm regularization weight.')
-flags.DEFINE_float('reg_b', 5e-2, 'L2 Norm regularization weight.')
+flags.DEFINE_float('reg_b', 5e-3, 'L2 Norm regularization weight.')
 # flags.DEFINE_integer('mini_batch_size', 10, 'Size of mini batch')
 flags.DEFINE_integer('mini_batch_size', 5, 'Size of mini batch')
 flags.DEFINE_integer('mini_batch_predict', 200, 'Size of mini batch for predict')
 flags.DEFINE_integer('max_predict', 50000, 'Number of steps to run trainer.')
 
-flags.DEFINE_float('gen_loss_context', 10, 'Generative loss, context weight.')
+flags.DEFINE_float('gen_loss_context', 5, 'Generative loss, kspace context weight.')
+flags.DEFINE_float('im_loss_context', 5, 'Generative loss, Image context weight.')
+
 # flags.DEFINE_float('gen_loss_adversarial', 1.0, 'Generative loss, adversarial weight.')
 flags.DEFINE_float('gen_loss_adversarial', 0.1, 'Generative loss, adversarial weight.')
 flags.DEFINE_integer('iters_no_adv', 1, 'Iters with adv_w=0')
@@ -75,12 +77,14 @@ flags.DEFINE_string('train_dir', "",
 FLAGS(sys.argv, known_only=True)
 logfile = open(os.path.join(FLAGS.train_dir, 'results_%s.log' % str(datetime.datetime.now()).replace(' ', '')), 'w')
 
-mask_1 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50_1')
-mask_2 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50_2')
-mask_3 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50_3')
+mask_1 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50r_1')
+mask_2 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50r_2')
+mask_3 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50r_3')
 
-#Select GPU 2
-os.environ["CUDA_VISIBLE_DEVICES"] = '3'
+#Select GPU:
+GPU_ID = '3'
+print ('GPU USED: ' + GPU_ID)
+os.environ["CUDA_VISIBLE_DEVICES"] = GPU_ID
 
 def get_case_idx(case_hash, meta_data):
     """ Get case indices given cash hash and meta data memmap
@@ -156,14 +160,14 @@ def run_evaluation(sess, feed, net, step, writer, tt):
     m_op_g = tf.summary.merge_all(key='G')
     m_op_d = tf.summary.merge_all(key='D')
 
-    r_g, r_d, loss_d_fake, loss_d_real, loss_d, loss_g, l2_norm, g_loss_no_reg, d_loss_no_reg = sess.run([m_op_g, m_op_d, net.d_loss_fake, net.d_loss_real,
-                                                                   net.d_loss, net.g_loss, net.evaluation, net.g_loss_no_reg, net.d_loss_no_reg], feed_dict=feed)
+    r_g, r_d, loss_d_fake, loss_d_real, loss_d, loss_g, l2_norm, g_loss_no_reg, d_loss_no_reg,g_loss_im = sess.run([m_op_g, m_op_d, net.d_loss_fake, net.d_loss_real,
+                                                                   net.d_loss, net.g_loss, net.evaluation, net.g_loss_no_reg, net.d_loss_no_reg,net.im_loss], feed_dict=feed)
 
     writer['G'].add_summary(r_g, step)
     writer['D'].add_summary(r_d, step)
 
-    print('%s:  Time: %s , Loss at step %s: D: %s, D_no_reg: %s, G: %s, G_no_reg: %s, L2: %s' % (tt, datetime.datetime.now(), step, loss_d, d_loss_no_reg, loss_g, g_loss_no_reg, l2_norm))
-    logfile.writelines('%s: Time: %s , Accuracy at step %s: D: %s, G: %s, L2: %s\n' % (tt, datetime.datetime.now(), step, loss_d, loss_g, l2_norm))
+    print('%s:  Time: %s , Loss at step %s: D: %s, D_no_reg: %s, G: %s, G_no_reg: %s, L2: %s, L2_Im %s' % (tt, datetime.datetime.now(), step, loss_d, d_loss_no_reg, loss_g, g_loss_no_reg, l2_norm,g_loss_im))
+    logfile.writelines('%s: Time: %s , Accuracy at step %s: D: %s, G: %s, L2: %s, L2_Im %s\n' % (tt, datetime.datetime.now(), step, loss_d, loss_g, l2_norm,g_loss_im))
     logfile.flush()
 
 
@@ -212,7 +216,7 @@ def train_model(mode, checkpoint=None):
 	print('Log not dumpped! fix needed!')
 
     # Import data
-    data_set = KspaceDataSet(base_dir, file_names.values(), stack_size=255, data_base=FLAGS.database,memmap=False)
+    data_set = KspaceDataSet(base_dir, file_names.values(), stack_size=1600, data_base=FLAGS.database,memmap=False)
     #data_set_mem = KspaceDataSet(base_dir, file_names.values(), stack_size=256, data_base=FLAGS.database, memmap=True)
     #data_set_tt = getattr(data_set_mem,'train')
 

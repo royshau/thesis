@@ -35,6 +35,8 @@ def calc_segmentation_statistics(data_dir, num_of_cases=-1, suffixes=None, brain
             break
         if not os.path.isdir(os.path.join(data_dir, sub_dir)):
             continue
+        gt_dir = '/HOME/Rec_Images/ZP_50_1d'
+        gt_path_sub_dir = os.path.join(gt_dir, sub_dir)
         path_sub_dir = os.path.join(data_dir, sub_dir)
         all_files_in_dir = os.listdir(path_sub_dir)
         suffix_to_nifti = {}
@@ -44,8 +46,9 @@ def calc_segmentation_statistics(data_dir, num_of_cases=-1, suffixes=None, brain
         for file_type in all_files_in_dir:
             for suffix in suffixes:
                 if file_type.endswith(sub_dir+suffix+seg_suffix_use+NII_SUFFIX):
-                    suffix_to_nifti[suffix] = nib.load(os.path.join(path_sub_dir, file_type))
-
+                        suffix_to_nifti[suffix] = nib.load(os.path.join(path_sub_dir, file_type))
+                        file_type = sub_dir+seg_suffix_use+NII_SUFFIX
+                        suffix_to_nifti[''] = nib.load(os.path.join(gt_path_sub_dir, file_type))
         if '' in suffix_to_nifti.keys():
             tpr_case, fpr_case, dice_case = calc_statistics(suffix_to_nifti)
             for suffix in suffix_to_nifti.keys():

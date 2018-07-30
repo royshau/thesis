@@ -21,10 +21,10 @@ class KspaceWgan(BasicModel):
         print("Input is y label")
         # HACK
         self.input_d={}
-        real_input = self.input['real']
+        real_input = self.input['real'][:,1,:,:]
         real_input = tf.reshape(real_input,(-1,1,self.dims_in[1],self.dims_in[2]))
         self.input_d['real'] = real_input
-        imag_input = self.input['imag']
+        imag_input = self.input['imag'][:,1,:,:]
         imag_input = tf.reshape(imag_input,(-1,1,self.dims_in[1],self.dims_in[2]))
         self.input_d['imag'] = imag_input
         # HACK
@@ -56,6 +56,9 @@ class KspaceWgan(BasicModel):
         self.regularization_sum_d = None
 
         self.clip_weights = None
+
+        self.real_im = None
+        self.fake_im = None
 
         tf.get_collection('D')
         tf.get_collection('G')
@@ -101,7 +104,7 @@ class KspaceWgan(BasicModel):
 
         # Create the inputs
 
-        mask = tf.concat([self.input['mask_2'],self.input['mask_1'],self.input['mask_2']],1)
+        mask = tf.concat([self.input['mask_1'],self.input['mask_2'],self.input['mask_3']],1)
         mask_not = tf.cast(tf.logical_not(tf.cast(mask, tf.bool)), tf.float32)
         x_real = self.input['real'] * mask
         x_imag = self.input['imag'] * mask
@@ -137,7 +140,7 @@ class KspaceWgan(BasicModel):
         x_imag += noise_imag
 
         if self.FLAGS.dump_debug:
-            tf.summary.image('G_mask', tf.transpose(self.labels['mask_1'], (0, 2, 3, 1)), collections='G', max_outputs=1)
+            tf.summary.image('G_mask', tf.transpose(self.labels['mask_2'], (0, 2, 3, 1)), collections='G', max_outputs=1)
             tf.summary.image('noise_real', tf.transpose(noise_real, (0, 2, 3, 1)), collections='G', max_outputs=1)
             tf.summary.image('noise_image', tf.transpose(noise_imag, (0, 2, 3, 1)), collections='G', max_outputs=1)
             tf.summary.image('x_real_noise', tf.transpose(x_real, (0, 2, 3, 1)), collections='G', max_outputs=2)
@@ -146,8 +149,8 @@ class KspaceWgan(BasicModel):
             tf.summary.image('x_input_image', tf.transpose(self.input['imag'], (0, 2, 3, 1)), collections='G', max_outputs=2)
 
             image_with_noise_padding = self.get_reconstructed_image(real=x_real, imag=x_imag, name='NoisePadding')
-            image_with_zero_padding = self.get_reconstructed_image(real=self.input['real'] * self.input['mask_1'],
-                                                                    imag=self.input['imag'] * self.input['mask_1'], name='NoisePadding')
+            image_with_zero_padding = self.get_reconstructed_image(real=self.input['real'] * self.input['mask_2'],
+                                                                    imag=self.input['imag'] * self.input['mask_2'], name='NoisePadding')
             image_debug = self.get_reconstructed_image(real=self.input['real'],
                                                                     imag=self.input['imag'], name='RegularDebug')
             image_with_noise_padding = tf.expand_dims(input=tf.abs(tf.complex(real=image_with_noise_padding[:,0,:,:],
@@ -166,7 +169,6 @@ class KspaceWgan(BasicModel):
         # with tf.name_scope('real'):
         out_dim = 16
         x_input_stack = tf.concat([x_real[:,:,:,:], x_imag[:,:,:,:]], axis=1)
-        # self.conv_1, reg_1 = ops.conv2d(x_real, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="G_conv_1")
 
         self.conv_1 = ops.conv2d(x_input_stack, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="G_conv_1")
         self.conv_1_bn = ops.batch_norm(self.conv_1, self.train_phase, decay=0.98, name="G_bn1")
@@ -209,8 +211,8 @@ class KspaceWgan(BasicModel):
         # Masking
         predict['real'] = tf.multiply(predict['real'], mask_not[:,1,:,:])
         predict['imag'] = tf.multiply(predict['imag'], mask_not[:,1,:,:])
-        input_masked_real = tf.multiply(self.input_d['real'], self.labels['mask_1'], name='input_masked_real')
-        input_masked_imag = tf.multiply(self.input_d['imag'], self.labels['mask_1'], name='input_masked_imag')
+        input_masked_real = tf.multiply(self.input_d['real'], self.labels['mask_2'], name='input_masked_real')
+        input_masked_imag = tf.multiply(self.input_d['imag'], self.labels['mask_2'], name='input_masked_imag')
 
         with tf.name_scope("final_predict"):
             predict['real'] = tf.add(predict['real'], input_masked_real, name='real')
@@ -241,7 +243,8 @@ class KspaceWgan(BasicModel):
         
         org = tf.reshape(tf.abs(tf.complex(real=tf.squeeze(org[:,0,:,:]), imag=tf.squeeze(org[:,1,:,:]))), shape=[-1, 1, self.dims_out[1], self.dims_out[2]])
         fake = tf.reshape(tf.abs(tf.complex(real=tf.squeeze(fake[:,0,:,:]), imag=tf.squeeze(fake[:,1,:,:]))), shape=[-1, 1, self.dims_out[1], self.dims_out[2]])
-
+        self.real_im = org
+        self.fake_im = fake
         tf.summary.image('D_x_input_reconstructed' + 'Original', tf.transpose(org, (0,2,3,1)), collections='D', max_outputs=4)
         tf.summary.image('D_x_input_reconstructed' + 'Fake', tf.transpose(fake, (0,2,3,1)), collections='G', max_outputs=4)
 
@@ -324,7 +327,7 @@ class KspaceWgan(BasicModel):
         tf.summary.scalar('g_loss', g_loss, collections='G')
 
         # Context loss L2
-        mask_not = tf.cast(tf.logical_not(tf.cast(self.labels['mask_1'], tf.bool)), tf.float32)
+        mask_not = tf.cast(tf.logical_not(tf.cast(self.labels['mask_2'], tf.bool)), tf.float32)
         real_diff = tf.contrib.layers.flatten(tf.multiply(self.predict_g['real'] - self.input_d['real'], mask_not))
         imag_diff = tf.contrib.layers.flatten(tf.multiply(self.predict_g['imag'] - self.input_d['imag'], mask_not))
         self.context_loss = tf.reduce_mean(tf.square(real_diff) + tf.square(imag_diff), name='Context_loss_mean')
@@ -338,9 +341,17 @@ class KspaceWgan(BasicModel):
 
         # if len(self.regularization_values) > 0:
         # reg_loss_g = self.reg_w * tf.reduce_sum(self.regularization_values)
+
+        #Context loss Image space
+        im_diff = tf.contrib.layers.flatten(self.real_im - self.fake_im)
+        self.im_loss = tf.reduce_sum(tf.square(im_diff), name='Im_loss_mean')
+        tf.summary.scalar('im_l2_loss', tf.abs(self.im_loss), collections='G')
+        self.g_loss += self.FLAGS.im_loss_context * self.im_loss
+
         self.reg_loss_g = self.get_weights_regularization(dump=self.FLAGS.dump_debug, collection='G')
         self.g_loss_no_reg = self.g_loss
         self.g_loss += self.reg_loss_g
+
         if self.FLAGS.dump_debug:
             tf.summary.scalar('g_loss_plus_context_plus_reg', self.g_loss, collections='G')
             tf.summary.scalar('g_loss_reg_only', self.reg_loss_g, collections='D')

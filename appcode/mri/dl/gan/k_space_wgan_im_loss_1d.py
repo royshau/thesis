@@ -57,6 +57,9 @@ class KspaceWgan(BasicModel):
 
         self.clip_weights = None
 
+        self.real_im = None
+        self.fake_im = None
+
         tf.get_collection('D')
         tf.get_collection('G')
 
@@ -106,26 +109,6 @@ class KspaceWgan(BasicModel):
         x_real = self.input['real'] * mask
         x_imag = self.input['imag'] * mask
 
-        # print(self.input['real'][:, 0, :, :])
-        # # Output to Tensorboard:
-        # input_real = tf.concat(axis=0, values=[self.input['real'][:,0,:,:],x_real[:,0,:,:]])
-        # input_imag = tf.concat(axis=0, values=[self.input['imag'][:,0,:,:],x_imag[:,0,:,:]])
-        #
-        # # Input d holds real&imaginary values. The discriminative decision based on reconstructed image
-        # input_to_discriminator = self.get_reconstructed_image(real=input_real, imag=input_imag, name='Both')
-        #
-        # org, fake = tf.split(input_to_discriminator, num_or_size_splits=2, axis=0)
-        #
-        # org = tf.reshape(tf.abs(tf.complex(real=tf.squeeze(org[:, 0, :, :]), imag=tf.squeeze(org[:, 1, :, :]))),
-        #                  shape=[-1, 1, self.dims_out[1], self.dims_out[2]])
-        # fake = tf.reshape(tf.abs(tf.complex(real=tf.squeeze(fake[:, 0, :, :]), imag=tf.squeeze(fake[:, 1, :, :]))),
-        #                   shape=[-1, 1, self.dims_out[1], self.dims_out[2]])
-        #
-        # tf.summary.image('G_input_slice0', tf.transpose(org, (0, 2, 3, 1)), collections='Input',
-        #                  max_outputs=4)
-        # tf.summary.image('G_masked_input_slice0', tf.transpose(fake, (0, 2, 3, 1)), collections='Input',
-        #                  max_outputs=4)
-
         print "Noise level: (-0.01,0.01)"
         minval = -0.01
         maxval = 0.01
@@ -164,20 +147,20 @@ class KspaceWgan(BasicModel):
         self.x_input_upscale['imag'] = x_imag
         # Model convolutions
         # with tf.name_scope('real'):
-        out_dim = 16
+
+        out_dim = 32
         x_input_stack = tf.concat([x_real[:,:,:,:], x_imag[:,:,:,:]], axis=1)
-        # self.conv_1, reg_1 = ops.conv2d(x_real, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="G_conv_1")
 
         self.conv_1 = ops.conv2d(x_input_stack, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="G_conv_1")
         self.conv_1_bn = ops.batch_norm(self.conv_1, self.train_phase, decay=0.98, name="G_bn1")
         self.relu_1 = tf.nn.relu(self.conv_1_bn)
 
-        out_dim = 16
+        out_dim = 32
 
         self.conv_1_1 = ops.conv2d(self.conv_1_bn, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="G_conv_1.1")
         self.conv_1_1_bn = ops.batch_norm(self.conv_1_1, self.train_phase, decay=0.98, name="G_bn1_1")
         self.relu_1_1 = tf.nn.relu(self.conv_1_1_bn)
-        
+
         out_dim = 32
         self.conv_2 = ops.conv2d(self.relu_1_1, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="G_conv_2")
         self.conv_2_bn = ops.batch_norm(self.conv_2, self.train_phase, decay=0.98, name="G_bn2")
@@ -241,7 +224,8 @@ class KspaceWgan(BasicModel):
         
         org = tf.reshape(tf.abs(tf.complex(real=tf.squeeze(org[:,0,:,:]), imag=tf.squeeze(org[:,1,:,:]))), shape=[-1, 1, self.dims_out[1], self.dims_out[2]])
         fake = tf.reshape(tf.abs(tf.complex(real=tf.squeeze(fake[:,0,:,:]), imag=tf.squeeze(fake[:,1,:,:]))), shape=[-1, 1, self.dims_out[1], self.dims_out[2]])
-
+        self.real_im = org
+        self.fake_im = fake
         tf.summary.image('D_x_input_reconstructed' + 'Original', tf.transpose(org, (0,2,3,1)), collections='D', max_outputs=4)
         tf.summary.image('D_x_input_reconstructed' + 'Fake', tf.transpose(fake, (0,2,3,1)), collections='G', max_outputs=4)
 
@@ -338,9 +322,17 @@ class KspaceWgan(BasicModel):
 
         # if len(self.regularization_values) > 0:
         # reg_loss_g = self.reg_w * tf.reduce_sum(self.regularization_values)
+
+        #Context loss Image space
+        im_diff = tf.contrib.layers.flatten(self.real_im - self.fake_im)
+        self.im_loss = tf.reduce_sum(tf.square(im_diff), name='Im_loss_mean')
+        tf.summary.scalar('im_l2_loss', tf.abs(self.im_loss), collections='G')
+        self.g_loss += self.FLAGS.im_loss_context * self.im_loss
+
         self.reg_loss_g = self.get_weights_regularization(dump=self.FLAGS.dump_debug, collection='G')
         self.g_loss_no_reg = self.g_loss
         self.g_loss += self.reg_loss_g
+
         if self.FLAGS.dump_debug:
             tf.summary.scalar('g_loss_plus_context_plus_reg', self.g_loss, collections='G')
             tf.summary.scalar('g_loss_reg_only', self.reg_loss_g, collections='D')

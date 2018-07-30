@@ -49,7 +49,11 @@ def create_segmentation_commands(data_dir, num_of_cases=-1, suffixes=None):
         cmd_file_out_path = os.path.join(data_dir, 'segmentations%s.sh' % suffix)
 
         with open(cmd_file_out_path, 'w') as f:
-            f.write('setFSL\n')
+            f.write('FSLDIR=/usr/share/fsl/5.0\n')
+            f.write('. ${FSLDIR}/etc/fslconf/fsl.sh\n')
+            f.write('PATH=${FSLDIR}/bin:${PATH}\n')
+            f.write('export FSLDIR PATH\n')
+
             f.writelines(cmd_suffix)
             print(cmd_file_out_path)
 

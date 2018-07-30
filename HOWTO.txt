@@ -33,6 +33,9 @@ cd ~/work/python/thesis/appcode/mri/k_space; set BASE=/sheard/Ohad/thesis/data/I
 
 PYTHONPATH=$PYTHONPATH:/home/rorory/projects/MRI/thesis/ python appcode/mri/dl/gan/main_wgan_multi_slices_GC.py --mode train --tt train --train_dir /home/rorory/projects/MRI/thesis/appcode/mri/data/IXI/T1/train_28_4
 
+
+>>> --mode train/resume/evaluate --tt train/test --train_dir /HOME/Trains/***** / --checkpoint /HOME/Trains/*****/model.ckpt-345000<<<
+
 rsync -raP /sheard/Ohad/thesis/data/SchizData/SchizReg/train/24_05_2016/shuffle/* ohadsh@132.72.48.22:/home/ohadsh/work/data/SchizReg/
 snx -s vpn1.bgu.ac.il -u ohas@vpn
 6013
@@ -44,15 +47,17 @@ run bin/freeview
 
 7.
 FSL segmentation:
-setenv FSLDIR /home/roysh/MRI_Project/tools/fsl - already in ~/.tcshrc
+FSLDIR=/usr/share/fsl/5.0
 setFSL -> which means $FSLDIR/etc/fslconf/fsl.csh
 cd $FSLDIR/bin
+
+/usr/lib/fsl/5.0/fast
 fast -I 1 -v /media/ohadsh/sheard/Ohad/thesis/tools/examples/new_image.nii.gz
 -I 1- only one iterations of something
 
 
 8. Create nifti data from training, predict and other.
-python $THESIS/appcode/mri/results/create_nifti_from_raw_data.py --data_dir /media/ohadsh/sheard/Ohad/thesis/data/IXI/data_for_train/T1/sagittal_updated/shuffle/ --predict_path /sheard/googleDrive/Master/runs/server/Wgan/random_mask_rv_Nov17/IXI/random_mask_factor4_D1/predict/train/ --cs_path /sheard/googleDrive/Master/runs/CS/IXI/random_mask_subset/factor4/cs_mri_predict.bin --tt train --output_path /sheard/try/train/ --random_sampling_factor 4 --num_of_cases 10
+python $THESIS/appcode/mri/results/create_nifti_from_raw_data.py --data_dir /HOME/data/shuffle --predict_path /HOME/Trains/28_5_50_2d/predict/test/ --tt test --output_path /HOME/predict/2d_50
 
 9. Create segmentation commands:
 python $THESIS/appcode/mri/results/create_segmentation_commands.py --data_dir /media/ohadsh/sheard/try/train/ --suffixes "['','_predict', '_zeroPadding', '_CS']" --num_of_cases 10
@@ -62,4 +67,4 @@ python $THESIS/appcode/mri/results/calc_segmentation_statistics.py --data_dir /m
 
 
 11. Viewer:
-python $THESIS/appcode/mri/results/viewer.py --data_dir /media/ohadsh/sheard/try/results/factor6/random_mask_factor6_D1_lr2_weighted_2_model.ckpt-1280000/ --suffixes "['','_CS', '_predict']" --num_of_cases 3 --brain_only True --views "['brains','segs']" --mask "{'x1': 35, 'x2': 245, 'y1': 20, 'y2': 256}"
+python appcode/mri/results/viewer.py --data_dir /HOME/OldTrains/22_5_multimask/predict/test_seg/output/ --suffixes "['','_zeroPadding', '_predict']" --num_of_cases 3 --brain_only True --views "['brains','segs']" --mask "{'x1': 100, 'x2': 150, 'y1': 100, 'y2': 150}"

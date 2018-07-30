@@ -34,6 +34,8 @@ def calc_masked_psnr(data_dir, num_of_cases=-1, suffixes=None, brain_only=True):
         if not os.path.isdir(os.path.join(data_dir, sub_dir)):
             continue
         path_sub_dir = os.path.join(data_dir, sub_dir)
+        gt_dir = '/HOME/ZP_50_1d'
+        gt_path_sub_dir = os.path.join(gt_dir, sub_dir)
         all_files_in_dir = os.listdir(path_sub_dir)
         suffix_to_nifti = {}
         suffix_to_nifti_imag = {}
@@ -45,7 +47,9 @@ def calc_masked_psnr(data_dir, num_of_cases=-1, suffixes=None, brain_only=True):
                 if file_type.endswith(sub_dir+suffix+seg_suffix_use+NII_SUFFIX):
                     suffix_to_nifti[suffix] = nib.load(os.path.join(path_sub_dir, file_type))
                     suffix_to_nifti_imag[suffix] = nib.load(os.path.join(path_sub_dir, file_type.replace('_seg', '')))
-
+                    file_type = sub_dir + seg_suffix_use + NII_SUFFIX
+                    suffix_to_nifti[''] = nib.load(os.path.join(gt_path_sub_dir, file_type))
+                    suffix_to_nifti_imag[''] = nib.load(os.path.join(gt_path_sub_dir, file_type.replace('_seg', '')))
         if '' in suffix_to_nifti.keys():
             mse = calc_statistics(suffix_to_nifti, suffix_to_nifti_imag)
             print sub_dir

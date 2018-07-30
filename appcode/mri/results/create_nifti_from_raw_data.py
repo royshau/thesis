@@ -64,7 +64,7 @@ def create_nifti_from_raw_data(data_dir, predict_path, output_path, data_base, b
             idx = get_case_idx(case, meta_data)
             name = db.info['hash_to_case'][case]
             print("Working on case : %s, number= (%d / %d)" % (name, done, num_of_cases))
-            ref = os.path.join('/media/rrtammyfs/labDatabase/IXI/IXI-T1/', name, "IXI"+name+".nii.gz")
+            ref = os.path.join('/HOME/Rec_Images/ZP_50_1d/', name, name+".nii.gz")
 
             if not os.path.exists(ref):
                 ref = None
@@ -75,12 +75,12 @@ def create_nifti_from_raw_data(data_dir, predict_path, output_path, data_base, b
 
             # Data creation
 
-            org_real = data_set_tt.files_obj['k_space_real_gt'].memmap[idx][:,1,:,:]
-            org_imag = data_set_tt.files_obj['k_space_imag_gt'].memmap[idx][:,1,:,:]
-            # print(org_real.shape)
-            data = get_image_from_kspace(org_real, org_imag).transpose(1, 2, 0)
+            # org_real = data_set_tt.files_obj['k_space_real_gt'].memmap[idx][:,1,:,:]
+            # org_imag = data_set_tt.files_obj['k_space_imag_gt'].memmap[idx][:,1,:,:]
+            # # print(org_real.shape)
+            # data = get_image_from_kspace(org_real, org_imag).transpose(1, 2, 0)
             #data = norm_data(data)
-            write_nifti_data(data, output_path=res_out_path, reference=ref, name=name)
+            #write_nifti_data(data, output_path=res_out_path, reference=ref, name=name)
 
             # Predict from network
             pred_real = f_predict['real'].memmap[idx]
