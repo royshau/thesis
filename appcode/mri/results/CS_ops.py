@@ -63,7 +63,7 @@ def mask_and_fill(data, mask, method=None):
         return np.nan
 
 def psnr(img,ref):
-  max_pix = np.max(ref)
+  max_pix = 1
   mse = np.mean((img - ref) ** 2)
   return 10*np.log10((max_pix**2)/mse)
 

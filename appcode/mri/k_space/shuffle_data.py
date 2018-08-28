@@ -34,7 +34,7 @@ def shuffle_data(base_dir, output_dir, tt='["train", "test"]', seed=123, data_ba
         for (file_name, file_info) in files_info.iteritems():
             # Set output file name
             out_path = os.path.join(basic_out_path, "000000.%s.bin" % file_name)
-            print "%s - Write %s into %s" % (t, file_name, out_path)
+            print ("%s - Write %s into %s" % (t, file_name, out_path))
             with open(out_path, 'wb') as f_out:
                 count_examples = 0
                 # read each example and write it
@@ -46,10 +46,10 @@ def shuffle_data(base_dir, output_dir, tt='["train", "test"]', seed=123, data_ba
                         data = np.fromfile(path_to_file, dtype=file_info["dtype"])
                         f_out.write(data)
                     else:
-                        print "Warning: the file - %s - not exist" % path_to_file
+                        print ("Warning: the file - %s - not exist" % path_to_file)
                     count_examples += 1
                     if np.mod(count_examples, 1000) == 0:
-                        print "Done %d examples" % count_examples
+                        print ("Done %d examples" % count_examples)
 
 
 if __name__ == "__main__":

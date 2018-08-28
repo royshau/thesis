@@ -191,6 +191,24 @@ def collect_reg(reg_dict):
         tf.add_to_collection("regularization_" + reg_name, reg_value)
 
 
+def UConv(input_, n_filters, training, name, pool=True, activation=tf.nn.leaky_relu, data_format='NCHW', norm=True):
+    """
+    Args:
+        input_ (4-D Tensor): (batch_size, H, W, C)
+        n_filters (list): number of filters [int, int]
+        training (1-D Tensor): Boolean Tensor
+        name (str): name postfix
+        pool (bool): If True, MaxPool2D
+        activation: Activaion functions
+    Returns:
+        net: output of the Convolution operations
+    """
+    net = conv2d(input_,n_filters,k_h=4, k_w=4, d_h=2, d_w=2,name="conv_{}".format(name))
+    net = tf.layers.batch_normalization(net,axis=1,training=training,name="bn_{}".format(name))
+    net = tf.nn.leaky_relu(net,name="relu_{}".format(name))
+
+    return net
+
 def conv_conv_pool(input_, n_filters, training, name, pool=True, activation=tf.nn.relu, data_format='NCHW', norm=True):
     """ TAKEN FROM https://github.com/kkweon/UNet-in-Tensorflow/blob/master/train.py
     {Conv -> BN -> RELU}x2 -> {Pool, optional}

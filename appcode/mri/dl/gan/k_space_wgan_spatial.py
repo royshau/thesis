@@ -170,21 +170,30 @@ class KspaceWgan(BasicModel):
         self.x_input_upscale['imag'] = x_imag
         # Model convolutions
         # with tf.name_scope('real'):
-        out_dim = 16
-        x_input_stack = tf.concat([x_real[:,:,:,:], x_imag[:,:,:,:]], axis=1)
+        X_loc = tf.tile(self.input['X_loc'],[tf.shape(x_real)[0],1,1,1])
+        Y_loc = tf.tile(self.input['Y_loc'],[tf.shape(x_real)[0],1,1,1])
+        out_dim = 64
+        x_input_stack = tf.concat([x_real[:,:,:,:], x_imag[:,:,:,:],X_loc,Y_loc], axis=1)
 
         self.conv_1 = ops.conv2d(x_input_stack, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="G_conv_1")
         self.conv_1_bn = ops.batch_norm(self.conv_1, self.train_phase, decay=0.98, name="G_bn1")
         self.relu_1 = tf.nn.relu(self.conv_1_bn)
 
+
+        out_dim = 32
+
+        self.conv_1_1 = ops.conv2d(self.relu_1, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="G_conv_1.2")
+        self.conv_1_1_bn = ops.batch_norm(self.conv_1_1, self.train_phase, decay=0.98, name="G_bn1_2")
+        self.relu_1_1 = tf.nn.relu(self.conv_1_1_bn)
+
         out_dim = 16
 
-        self.conv_1_1 = ops.conv2d(self.relu_1, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="G_conv_1.1")
-        self.conv_1_1_bn = ops.batch_norm(self.conv_1_1, self.train_phase, decay=0.98, name="G_bn1_1")
-        self.relu_1_1 = tf.nn.relu(self.conv_1_1_bn)
+        self.conv_1_2 = ops.conv2d(self.relu_1_1, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="G_conv_1.1")
+        self.conv_1_2_bn = ops.batch_norm(self.conv_1_2, self.train_phase, decay=0.98, name="G_bn1_1")
+        self.relu_1_2 = tf.nn.relu(self.conv_1_2_bn)
         
         out_dim = 32
-        self.conv_2 = ops.conv2d(self.relu_1_1, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="G_conv_2")
+        self.conv_2 = ops.conv2d(self.relu_1_2, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="G_conv_2")
         self.conv_2_bn = ops.batch_norm(self.conv_2, self.train_phase, decay=0.98, name="G_bn2")
         self.relu_2 = tf.nn.relu(self.conv_2_bn)
 
@@ -331,8 +340,8 @@ class KspaceWgan(BasicModel):
 
         # Context loss L2
         mask_not = tf.cast(tf.logical_not(tf.cast(self.labels['mask_2'], tf.bool)), tf.float32)
-        real_diff = tf.contrib.layers.flatten(self.predict_g['real'] - self.input_d['real'])
-        imag_diff = tf.contrib.layers.flatten(self.predict_g['imag'] - self.input_d['imag'])
+        real_diff = tf.contrib.layers.flatten(tf.multiply(self.predict_g['real'] - self.input_d['real'], mask_not))
+        imag_diff = tf.contrib.layers.flatten(tf.multiply(self.predict_g['imag'] - self.input_d['imag'], mask_not))
         self.context_loss = tf.reduce_mean(tf.square(real_diff) + tf.square(imag_diff), name='Context_loss_mean')
         print("You are using L2 loss")
 

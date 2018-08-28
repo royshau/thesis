@@ -9,9 +9,10 @@ from __future__ import print_function
 
 import tensorflow as tf
 import numpy as np
+import scipy.io
 from appcode.mri.k_space.k_space_data_set import KspaceDataSet
 from appcode.mri.k_space.data_creator import get_random_mask, get_random_gaussian_mask, get_rv_mask
-from appcode.mri.dl.gan.k_space_wgan_im_loss import KspaceWgan
+from appcode.mri.dl.gan.k_space_wgan_unet_2 import KspaceWgan
 from common.deep_learning.helpers import *
 import copy
 import os
@@ -50,27 +51,27 @@ flags = tf.app.flags
 FLAGS = flags.FLAGS
 
 flags.DEFINE_integer('max_steps', 5000000, 'Number of steps to run trainer.')
-flags.DEFINE_float('learning_rate', 0.0005, 'Initial learning rate.')
+flags.DEFINE_float('learning_rate', 0.0001, 'Initial learning rate.')
 # flags.DEFINE_float('regularization_weight', 5e-4, 'L2 Norm regularization weight.')
 flags.DEFINE_float('reg_w', 5e-4, 'L2 Norm regularization weight.')
-flags.DEFINE_float('reg_b', 5e-3, 'L2 Norm regularization weight.')
+flags.DEFINE_float('reg_b', 5e-4, 'L2 Norm regularization weight.')
 # flags.DEFINE_integer('mini_batch_size', 10, 'Size of mini batch')
-flags.DEFINE_integer('mini_batch_size', 4, 'Size of mini batch')
+flags.DEFINE_integer('mini_batch_size', 16, 'Size of mini batch')
 flags.DEFINE_integer('mini_batch_predict', 1, 'Size of mini batch for predict')
 flags.DEFINE_integer('max_predict', 50000, 'Number of steps to run trainer.')
 
-flags.DEFINE_float('gen_loss_context', 5, 'Generative loss, kspace context weight.')
-flags.DEFINE_float('im_loss_context', 5, 'Generative loss, Image context weight.')
+flags.DEFINE_float('gen_loss_context', 100, 'Generative loss, kspace context weight.')
+flags.DEFINE_float('im_loss_context', 10, 'Generative loss, Image context weight.')
 
 # flags.DEFINE_float('gen_loss_adversarial', 1.0, 'Generative loss, adversarial weight.')
-flags.DEFINE_float('gen_loss_adversarial', 0.3, 'Generative loss, adversarial weight.')
-flags.DEFINE_integer('iters_no_adv', 1, 'Iters with adv_w=0')
+flags.DEFINE_float('gen_loss_adversarial', 1, 'Generative loss, adversarial weight.')
+flags.DEFINE_integer('iters_no_adv', 1000, 'Iters with adv_w=0')
 
-flags.DEFINE_integer('print_test', 100, 'Print test frequency')
-flags.DEFINE_integer('print_train', 10, 'Print train frequency')
+flags.DEFINE_integer('print_test', 2000, 'Print test frequency')
+flags.DEFINE_integer('print_train', 100, 'Print train frequency')
 
 
-flags.DEFINE_integer('num_D_updates', 3, 'Discriminator update freq')
+flags.DEFINE_integer('num_D_updates', 1, 'Discriminator update freq')
 flags.DEFINE_integer('random_sampling_factor', 4, 'Random mask sampling factor')
 
 flags.DEFINE_boolean('to_show', False, 'View data')
@@ -93,6 +94,10 @@ mask_1 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50r_1')
 mask_2 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50r_2')
 mask_3 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50r_3')
 
+X_loc = scipy.io.loadmat('/HOME/thesis/matlab/X_loc.mat')['X']
+X_loc = X_loc[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2)
+Y_loc = scipy.io.loadmat('/HOME/thesis/matlab/Y_loc.mat')['Y']
+Y_loc = Y_loc[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2)
 #Select GPU 2
 GPU_ID = '1'
 print ('GPU USED: ' + GPU_ID)
@@ -134,17 +139,17 @@ def feed_data_old(data_set,i, y_input, train_phase, tt='train', batch_size=10):
         return None
 
     # if i%3 ==0:
-    # mask_1_feed = mask_1[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2)
-    # mask_2_feed = mask_2[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
-    # mask_3_feed = mask_3[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
+    mask_1_feed = mask_1[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2)
+    mask_2_feed = mask_2[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
+    mask_3_feed = mask_3[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
     # elif i%3 ==1:
-    mask_1_feed = mask_3[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2)
-    mask_2_feed = mask_1[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
-    mask_3_feed = mask_2[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
+    #     mask_1_feed = mask_3[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2)
+    #     mask_2_feed = mask_1[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
+    #     mask_3_feed = mask_2[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
     # else:
-    # mask_1_feed = mask_2[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2)
-    # mask_2_feed = mask_3[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
-    # mask_3_feed = mask_1[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
+    #     mask_1_feed = mask_2[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2)
+    #     mask_2_feed = mask_3[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
+    #     mask_3_feed = mask_1[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
 
     # start_line = int(10*random.random() - 5)
     # mask_single = get_random_mask(w=DIMS_OUT[2], h=DIMS_OUT[1], factor=sampling_factor, start_line=start_line, keep_center=keep_center)
@@ -153,7 +158,9 @@ def feed_data_old(data_set,i, y_input, train_phase, tt='train', batch_size=10):
             y_input['mask_1']: mask_1_feed,
             y_input['mask_2']: mask_2_feed,
             y_input['mask_3']: mask_3_feed,
-            train_phase: True #Force Train
+            y_input['X_loc']: X_loc,
+            y_input['Y_loc']: Y_loc,
+            train_phase: 'train' #Force Train
            }
     return feed
 
@@ -187,7 +194,9 @@ def feed_data(i, y_input, train_phase, tt='train'):
     feed = {y_input['mask_1']: mask_1_feed,
             y_input['mask_2']: mask_2_feed,
             y_input['mask_3']: mask_3_feed,
-            train_phase: 'train', #Force Train
+            y_input['X_loc']: X_loc,
+            y_input['Y_loc']: Y_loc,
+            train_phase: True, #Force Train
            }
     return feed
 
@@ -237,7 +246,9 @@ def load_graph(iterator):
         # Init inputs as placeholders
         y_input = {'mask_1': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask_1'),
                    'mask_2': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask_2'),
-                   'mask_3': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask_3')
+                   'mask_3': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask_3'),
+                   'X_loc': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='X_loc'),
+                   'Y_loc': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='Y_loc')
                    }
 
         tf.add_to_collection("placeholders", y_input['mask_1'])
@@ -251,7 +262,9 @@ def load_graph(iterator):
             'imag': tf.placeholder(tf.float32, shape=[None, DIMS_IN[0], DIMS_IN[1], DIMS_IN[2]], name='y_input_imag'),
             'mask_1': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask_1'),
             'mask_2': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask_2'),
-            'mask_3': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask_3')
+            'mask_3': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask_3'),
+            'X_loc': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='X_loc'),
+            'Y_loc': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='Y_loc')
             }
 
         tf.add_to_collection("placeholders", y_input['real'])
@@ -274,14 +287,14 @@ def train_model(mode, checkpoint=None):
 
     print("Learning_rate = %f" % FLAGS.learning_rate)
     
-    with open(os.path.join(FLAGS.train_dir, 'FLAGS.json'), 'w') as f:
-        #json.dump(FLAGS.__dict__, f)
-	print('Log not dumpped! fix needed!')
+    # with open(os.path.join(FLAGS.train_dir, 'FLAGS.json'), 'w') as f:
+    #     json.dump(FLAGS.__dict__, f)
+    print('Log not dumpped! fix needed!')
 
 
     train_dataset = tf.data.TFRecordDataset(tfrecords['train'])
 
-    train_dataset = train_dataset.map(_parse_)
+    train_dataset = train_dataset.map(_parse_, num_parallel_calls=16)
     # Shuffle the dataset
     tf.set_random_seed(50)
     train_dataset = train_dataset.shuffle(buffer_size=1000)
@@ -289,12 +302,13 @@ def train_model(mode, checkpoint=None):
     train_dataset = train_dataset.repeat()
     # Generate batches
     train_dataset = train_dataset.batch(FLAGS.mini_batch_size)
+    train_dataset = train_dataset.prefetch(buffer_size=FLAGS.mini_batch_size)
     # Create a one-shot iterator
     train_iterator = train_dataset.make_one_shot_iterator()
 
     test_dataset = tf.data.TFRecordDataset(tfrecords['test'])
 
-    test_dataset = test_dataset.map(_parse_)
+    test_dataset = test_dataset.map(_parse_, num_parallel_calls=16)
     # Shuffle the dataset
     tf.set_random_seed(50)
     test_dataset = test_dataset.shuffle(buffer_size=1000)
@@ -302,6 +316,8 @@ def train_model(mode, checkpoint=None):
     test_dataset = test_dataset.repeat()
     # Generate batches
     test_dataset = test_dataset.batch(FLAGS.mini_batch_size)
+    test_dataset = test_dataset.prefetch(buffer_size=FLAGS.mini_batch_size)
+
     # Create a one-shot iterator
     test_iterator = test_dataset.make_one_shot_iterator()
 
@@ -364,26 +380,31 @@ def train_model(mode, checkpoint=None):
         else:
             # Training
             # Update D network
-            for it in np.arange(FLAGS.num_D_updates):
-                feed = feed_data(i + it, net.labels, net.train_phase,
-                                 tt='train')
-                feed[handle] = train_handle
+            if (i > FLAGS.iters_no_adv):
+                for it in np.arange(FLAGS.num_D_updates):
+                    feed = feed_data(i + it, net.labels, net.train_phase,
+                                     tt='train')
+                    feed[handle] = train_handle
 
-                if feed is not None:
-                    feed[net.adv_loss_w] = gen_loss_adversarial
+                    if feed is not None:
+                        feed[net.adv_loss_w] = gen_loss_adversarial
 
-                    _, d_loss_fake, d_loss_real, d_loss = \
-                        sess.run([net.train_op_d, net.d_loss_fake, net.d_loss_real, net.d_loss], feed_dict=feed)
-                    _ = sess.run([net.clip_weights])
+                        _, d_loss_fake, d_loss_real, d_loss = \
+                            sess.run([net.train_op_d, net.d_loss_fake, net.d_loss_real, net.d_loss], feed_dict=feed)
+                        _ = sess.run([net.clip_weights])
 
             # Update G network
             feed = feed_data(i, net.labels, net.train_phase,
                              tt='train')
             feed[handle] = train_handle
-
+            feed[net.adv_loss_w] = gen_loss_adversarial
             if feed is not None:
-                feed[net.adv_loss_w] = gen_loss_adversarial
-                _, g_loss = sess.run([net.train_op_g, net.g_loss], feed_dict=feed)
+                if (i<300):
+                    _, g_loss = sess.run([net.train_op_k, net.g_loss], feed_dict=feed)
+                elif (i<750):
+                    _, g_loss = sess.run([net.train_op_u, net.g_loss], feed_dict=feed)
+                else:
+                    _, g_loss = sess.run([net.train_op_g, net.g_loss], feed_dict=feed)
 
             if i % FLAGS.print_train == 0:
                 feed[net.adv_loss_w] = gen_loss_adversarial
@@ -429,8 +450,8 @@ def evaluate_checkpoint(tt='test', checkpoint=None, output_file=None, output_fil
         os.makedirs(output_file)
 
     if output_file is not None:
-        f_out_real = open(os.path.join(output_file, "000000.predict_real.bin"), 'w')
-        f_out_imag = open(os.path.join(output_file, "000000.predict_imag.bin"), 'w')
+        f_out = open(os.path.join(output_file, "000000.predict_image.bin"), 'w')
+        # f_out_imag = open(os.path.join(output_file, "000000.predict_imag.bin"), 'w')
 
     gen_loss_adversarial = 1.0
     i = 0
@@ -447,8 +468,8 @@ def evaluate_checkpoint(tt='test', checkpoint=None, output_file=None, output_fil
                 all_acc.append(np.array(result))
                 print('Time: %s , Accuracy for mini_batch is: %s' % (datetime.datetime.now(), result))
                 if output_file is not None:
-                    f_out_real.write(predict['real'].ravel())
-                    f_out_imag.write(predict['imag'].ravel())
+                    f_out.write(predict['image'].ravel())
+                    # f_out_imag.write(predict['imag'].ravel())
             else:
                 break
             predict_counter += FLAGS.mini_batch_predict

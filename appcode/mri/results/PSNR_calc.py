@@ -2,13 +2,14 @@ import nibabel as nib
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.io as imp
+import skimage.measure
 import os
 from CS_ops import *
 
 
 NII_SUFFIX = '.nii.gz'
-DATA_DIR = '/HOME/predict/29_5_1d_50_bb/'
-GT_DIR = '/HOME/Rec_Images/ZP_50_1d'
+DATA_DIR = '/HOME/predict/22_8_unet_2/'
+GT_DIR = '/HOME/predict/22_8_unet_2'
 masks_names = ['_predict']
 
 sub_dirs = os.listdir(DATA_DIR)
@@ -26,8 +27,8 @@ for mask_name in masks_names:
         nii_CS = nib.load(CS_path)
         data_org = nii_org.get_data().astype(np.float32)
         data_CS = nii_CS.get_data().astype(np.float32)
-        max_data_val = np.max(abs(data_org))
-        data_org = data_org/max_data_val
+        max_data_val = 1
+        #data_org = data_org/max_data_val
 
         for i in xrange(data_org.shape[2]):
             PSNR_CS = np.append(PSNR_CS, psnr(data_CS[:,:,i],data_org[:,:,i]))

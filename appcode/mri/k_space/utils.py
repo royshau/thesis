@@ -1,6 +1,6 @@
 import numpy as np
 from numpy.fft import *
-from scipy.interpolate import griddata
+#from scipy.interpolate import griddata
 from scipy.misc import imresize
 import math
 EPS = 0.000001
@@ -20,8 +20,8 @@ def get_dummy_k_space_and_image(img):
         k_space = fft2c(img).astype('complex64')
 
         # Clipping
-        k_space.real[np.where(np.abs(k_space.real) < EPS)] = 0
-        k_space.imag[np.where(np.abs(k_space.imag) < EPS)] = 0
+        # k_space.real[np.where(np.abs(k_space.real) < EPS)] = 0
+        # k_space.imag[np.where(np.abs(k_space.imag) < EPS)] = 0
 
         # Reconstruct image
         dummy_img = np.abs(ifft2c(k_space)).astype(np.float32)

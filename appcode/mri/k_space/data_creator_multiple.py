@@ -43,11 +43,11 @@ class DataCreatorMulti:
                 threadLimiter.acquire()
                 case_name = case.split('.')[0]
                 case_name = case_name.split('/')[0]
-                print "Working on case: " + case_name
+                print ("Working on case: " + case_name)
 
                 # Set output path and create dir
                 if case_name not in self.mri_data_base.info["train_test_list"]:
-                    print "case:  - not in tt list, add 1 as prefix -" + case_name
+                    print ("case:  - not in tt list, add 1 as prefix -" + case_name)
                     return
 
                 tt = self.mri_data_base.info["train_test_list"][case_name]
@@ -67,12 +67,12 @@ class DataCreatorMulti:
                 source_data = data_base.get_source_data(case)
                 image_3d = source_data['img'][0].squeeze()
 
-                ## HACK - padding image:
-                pad = 256
-                print "PADDING IMAGE TO FIX SIZE! 256-%d " % pad
-                if image_3d.shape[1] > pad:
-                    return
-                image_3d = pad_image_with_zeros_fixed(dat=image_3d, to_size=[256, pad])
+                # ## HACK - padding image:
+                # pad = 256
+                # print "PADDING IMAGE TO FIX SIZE! 256-%d " % pad
+                # if image_3d.shape[1] > pad:
+                #     return
+                # image_3d = pad_image_with_zeros_fixed(dat=image_3d, to_size=[256, pad])
 
                 # Rotate if needed
                 image_3d = self.rotate(image_3d)
@@ -107,7 +107,7 @@ class DataCreatorMulti:
                     counter += 1
             except:
                 shutil.rmtree(out_path, ignore_errors=True)
-                self.create_example(self, case, data_base)
+                self.create_example(case, data_base)
             finally:
                 if flag == 1:
                     threadLimiter.release()
@@ -175,16 +175,16 @@ class DataCreatorMulti:
         if self.rot == 0:
             ret = image
         elif self.rot == 90:
-            print "ROTATE 90"
+            # print "ROTATE 90"
             ret = np.rot90(image)
         elif self.rot == 180:
-            print "ROTATE 180"
+            # print "ROTATE 180"
             ret = np.rot90(np.rot90(image))
         elif self.rot == 270:
-            print "ROTATE 270"
+            # print "ROTATE 270"
             ret = np.rot90(np.rot90(np.rot90(image)))
         else:
-            print "No valid rotation"
+            # print "No valid rotation"
             assert 0
         return ret
 
@@ -269,7 +269,7 @@ def get_rv_mask(mask_main_dir, factor):
         factor = '2_5'
     full_path = os.path.join(mask_main_dir, "mask%s.bin" % factor)
     if not os.path.exists(full_path):
-        print "Mask not exists"
+        print ("Mask not exists")
 
     mask = np.fromfile(full_path, dtype=np.uint8)
     mask = mask.reshape(256,256)
@@ -326,8 +326,8 @@ def show_example(out_path, counter, data_all):
     :param counter: example number
     :param data_all: dictionary with all data
     """
-    print "out_path: " + out_path
-    print "counter: " + str(counter)
+    print ("out_path: " + out_path)
+    print ("counter: " + str(counter))
 
     fig, ax = plt.subplots(nrows=3, ncols=2)
     fig.set_size_inches(18.5, 10.5, forward=True)

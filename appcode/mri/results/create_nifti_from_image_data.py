@@ -13,7 +13,7 @@ file_names = ['k_space_real_gt', 'k_space_imag_gt', 'meta_data']
 import argparse
 
 predict_info = {'width': 256, 'height': 256, 'channels': 1, 'dtype': 'float32'}
-predict_names = {'real': '000000.predict_real.bin', 'imag': '000000.predict_imag.bin'}
+predict_names = {'image': '000000.predict_image.bin'}
 import matplotlib.pyplot as plt
 
 META_KEYS = {'hash':0, 'slice': 1, 'bit_pix':2, 'aug':3, 'norm_factor':4}
@@ -41,7 +41,7 @@ def create_nifti_from_raw_data(data_dir, predict_path, output_path, data_base, b
 
     f_predict = {}
     cs_pred = None
-    for name_pred in ['real', 'imag']:
+    for name_pred in ['image']:
         f_predict[name_pred] = FileHandler(path=os.path.join(predict_path, predict_names[name_pred]),
                                                    info=predict_info, read_or_write='read', name=name_pred, memmap=True)
     if cs_path is not None:
@@ -83,19 +83,16 @@ def create_nifti_from_raw_data(data_dir, predict_path, output_path, data_base, b
             write_nifti_data(data, output_path=res_out_path, reference=ref, name=name)
 
             # Predict from network
-            pred_real = f_predict['real'].memmap[idx]
-            pred_imag = f_predict['imag'].memmap[idx]
+            pred_image = f_predict['image'].memmap[idx].transpose(2, 1, 0)
+            # pred_imag = f_predict['imag'].memmap[idx]
             # print(data.shape)
             # plt.imshow(data[:,:,10],cmap='gray')
             # plt.show()
             # data = norm_data(data)
-            if source == 'k_space':
-                data = get_image_from_kspace(pred_real, pred_imag).transpose(2, 1, 0)
-            else:
-                data = 256*np.abs(pred_real+ 1j * pred_imag).transpose(2, 1, 0)
+            data_gen = pred_image
             # data = norm_data(data)
             #data = norm_data(data)
-            write_nifti_data(data, output_path=res_out_path, reference=ref, name=name+"_predict")
+            write_nifti_data(data_gen, output_path=res_out_path, reference=ref, name=name+"_predict")
 
             # Zero Padding
             # if random_sampling_factor is not None:
@@ -133,8 +130,9 @@ def norm_data(data):
     :param data:
     :return:
     """
-    norm_factor = 1.0 / data.max()
-    return (data * norm_factor).astype('float32')
+    for i in range(data.shape[2]):
+        data[:,:,i] = (data[:,:,i]-np.min(data[:,:,i]))/(np.max(data[:,:,i])-np.min(data[:,:,i]))
+    return data.astype('float32')
 
 if __name__ == '__main__':
     
