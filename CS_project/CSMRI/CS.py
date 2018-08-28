@@ -6,7 +6,7 @@ def CS(kspace,mask,params):
 
     rec_brain = ifft2c(masked_data)
     rec_brain_old = rec_brain
-    for i in xrange(params['iters']):
+    for i in range(params['iters']):
         rec_brain = wavelet_thresh(rec_brain, params['thresh'], None, params['wave'])
         rec_kspace = fft2c(rec_brain) * (1 - mask) + masked_data
         rec_brain = ifft2c(rec_kspace)

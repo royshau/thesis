@@ -1,6 +1,6 @@
 import numpy as np
 import numpy.fft as fft
-from scipy import interpolate as inter
+#from scipy import interpolate as inter
 import pywt
 
 def SoftThresh(x, lamb):
@@ -21,10 +21,10 @@ def ifft2c(x):
     return np.sqrt(N) * fft.fftshift(fft.ifft2(fft.ifftshift(x)))
 
 
-def wavelet_thresh(img, threshold, level, wavtype='db2'):
+def wavelet_thresh(img, threshold, level, wavtype):
     coeffs2 = pywt.wavedec2(img, wavtype, level=level)
-    NewWaveletCoeffs = map(lambda x: SoftThresh(x, threshold), coeffs2)
-    return pywt.waverec2(NewWaveletCoeffs, wavtype)
+    newwaveletcoeffs = list(map(lambda x: SoftThresh(x, threshold), coeffs2))
+    return pywt.waverec2(newwaveletcoeffs, wavtype)
 
 
 def mask_and_fill(data, mask, method=None):
