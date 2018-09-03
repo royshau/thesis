@@ -63,9 +63,9 @@ def mask_and_fill(data, mask, method=None):
         return np.nan
 
 def psnr(img,ref):
-  max_pix = 1
+  range_diff = np.max(img)-np.min(img)
   mse = np.mean((img - ref) ** 2)
-  return 10*np.log10((max_pix**2)/mse)
+  return 10*np.log10((range_diff**2)/mse)
 
 def calc_dice(im1, im2):
 

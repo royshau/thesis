@@ -360,44 +360,58 @@ class KspaceWgan(BasicModel):
         tf.summary.image('D_x_input_reconstructed' + 'Fake', tf.transpose(fake, (0,2,3,1)), collections='G', max_outputs=4)
 
         # Model convolutions
-        out_dim = 8  # 128x128
-        self.conv_1_d = ops.conv2d(input_to_discriminator, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="D_conv_1")
-        self.pool_1_d = tf.layers.max_pooling2d(self.conv_1_d, pool_size=[2, 2], strides=2, padding='same',
-                                              data_format='channels_first',name="D_pool_1")
-        self.conv_1_bn_d = ops.batch_norm(self.pool_1_d, self.train_phase, decay=0.98, name="D_bn1")
-        # self.relu_1_d = tf.nn.relu(self.conv_1_bn_d)
-        self.relu_1_d = ops.lrelu(self.conv_1_bn_d)
+        out_dim = 64  # 128x128
+        self.net = ops.conv2d(input_to_discriminator, output_dim=out_dim, k_h=4, k_w=4, d_h=2, d_w=2, name="D_conv_1")
+        self.net = ops.batch_norm(self.net, self.train_phase, name="D_bn1")
+        self.net = ops.lrelu(self.net)
 
-        out_dim = 16  # 64x64
-        self.conv_2_d = ops.conv2d(self.relu_1_d, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1,
-                                            name="D_conv_2")
-        self.pool_2_d = tf.layers.max_pooling2d(self.conv_2_d, pool_size=[2, 2], strides=2, padding='same',
-                                              data_format='channels_first',name="D_pool_2")
-        self.conv_2_bn_d = ops.batch_norm(self.pool_2_d, self.train_phase, decay=0.98, name="D_bn2")
-        # self.relu_2_d = tf.nn.relu(self.conv_2_bn_d)
-        self.relu_2_d = ops.lrelu(self.conv_2_bn_d)
+        out_dim = 128  # 64x64
+        self.net = ops.conv2d(self.net, output_dim=out_dim, k_h=4, k_w=4, d_h=2, d_w=2, name="D_conv_2")
+        self.net = ops.batch_norm(self.net, self.train_phase, name="D_bn2")
+        self.net = ops.lrelu(self.net)
 
-        # out_dim = 32  # 32x32
-        out_dim = 8  # 32x32
-        self.conv_3_d = ops.conv2d(self.relu_2_d, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1,
-                                            name="D_conv_3")
-        self.pool_3_d = tf.layers.max_pooling2d(self.conv_3_d, pool_size=[2, 2], strides=2, padding='same',
-                                              data_format='channels_first',name="D_pool_3")
-        self.conv_3_bn_d = ops.batch_norm(self.pool_3_d, self.train_phase, decay=0.98, name="D_bn3")
-        # self.relu_3_d = tf.nn.relu(self.conv_3_bn_d)
-        self.relu_3_d = ops.lrelu(self.conv_3_bn_d)
+        out_dim = 256  # 32x32
+        self.net = ops.conv2d(self.net, output_dim=out_dim, k_h=4, k_w=4, d_h=2, d_w=2, name="D_conv_3")
+        self.net = ops.batch_norm(self.net, self.train_phase, name="D_bn3")
+        self.net = ops.lrelu(self.net)
 
-        out_dim = 16  # 16x16
-        self.conv_4_d = ops.conv2d(self.relu_3_d, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1,
-                                            name="D_conv_4")
-        self.pool_4_d = tf.layers.max_pooling2d(self.conv_4_d, pool_size=[2, 2], strides=2, padding='same',
-                                             data_format='channels_first',name="D_pool_4")
-        self.conv_4_bn_d = ops.batch_norm(self.pool_4_d, self.train_phase, decay=0.98, name="D_bn4")
-        # self.relu_4_d = tf.nn.relu(self.conv_4_bn_d)
-        self.relu_4_d = ops.lrelu(self.conv_4_bn_d)
+        out_dim = 512  # 16x16
+        self.net = ops.conv2d(self.net, output_dim=out_dim, k_h=4, k_w=4, d_h=2, d_w=2, name="D_conv_4")
+        self.net = ops.batch_norm(self.net, self.train_phase, name="D_bn4")
+        self.net = ops.lrelu(self.net)
+
+        out_dim = 512  # 8X8
+        self.net = ops.conv2d(self.net, output_dim=out_dim, k_h=4, k_w=4, d_h=2, d_w=2, name="D_conv_5")
+        self.net = ops.batch_norm(self.net, self.train_phase, name="D_bn5")
+        self.net = ops.lrelu(self.net)
+
+        out_dim = 512  # 4X4
+        self.net = ops.conv2d(self.net, output_dim=out_dim, k_h=4, k_w=4, d_h=2, d_w=2, name="D_conv_6")
+        self.net = ops.batch_norm(self.net, self.train_phase, name="D_bn6")
+        self.net = ops.lrelu(self.net)
+
+        out_dim = 512  # 4x4
+        self.net = ops.conv2d(self.net, output_dim=out_dim, k_h=1, k_w=1, d_h=1, d_w=1, name="D_conv_7")
+        self.d1 = ops.batch_norm(self.net, self.train_phase, name="D_bn7")
+
+        out_dim = 128  # 16x16
+        self.net = ops.conv2d(self.d1, output_dim=out_dim, k_h=1, k_w=1, d_h=1, d_w=1, name="D_conv_8")
+        self.net = ops.batch_norm(self.net, self.train_phase, name="D_bn8")
+        self.net = ops.lrelu(self.net)
+
+        out_dim = 128  # 128x128
+        self.net = ops.conv2d(self.net, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="D_conv_9")
+        self.net = ops.batch_norm(self.net, self.train_phase, name="D_bn9")
+        self.net = ops.lrelu(self.net)
+
+        out_dim = 512  # 128x128
+        self.net = ops.conv2d(self.net, output_dim=out_dim, k_h=3, k_w=3, d_h=1, d_w=1, name="D_conv_10")
+        self.net = ops.batch_norm(self.net, self.train_phase, name="D_bn10")
+        self.net = ops.lrelu(self.net + self.d1)
+
 
         out_dim = 1
-        self.affine_1_d = ops.linear(tf.contrib.layers.flatten(self.relu_4_d), output_size=out_dim, scope="D_affine_1")
+        self.affine_1_d = ops.linear(tf.contrib.layers.flatten(self.net), output_size=out_dim, scope="D_affine_1")
         predict_d = self.affine_1_d
         # Dump prediction out
 

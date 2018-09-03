@@ -12,7 +12,7 @@ import numpy as np
 import scipy.io
 from appcode.mri.k_space.k_space_data_set import KspaceDataSet
 from appcode.mri.k_space.data_creator import get_random_mask, get_random_gaussian_mask, get_rv_mask
-from appcode.mri.dl.gan.k_space_wgan_unet_3 import KspaceWgan
+from appcode.mri.dl.gan.k_space_wgan_unet_unet import KspaceWgan
 from common.deep_learning.helpers import *
 import copy
 import os

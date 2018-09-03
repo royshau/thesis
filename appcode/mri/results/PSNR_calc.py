@@ -8,14 +8,15 @@ from CS_ops import *
 
 
 NII_SUFFIX = '.nii.gz'
-DATA_DIR = '/HOME/predict/22_8_unet_2/'
-GT_DIR = '/HOME/predict/22_8_unet_2'
+DATA_DIR = '/HOME/predict/29_8_unet_30_D2/'
+GT_DIR = '/HOME/predict/29_8_unet_30_D2'
 masks_names = ['_predict']
 
 sub_dirs = os.listdir(DATA_DIR)
 for mask_name in masks_names:
     PSNR_CS = np.array([])
     PSNR_ZF = np.array([])
+
     for case_num,case in enumerate(sub_dirs,start =0):
         print('Working on case' + case)
         nii_path = GT_DIR+'/'+case+'/'+case+NII_SUFFIX
@@ -28,7 +29,6 @@ for mask_name in masks_names:
         data_org = nii_org.get_data().astype(np.float32)
         data_CS = nii_CS.get_data().astype(np.float32)
         max_data_val = 1
-        #data_org = data_org/max_data_val
 
         for i in xrange(data_org.shape[2]):
             PSNR_CS = np.append(PSNR_CS, psnr(data_CS[:,:,i],data_org[:,:,i]))

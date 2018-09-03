@@ -12,7 +12,7 @@ import numpy as np
 import scipy.io
 from appcode.mri.k_space.k_space_data_set import KspaceDataSet
 from appcode.mri.k_space.data_creator import get_random_mask, get_random_gaussian_mask, get_rv_mask
-from appcode.mri.dl.gan.k_space_wgan_unet_3 import KspaceWgan
+from appcode.mri.dl.gan.k_space_wgan_unet_image import KspaceWgan
 from common.deep_learning.helpers import *
 import copy
 import os
@@ -219,14 +219,13 @@ def run_evaluation(sess, feed, net, step, writer, tt):
     m_op_g = tf.summary.merge_all(key='G')
     m_op_d = tf.summary.merge_all(key='D')
 
-    r_g, r_d, loss_d_fake, loss_d_real, loss_d, loss_g, l2_norm, g_loss_no_reg, d_loss_no_reg,g_loss_im,g_loss_l1,psnr = sess.run([m_op_g, m_op_d, net.d_loss_fake, net.d_loss_real,
-                                                                   net.d_loss, net.g_loss, net.context_loss, net.g_loss_no_reg, net.d_loss_no_reg,net.im_loss,net.l1_loss,net.psnr], feed_dict=feed)
+    r_g, r_d,loss_d,loss_g,g_loss_im,g_loss_l1,psnr = sess.run([m_op_g, m_op_d,net.d_loss, net.g_loss,net.im_loss,net.l1_loss,net.psnr], feed_dict=feed)
 
     writer['G'].add_summary(r_g, step)
     writer['D'].add_summary(r_d, step)
 
-    print('%s:  Time: %s , Loss at step %s: D: %s, G: %s,  L2: %s, L2_Im: %s L1: %s PSNR: %s' % (tt, datetime.datetime.now(), step, loss_d, loss_g, l2_norm,g_loss_im,g_loss_l1,psnr))
-    logfile.writelines('%s: Time: %s , Accuracy at step %s: D: %s, G: %s, L2: %s, L2_Im %s\n' % (tt, datetime.datetime.now(), step, loss_d, loss_g, l2_norm,g_loss_im))
+    print('%s:  Time: %s , Loss at step %s: D: %s, G: %s, L2_Im: %s L1: %s PSNR: %s' % (tt, datetime.datetime.now(), step, loss_d, loss_g,g_loss_im,g_loss_l1,psnr))
+    logfile.writelines('%s: Time: %s , Accuracy at step %s: D: %s, G: %s, L2_Im %s\n' % (tt, datetime.datetime.now(), step, loss_d, loss_g,g_loss_im))
     logfile.flush()
 
 
@@ -403,9 +402,7 @@ def train_model(mode, checkpoint=None):
             feed[handle] = train_handle
             feed[net.adv_loss_w] = gen_loss_adversarial
             if feed is not None:
-                if (i<300):
-                    _, g_loss = sess.run([net.train_op_k, net.g_loss], feed_dict=feed)
-                elif (i<750):
+                if (i<750):
                     _, g_loss = sess.run([net.train_op_u, net.g_loss], feed_dict=feed)
                 else:
                     _, g_loss = sess.run([net.train_op_g, net.g_loss], feed_dict=feed)
@@ -433,7 +430,7 @@ def evaluate_checkpoint(tt='test', checkpoint=None, output_file=None, output_fil
     :return:
     """
     # Import data
-    data_set = KspaceDataSet(base_dir, file_names.values(), stack_size=16, shuffle=False, data_base=FLAGS.database)
+    data_set = KspaceDataSet(base_dir, file_names.values(), stack_size=50, shuffle=False, data_base=FLAGS.database)
 
     net = load_graph(iterator=None)
 

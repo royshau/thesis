@@ -89,9 +89,8 @@ def create_nifti_from_raw_data(data_dir, predict_path, output_path, data_base, b
             # plt.imshow(data[:,:,10],cmap='gray')
             # plt.show()
             # data = norm_data(data)
-            data_gen = pred_image
-            # data = norm_data(data)
-            #data = norm_data(data)
+            data_gen = np.copy(pred_image)
+            data_gen = norm_data(data_gen)
             write_nifti_data(data_gen, output_path=res_out_path, reference=ref, name=name+"_predict")
 
             # Zero Padding
