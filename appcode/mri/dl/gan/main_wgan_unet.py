@@ -12,7 +12,7 @@ import numpy as np
 import scipy.io
 from appcode.mri.k_space.k_space_data_set import KspaceDataSet
 from appcode.mri.k_space.data_creator import get_random_mask, get_random_gaussian_mask, get_rv_mask
-from appcode.mri.dl.gan.k_space_wgan_unet_2 import KspaceWgan
+from appcode.mri.dl.gan.k_space_wgan_unet_3 import KspaceWgan
 from common.deep_learning.helpers import *
 import copy
 import os
@@ -26,26 +26,25 @@ import pdb
 import random
 import time
 import sys
-
-
+os.environ['LD_LIBRARY_PATH'] += "/usr/local/cuda/extras/CUPTY/lib64"
 
 def _parse_(serialized_example):
-    feature = {'real':tf.FixedLenFeature([],tf.string),
-                'imag':tf.FixedLenFeature([],tf.string),
+    feature = {'real': tf.FixedLenFeature([], tf.string),
+               'imag': tf.FixedLenFeature([], tf.string),
                'meta': tf.FixedLenFeature([], tf.string)}
     example = tf.parse_single_example(serialized_example, feature)
-    real = tf.decode_raw(example['real'],tf.float32)
-    real = tf.reshape(real,[3,256, 256])
+    real = tf.decode_raw(example['real'], tf.float32)
+    real = tf.reshape(real, [3, 256, 256])
     imag = tf.decode_raw(example['imag'], tf.float32)
-    imag = tf.reshape(imag, [3,256, 256])
-    return real,imag
+    imag = tf.reshape(imag, [3, 256, 256])
+    return real, imag
 
 
 # k space data set on loca SSD
 base_dir = '/HOME/data/shuffle'
-file_names = {'y_r': 'k_space_real_gt', 'y_i': 'k_space_imag_gt' , 'm_d':'meta_data'}
+file_names = {'y_r': 'k_space_real_gt', 'y_i': 'k_space_imag_gt', 'm_d': 'meta_data'}
 
-tfrecords = {'test':["/HOME/data/test.tfrecords"],'train':["/HOME/data/train.tfrecords"]}
+tfrecords = {'test': ["/HOME/data/train.tfrecords"], 'train': ["/HOME/data/train.tfrecords"]}
 
 flags = tf.app.flags
 FLAGS = flags.FLAGS
@@ -57,7 +56,7 @@ flags.DEFINE_float('reg_w', 5e-4, 'L2 Norm regularization weight.')
 flags.DEFINE_float('reg_b', 5e-4, 'L2 Norm regularization weight.')
 # flags.DEFINE_integer('mini_batch_size', 10, 'Size of mini batch')
 flags.DEFINE_integer('mini_batch_size', 16, 'Size of mini batch')
-flags.DEFINE_integer('mini_batch_predict', 1, 'Size of mini batch for predict')
+flags.DEFINE_integer('mini_batch_predict', 16, 'Size of mini batch for predict')
 flags.DEFINE_integer('max_predict', 50000, 'Number of steps to run trainer.')
 
 flags.DEFINE_float('gen_loss_context', 100, 'Generative loss, kspace context weight.')
@@ -69,7 +68,6 @@ flags.DEFINE_integer('iters_no_adv', 1000, 'Iters with adv_w=0')
 
 flags.DEFINE_integer('print_test', 2000, 'Print test frequency')
 flags.DEFINE_integer('print_train', 100, 'Print train frequency')
-
 
 flags.DEFINE_integer('num_D_updates', 1, 'Discriminator update freq')
 flags.DEFINE_integer('random_sampling_factor', 4, 'Random mask sampling factor')
@@ -83,25 +81,30 @@ DIMS_OUT = np.array([1, 256, 256])
 
 # flags.DEFINE_string('train_dir', args.train_dir,
 #                            """Directory where to write event logs """
-                           # """and checkpoint.""")
+# """and checkpoint.""")
 flags.DEFINE_string('train_dir', "",
-                           """Directory where to write event logs """
-                           """and checkpoint.""")
+                    """Directory where to write event logs """
+                    """and checkpoint.""")
 FLAGS(sys.argv, known_only=True)
 logfile = open(os.path.join(FLAGS.train_dir, 'results_%s.log' % str(datetime.datetime.now()).replace(' ', '')), 'w')
-
-mask_1 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50r_1')
-mask_2 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50r_2')
-mask_3 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50r_3')
+#
+# mask_1 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50r_1')
+# mask_2 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50r_2')
+# mask_3 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50r_3')
+masks = scipy.io.loadmat('/HOME/thesis/matlab/mask_30.mat')
+mask_1 = masks['mask_1']
+mask_2 = masks['mask_2']
+mask_3 = masks['mask_3']
 
 X_loc = scipy.io.loadmat('/HOME/thesis/matlab/X_loc.mat')['X']
-X_loc = X_loc[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2)
+X_loc = X_loc[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
 Y_loc = scipy.io.loadmat('/HOME/thesis/matlab/Y_loc.mat')['Y']
-Y_loc = Y_loc[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2)
-#Select GPU 2
+Y_loc = Y_loc[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
+# Select GPU 2
 GPU_ID = '1'
-print ('GPU USED: ' + GPU_ID)
+print('GPU USED: ' + GPU_ID)
 os.environ["CUDA_VISIBLE_DEVICES"] = GPU_ID
+
 
 def get_case_idx(case_hash, meta_data):
     """ Get case indices given cash hash and meta data memmap
@@ -115,7 +118,8 @@ def get_case_idx(case_hash, meta_data):
     slice_idx_abs = idx[slice_idx_rel]
     return slice_idx_abs
 
-def feed_data_old(data_set,i, y_input, train_phase, tt='train', batch_size=10):
+
+def feed_data_old(data_set, i, y_input, train_phase, tt='train', batch_size=10):
     """
     Feed data into dictionary
     :param data_set: data set object
@@ -139,7 +143,7 @@ def feed_data_old(data_set,i, y_input, train_phase, tt='train', batch_size=10):
         return None
 
     # if i%3 ==0:
-    mask_1_feed = mask_1[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2)
+    mask_1_feed = mask_1[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
     mask_2_feed = mask_2[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
     mask_3_feed = mask_3[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
     # elif i%3 ==1:
@@ -160,9 +164,10 @@ def feed_data_old(data_set,i, y_input, train_phase, tt='train', batch_size=10):
             y_input['mask_3']: mask_3_feed,
             y_input['X_loc']: X_loc,
             y_input['Y_loc']: Y_loc,
-            train_phase: 'train' #Force Train
-           }
+            train_phase: 'train'  # Force Train
+            }
     return feed
+
 
 def feed_data(i, y_input, train_phase, tt='train'):
     """
@@ -176,9 +181,8 @@ def feed_data(i, y_input, train_phase, tt='train'):
     :return:
     """
 
-
     # if i%3 ==0:
-    mask_1_feed = mask_1[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2)
+    mask_1_feed = mask_1[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
     mask_2_feed = mask_2[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
     mask_3_feed = mask_3[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
     # elif i%3 ==1:
@@ -190,14 +194,13 @@ def feed_data(i, y_input, train_phase, tt='train'):
     #     mask_2_feed = mask_3[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
     #     mask_3_feed = mask_1[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
 
-
     feed = {y_input['mask_1']: mask_1_feed,
             y_input['mask_2']: mask_2_feed,
             y_input['mask_3']: mask_3_feed,
             y_input['X_loc']: X_loc,
             y_input['Y_loc']: Y_loc,
-            train_phase: True, #Force Train
-           }
+            train_phase: True,  # Force Train
+            }
     return feed
 
 
@@ -215,14 +218,18 @@ def run_evaluation(sess, feed, net, step, writer, tt):
     m_op_g = tf.summary.merge_all(key='G')
     m_op_d = tf.summary.merge_all(key='D')
 
-    r_g, r_d, loss_d_fake, loss_d_real, loss_d, loss_g, l2_norm, g_loss_no_reg, d_loss_no_reg,g_loss_im = sess.run([m_op_g, m_op_d, net.d_loss_fake, net.d_loss_real,
-                                                                   net.d_loss, net.g_loss, net.evaluation, net.g_loss_no_reg, net.d_loss_no_reg,net.im_loss], feed_dict=feed)
+    r_g, r_d, loss_d_fake, loss_d_real, loss_d, loss_g, l2_norm, g_loss_no_reg, d_loss_no_reg, g_loss_im, g_loss_l1, psnr = sess.run(
+        [m_op_g, m_op_d, net.d_loss_fake, net.d_loss_real,
+         net.d_loss, net.g_loss, net.context_loss, net.g_loss_no_reg, net.d_loss_no_reg, net.im_loss, net.l1_loss,
+         net.psnr], feed_dict=feed)
 
     writer['G'].add_summary(r_g, step)
     writer['D'].add_summary(r_d, step)
 
-    print('%s:  Time: %s , Loss at step %s: D: %s, D_no_reg: %s, G: %s, G_no_reg: %s, L2: %s, L2_Im %s' % (tt, datetime.datetime.now(), step, loss_d, d_loss_no_reg, loss_g, g_loss_no_reg, l2_norm,g_loss_im))
-    logfile.writelines('%s: Time: %s , Accuracy at step %s: D: %s, G: %s, L2: %s, L2_Im %s\n' % (tt, datetime.datetime.now(), step, loss_d, loss_g, l2_norm,g_loss_im))
+    print('%s:  Time: %s , Loss at step %s: D: %s, G: %s,  L2: %s, L2_Im: %s L1: %s PSNR: %s' % (
+    tt, datetime.datetime.now(), step, loss_d, loss_g, l2_norm, g_loss_im, g_loss_l1, psnr))
+    logfile.writelines('%s: Time: %s , Accuracy at step %s: D: %s, G: %s, L2: %s, L2_Im %s\n' % (
+    tt, datetime.datetime.now(), step, loss_d, loss_g, l2_norm, g_loss_im))
     logfile.flush()
 
 
@@ -244,12 +251,13 @@ def load_graph(iterator):
     """
     if iterator is not None:
         # Init inputs as placeholders
-        y_input = {'mask_1': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask_1'),
-                   'mask_2': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask_2'),
-                   'mask_3': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask_3'),
-                   'X_loc': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='X_loc'),
-                   'Y_loc': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='Y_loc')
-                   }
+        y_input = {
+            'mask_1': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask_1'),
+            'mask_2': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask_2'),
+            'mask_3': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask_3'),
+            'X_loc': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='X_loc'),
+            'Y_loc': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='Y_loc')
+            }
 
         tf.add_to_collection("placeholders", y_input['mask_1'])
         real, imag = iterator.get_next()
@@ -265,14 +273,13 @@ def load_graph(iterator):
             'mask_3': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='mask_3'),
             'X_loc': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='X_loc'),
             'Y_loc': tf.placeholder(tf.float32, shape=[1, DIMS_OUT[0], DIMS_OUT[1], DIMS_OUT[2]], name='Y_loc')
-            }
+        }
 
         tf.add_to_collection("placeholders", y_input['real'])
         tf.add_to_collection("placeholders", y_input['imag'])
         tf.add_to_collection("placeholders", y_input['mask_1'])
-        real =None
+        real = None
         imag = None
-
 
     train_phase = tf.placeholder(tf.bool, name='phase_train')
     adv_loss_w = tf.placeholder(tf.float32, name='adv_loss_w')
@@ -284,13 +291,11 @@ def load_graph(iterator):
 
 
 def train_model(mode, checkpoint=None):
-
     print("Learning_rate = %f" % FLAGS.learning_rate)
-    
+
     # with open(os.path.join(FLAGS.train_dir, 'FLAGS.json'), 'w') as f:
     #     json.dump(FLAGS.__dict__, f)
     print('Log not dumpped! fix needed!')
-
 
     train_dataset = tf.data.TFRecordDataset(tfrecords['train'])
 
@@ -326,7 +331,6 @@ def train_model(mode, checkpoint=None):
         handle, train_dataset.output_types, train_dataset.output_shapes)
     net = load_graph(iterator)
 
-
     # Create a saver and keep all checkpoints
     saver = tf.train.Saver(tf.global_variables(), max_to_keep=None)
 
@@ -335,88 +339,98 @@ def train_model(mode, checkpoint=None):
 
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True
-    sess = tf.Session(config=config)
-    init = tf.global_variables_initializer()
+    builder = tf.profiler.ProfileOptionBuilder
+    opts = builder(builder.time_and_memory()).order_by('micros').build()
+    # Create a profiling context, set constructor argument `trace_steps`,
+    # `dump_steps` to empty for explicit control.
+    with tf.contrib.tfprof.ProfileContext(FLAGS.train_dir,
+                                          trace_steps=[],
+                                          dump_steps=[]) as pctx:
+        sess = tf.Session(config=config)
+        init = tf.global_variables_initializer()
 
-    writer = defaultdict(dict)
-    writer['train']['D'] = tf.summary.FileWriter(os.path.join(FLAGS.train_dir, 'train', 'D'), sess.graph)
-    writer['train']['G'] = tf.summary.FileWriter(os.path.join(FLAGS.train_dir, 'train', 'G'), sess.graph)
+        writer = defaultdict(dict)
+        writer['train']['D'] = tf.summary.FileWriter(os.path.join(FLAGS.train_dir, 'train', 'D'), sess.graph)
+        writer['train']['G'] = tf.summary.FileWriter(os.path.join(FLAGS.train_dir, 'train', 'G'), sess.graph)
 
-    writer['test']['D'] = tf.summary.FileWriter(os.path.join(FLAGS.train_dir, 'test', 'D'), sess.graph)
-    writer['test']['G'] = tf.summary.FileWriter(os.path.join(FLAGS.train_dir, 'test', 'G'), sess.graph)
+        writer['test']['D'] = tf.summary.FileWriter(os.path.join(FLAGS.train_dir, 'test', 'D'), sess.graph)
+        writer['test']['G'] = tf.summary.FileWriter(os.path.join(FLAGS.train_dir, 'test', 'G'), sess.graph)
 
-    if mode == 'resume':
-        saver.restore(sess, checkpoint)
-        start_iter = int(checkpoint.split('-')[-1])
-        # saver.restore(sess, tf.train.latest_checkpoint(checkpoint))
-    else:
-        sess.run(init)
-        start_iter = 0
-
-    tf.train.write_graph(sess.graph_def, FLAGS.train_dir, 'graph.pbtxt', True)
-
-    gen_loss_adversarial = FLAGS.gen_loss_adversarial
-    # gen_loss_adversarial = FLAGS.gen_loss_adversarial
-    print("Starting with adv loss = %f" % gen_loss_adversarial)
-    print("Starting at iteration number: %d " % start_iter)
-    k = 1
-    #Set iterators handls
-    train_handle = sess.run(train_iterator.string_handle())
-    test_handle = sess.run(test_iterator.string_handle())
-    # Train the model, and feed in test data and record summaries every 10 steps
-    for i in range(start_iter, FLAGS.max_steps):
-
-        # try:
-        if i % FLAGS.print_test == 0:
-            # Record summary data and the accuracy
-            feed = feed_data(i, net.labels, net.train_phase,
-                             tt='test')
-            if feed is not None:
-                feed[handle] = test_handle
-                feed[net.adv_loss_w] = gen_loss_adversarial
-                run_evaluation(sess, feed, step=i, net=net, writer=writer['test'], tt='TEST')
-                save_checkpoint(sess=sess, saver=saver, step=i)
-
+        if mode == 'resume':
+            saver.restore(sess, checkpoint)
+            start_iter = int(checkpoint.split('-')[-1])
+            # saver.restore(sess, tf.train.latest_checkpoint(checkpoint))
         else:
-            # Training
-            # Update D network
-            if (i > FLAGS.iters_no_adv):
-                for it in np.arange(FLAGS.num_D_updates):
-                    feed = feed_data(i + it, net.labels, net.train_phase,
-                                     tt='train')
-                    feed[handle] = train_handle
+            sess.run(init)
+            start_iter = 0
 
-                    if feed is not None:
-                        feed[net.adv_loss_w] = gen_loss_adversarial
+        tf.train.write_graph(sess.graph_def, FLAGS.train_dir, 'graph.pbtxt', True)
 
-                        _, d_loss_fake, d_loss_real, d_loss = \
-                            sess.run([net.train_op_d, net.d_loss_fake, net.d_loss_real, net.d_loss], feed_dict=feed)
-                        _ = sess.run([net.clip_weights])
+        gen_loss_adversarial = FLAGS.gen_loss_adversarial
+        # gen_loss_adversarial = FLAGS.gen_loss_adversarial
+        print("Starting with adv loss = %f" % gen_loss_adversarial)
+        print("Starting at iteration number: %d " % start_iter)
+        k = 1
+        # Set iterators handls
+        train_handle = sess.run(train_iterator.string_handle())
+        test_handle = sess.run(test_iterator.string_handle())
+        # Train the model, and feed in test data and record summaries every 10 steps
+        for i in range(start_iter, FLAGS.max_steps):
+            pctx.trace_next_step()
+            # Dump the profile to '/tmp/train_dir' after the step.
+            pctx.dump_next_step()
+            # try:
+            if i % FLAGS.print_test == 0:
+                # Record summary data and the accuracy
+                feed = feed_data(i, net.labels, net.train_phase,
+                                 tt='test')
+                if feed is not None:
+                    feed[handle] = test_handle
+                    feed[net.adv_loss_w] = gen_loss_adversarial
+                    run_evaluation(sess, feed, step=i, net=net, writer=writer['test'], tt='TEST')
+                    save_checkpoint(sess=sess, saver=saver, step=i)
 
-            # Update G network
-            feed = feed_data(i, net.labels, net.train_phase,
-                             tt='train')
-            feed[handle] = train_handle
-            feed[net.adv_loss_w] = gen_loss_adversarial
-            if feed is not None:
-                if (i<300):
-                    _, g_loss = sess.run([net.train_op_k, net.g_loss], feed_dict=feed)
-                elif (i<750):
-                    _, g_loss = sess.run([net.train_op_u, net.g_loss], feed_dict=feed)
-                else:
-                    _, g_loss = sess.run([net.train_op_g, net.g_loss], feed_dict=feed)
+            else:
+                # Training
+                # Update D network
+                if (i > FLAGS.iters_no_adv):
+                    for it in np.arange(FLAGS.num_D_updates):
+                        feed = feed_data(i + it, net.labels, net.train_phase,
+                                         tt='train')
+                        feed[handle] = train_handle
 
-            if i % FLAGS.print_train == 0:
+                        if feed is not None:
+                            feed[net.adv_loss_w] = gen_loss_adversarial
+
+                            _, d_loss_fake, d_loss_real, d_loss = \
+                                sess.run([net.train_op_d, net.d_loss_fake, net.d_loss_real, net.d_loss], feed_dict=feed)
+                            _ = sess.run([net.clip_weights])
+
+                # Update G network
+                feed = feed_data(i, net.labels, net.train_phase,
+                                 tt='train')
+                feed[handle] = train_handle
                 feed[net.adv_loss_w] = gen_loss_adversarial
-                run_evaluation(sess, feed, step=i, net=net, writer=writer['train'], tt='TRAIN')
+                if feed is not None:
+                    if (i < 300):
+                        _, g_loss = sess.run([net.train_op_k, net.g_loss], feed_dict=feed)
+                    elif (i < 750):
+                        _, g_loss = sess.run([net.train_op_u, net.g_loss], feed_dict=feed)
+                    else:
+                        _, g_loss = sess.run([net.train_op_g, net.g_loss], feed_dict=feed)
 
-            # import pdb
-            # pdb.set_trace()
-            # print(dbg[0].mean(), dbg[1].mean())
-        # except KeyboardInterrupt:
-        #     raise
-        # except:
-        #     print('Error in iteration')
+                if i % FLAGS.print_train == 0:
+                    feed[net.adv_loss_w] = gen_loss_adversarial
+                    run_evaluation(sess, feed, step=i, net=net, writer=writer['train'], tt='TRAIN')
+
+                # import pdb
+                # pdb.set_trace()
+                # print(dbg[0].mean(), dbg[1].mean())
+            # except KeyboardInterrupt:
+            #     raise
+            # except:
+            #     print('Error in iteration')
+            pctx.profiler.profile_operations(options=opts)
     logfile.close()
 
 
@@ -443,6 +457,8 @@ def evaluate_checkpoint(tt='test', checkpoint=None, output_file=None, output_fil
     data_set_tt = getattr(data_set, tt)
 
     all_acc = []
+    psnr = []
+    nmse = []
     predict_counter = 0
     if output_file is None:
         # Create output directories
@@ -457,58 +473,65 @@ def evaluate_checkpoint(tt='test', checkpoint=None, output_file=None, output_fil
     i = 0
     print("Evaluate Model using checkpoint: %s, data=%s" % (checkpoint, tt))
     while data_set_tt.epoch == 0:
-            # Running over all data until epoch > 0
-            i+=1
-            feed = feed_data_old(data_set,i, net.labels, net.train_phase,
+        # Running over all data until epoch > 0
+        i += 1
+        feed = feed_data_old(data_set, i, net.labels, net.train_phase,
                              tt=tt, batch_size=FLAGS.mini_batch_predict)
-            if feed is not None:
-                feed[net.adv_loss_w] = gen_loss_adversarial
-                predict, result = sess.run([net.predict_g, net.evaluation], feed_dict=feed)
+        if feed is not None:
+            feed[net.adv_loss_w] = gen_loss_adversarial
+            predict, result = sess.run([net.predict_g, net.evaluation], feed_dict=feed)
 
-                all_acc.append(np.array(result))
-                print('Time: %s , Accuracy for mini_batch is: %s' % (datetime.datetime.now(), result))
-                if output_file is not None:
-                    f_out.write(predict['image'].ravel())
-                    # f_out_imag.write(predict['imag'].ravel())
-            else:
-                break
-            predict_counter += FLAGS.mini_batch_predict
-            print("Done - " + str(predict_counter))
-            if predict_counter >= FLAGS.max_predict:
-                break
+            all_acc.append(np.array(result['k_space']))
+            psnr.append(np.array(result['PSNR']))
+            nmse.append(np.array(result['NMSE']))
+
+            print('Time: %s , Accuracy for mini_batch is l2_kspace: %s PSNR: %s NMSE: %s' % (
+            datetime.datetime.now(), result['k_space'], result['PSNR'], result['NMSE']))
+            if output_file is not None:
+                f_out.write(predict['image'].ravel())
+                # f_out_imag.write(predict['imag'].ravel())
+        else:
+            break
+        predict_counter += FLAGS.mini_batch_predict
+        print("Done - " + str(predict_counter))
+        if predict_counter >= FLAGS.max_predict:
+            break
 
     if output_file is not None:
-        f_out_real.close()
-        f_out_imag.close()
-    print("Total accuracy is: %f" % np.array(all_acc).mean())
+        f_out.close()
+    print("Total accuracy is kspace_l2: %s PSNR: %s NMSE %s" % (
+    np.array(all_acc).mean(), np.array(psnr).mean(), np.array(nmse).mean()))
 
 
 def main(args):
-
     print('Initializing')
     if args.mode == 'train' or args.mode == 'resume':
 
         # Copy scripts to training dir
-	print('Training') 
+        print('Training')
         shutil.copy(os.path.abspath(__file__), args.train_dir)
         model_file = inspect.getfile(KspaceWgan)
-        model_file = model_file.split('.py')[0]+'.py'
+        model_file = model_file.split('.py')[0] + '.py'
         shutil.copy(model_file, args.train_dir)
         train_model(args.mode, args.checkpoint)
     elif args.mode == 'evaluate':
-        evaluate_checkpoint(tt=args.tt, checkpoint=args.checkpoint, output_file=args.output_file, output_file_interp=args.output_file_interp)
+        evaluate_checkpoint(tt=args.tt, checkpoint=args.checkpoint, output_file=args.output_file,
+                            output_file_interp=args.output_file_interp)
     # elif mode == 'predict':
     #     predict_checkpoint(tt=args.tt, checkpoint=args.checkpoint, args.output_dir)
+
 
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Main script for train super-resolution k-space.')
-    parser.add_argument('--mode', dest='mode', choices=['train', 'evaluate', 'predict', 'resume'], type=str, help='mode')
+    parser.add_argument('--mode', dest='mode', choices=['train', 'evaluate', 'predict', 'resume'], type=str,
+                        help='mode')
     parser.add_argument('--tt', dest='tt', choices=['train', 'test'], type=str, help='train / test')
     parser.add_argument('--train_dir', dest='train_dir', default='', type=str, help='training directory')
     parser.add_argument('--checkpoint', dest='checkpoint', type=str, help='checkpoint full path')
     parser.add_argument('--output_file', dest='output_file', default=None, type=str, help='Output file for predict')
-    parser.add_argument('--output_file_interp', dest='output_file_interp', default=None, type=str, help='Output file for interpolation output')
+    parser.add_argument('--output_file_interp', dest='output_file_interp', default=None, type=str,
+                        help='Output file for interpolation output')
     parser.add_argument('--print_train', dest='print_train', type=int, help='Print_Train')
     parser.add_argument('--print_test', dest='print_test', type=int, help='Print Test')
     parser.add_argument('--num_D_updates', dest='num_D_updates', type=int, help='num_D_updates')
@@ -516,9 +539,10 @@ if __name__ == '__main__':
     parser.add_argument('--gen_loss_context', dest='gen_loss_context', type=float, help='gen_loss_context')
     parser.add_argument('--learning_rate', dest='learning_rate', type=float, help='learning_rate')
     parser.add_argument('--dump_debug', dest='dump_debug', type=bool, help='dump all images')
-    parser.add_argument('--max_predict', dest='max_predict', type=int, default=5000,  help='maximum predict examples')
-    parser.add_argument('--mini_batch_size', dest='mini_batch_size', type=int, default=5,  help='mini batch size')
-    parser.add_argument('--random_sampling_factor', dest='random_sampling_factor', type=int, default=6, help='Random mask sampling factor')
+    parser.add_argument('--max_predict', dest='max_predict', type=int, default=5000, help='maximum predict examples')
+    parser.add_argument('--mini_batch_size', dest='mini_batch_size', type=int, default=5, help='mini batch size')
+    parser.add_argument('--random_sampling_factor', dest='random_sampling_factor', type=int, default=6,
+                        help='Random mask sampling factor')
     parser.add_argument('--database', dest='database', type=str, help='data base name - for file info')
     parser.add_argument('--reg_w', dest='reg_w', type=float, default=5e-4, help='regularization w')
     parser.add_argument('--reg_b', dest='reg_b', type=float, default=5e-4, help='regularization b')
@@ -530,6 +554,6 @@ if __name__ == '__main__':
     # elif args.mode == 'predict':
     #     assert args.tt and args.checkpoint and args.output_dir , "Must have tt, checkpoint and output_dir for predict"
     elif args.mode == 'resume':
-         print('training')
-	 assert args.checkpoint, "Must have checkpoint for resume"
+        print('training')
+        assert args.checkpoint, "Must have checkpoint for resume"
     main(args)

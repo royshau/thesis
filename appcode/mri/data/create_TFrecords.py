@@ -20,7 +20,7 @@ def _int64_feature(value):
 def _bytes_feature(value):
     return tf.train.Feature(bytes_list=tf.train.BytesList(value=[value]))
 
-tfrecord_filename = 'test_min.tfrecords'
+tfrecord_filename = 'train.tfrecords'
 
 # Initiating the writer and creating the tfrecords file.
 
@@ -31,11 +31,15 @@ writer = tf.python_io.TFRecordWriter(tfrecord_filename)
 # The images are named as apple01.jpg, apple02.jpg .. , orange01.jpg .. etc.
 
 
-real = glob.glob('/HOME/data/base/test/*/*.k_space_real_gt.bin')
-imag = glob.glob('/HOME/data/base/test/*/*.k_space_imag_gt.bin')
-meta = glob.glob('/HOME/data/base/test/*/*.meta_data.bin')
+real = glob.glob('/HOME/data/base/train/*/*.k_space_real_gt.bin')
+imag = glob.glob('/HOME/data/base/train/*/*.k_space_imag_gt.bin')
+meta = glob.glob('/HOME/data/base/train/*/*.meta_data.bin')
 shuffled_ind = np.random.permutation(len(real))
-shuffled_ind = shuffled_ind[0:20]
+sum_r = 0
+sum_i = 0
+sum_r2 = 0
+sum_i2 = 0
+count=0
 for i in shuffled_ind:
     real_img = np.flip(np.fromfile(real[i],np.float32).reshape(3,256,256),1)
     imag_img = np.flip(np.fromfile(imag[i], np.float32).reshape(3,256,256),1)
@@ -44,13 +48,23 @@ for i in shuffled_ind:
     feature = { 'real': _bytes_feature(real_img.tostring()),
                   'imag': _bytes_feature(imag_img.tostring()),
                 'meta': _bytes_feature(meta_img.tostring())}
-
+    sum_r = np.sum(real_img)/(256*256)
+    sum_i = np.sum(imag_img**2)/(256*256)
+    sum_r2 = np.sum(real_img)/(256*256)
+    sum_i2 = np.sum(imag_img**2)/(256*256)
     # Create an example protocol buffer
     example = tf.train.Example(features=tf.train.Features(feature=feature))
 
     # Writing the serialized example.
 
     writer.write(example.SerializeToString())
-    print(i)
+    count+=1
+    print(count)
+
+print(sum_r/count)
+print(sum_i/count)
+print(sum_r2/count)
+print(sum_i2/count)
+
 writer.close()
 

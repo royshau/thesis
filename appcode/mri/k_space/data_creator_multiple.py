@@ -79,7 +79,7 @@ class DataCreatorMulti:
 
                 # Normalize image
                 norm_factor = 1.0 / image_3d.max()
-                image_3d = (image_3d * norm_factor).astype('float32')
+                image_3d = (image_3d * norm_factor).astype('float32')*2-1
                 k_space_3d, _ = get_dummy_k_space_and_image(image_3d)
                 meta_data = source_data['meta_data'][0]
 

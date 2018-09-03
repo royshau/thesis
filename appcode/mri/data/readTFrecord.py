@@ -7,7 +7,7 @@ import glob
 
 import tensorflow as tf
 
-filenames = ["/HOME/data/test.tfrecords"]
+filenames = ["/HOME/data/train.tfrecords"]
 dataset = tf.data.TFRecordDataset(filenames)
 def _parse_(serialized_example):
     feature = {'real':tf.FixedLenFeature([],tf.string),
@@ -40,7 +40,8 @@ min_real =10000
 min_imag =10000
 sum_r= 0
 sum_i= 0
-
+sum_r2= 0
+sum_i2= 0
 i=0
 GPU_ID = '1'
 os.environ["CUDA_VISIBLE_DEVICES"] = GPU_ID
@@ -57,8 +58,10 @@ with tf.Session() as sess:
                 min_real = np.min(real)
             if (np.min(imag)<min_imag):
                 min_imag = np.min(imag)
-            sum_r += np.sum(real)
-            sum_i += np.sum(imag)
+            sum_r += np.sum(real[:,1,:,:]) / (256 * 256)
+            sum_i += np.sum(imag[:,1,:,:]) / (256 * 256)
+            sum_r2 += np.sum(real[:,1,:,:]**2) / (256 * 256)
+            sum_i2 += np.sum(imag[:,1,:,:]**2) / (256 * 256)
             i+=16
             print(i)
         except tf.errors.OutOfRangeError:
@@ -68,8 +71,10 @@ print(max_real)
 print(max_imag)
 print(min_real)
 print(min_imag)
-print(sum_r)
-print(sum_i)
+print(sum_r/i)
+print(sum_i/i)
+print(sum_r2/i)
+print(sum_i2/i)
 print(i)
 # plt.show()
 # image = get_image_from_kspace(real[2,1,:,:], imag[2,1,:,:])
