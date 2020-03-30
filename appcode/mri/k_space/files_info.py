@@ -46,6 +46,21 @@ all_infos  = {
                      "k_space_imag_gt": {"width": 128, "height": 256, "channels": 1, "dtype": np.float32},
                      "image_gt": {"width": 128, "height": 256, "channels": 1, "dtype": np.float32},
                      "meta_data": {"width": sizeof_meta_data, "height": 1, "channels": 1, "dtype": np.float32}},
+
+    "Lesions": {"k_space_real_gt": {"width": 256, "height": 256, "channels": 3, "dtype": np.float32},
+               "k_space_imag_gt": {"width": 256, "height": 256, "channels": 3, "dtype": np.float32},
+               "image_gt": {"width": 256, "height": 256, "channels": 3, "dtype": np.float32},
+               "meta_data": {"width": sizeof_meta_data, "height": 1, "channels": 1, "dtype": np.float32}},
+
+    "DCE-MRI": {"k_space_real_gt": {"width": 256, "height": 256, "channels": 3, "dtype": np.float32},
+                "k_space_imag_gt": {"width": 256, "height": 256, "channels": 3, "dtype": np.float32},
+                "image_gt": {"width": 256, "height": 256, "channels": 3, "dtype": np.float32},
+                "meta_data": {"width": sizeof_meta_data, "height": 1, "channels": 1, "dtype": np.float32}},
+
+    "Lesions-PP": {"k_space_real_gt": {"width": 182, "height": 218, "channels": 3, "dtype": np.float32},
+                   "k_space_imag_gt": {"width": 182, "height": 218, "channels": 3, "dtype": np.float32},
+                   "image_gt": {"width": 182, "height": 218, "channels": 3, "dtype": np.float32},
+                   "meta_data": {"width": sizeof_meta_data, "height": 1, "channels": 1, "dtype": np.float32}},
 }
 
 

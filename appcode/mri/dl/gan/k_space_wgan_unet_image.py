@@ -98,7 +98,7 @@ class KspaceWgan(BasicModel):
 
         with tf.name_scope('evaluation'):
             # Calculate accuracy L2 norm
-            self.evaluation = self.__evaluation__(predict=self.predict_g, labels=self.labels)
+            self.evaluation = self.__evaluation__()
 
     def __G__(self):
         """
@@ -114,8 +114,6 @@ class KspaceWgan(BasicModel):
 
         if self.FLAGS.dump_debug:
             tf.summary.image('G_mask', tf.transpose(self.labels['mask_2'], (0, 2, 3, 1)), collections='G', max_outputs=1)
-            tf.summary.image('noise_real', tf.transpose(noise_real, (0, 2, 3, 1)), collections='G', max_outputs=1)
-            tf.summary.image('noise_image', tf.transpose(noise_imag, (0, 2, 3, 1)), collections='G', max_outputs=1)
             tf.summary.image('x_real_noise', tf.transpose(x_real, (0, 2, 3, 1)), collections='G', max_outputs=2)
             tf.summary.image('x_image_noise', tf.transpose(x_imag, (0, 2, 3, 1)), collections='G', max_outputs=2)
             tf.summary.image('x_input_real', tf.transpose(self.input['real'], (0, 2, 3, 1)), collections='G', max_outputs=2)
@@ -381,10 +379,6 @@ class KspaceWgan(BasicModel):
         psnr_mse = tf.reduce_mean(tf.squared_difference(self.fake_im,self.real_im), axis=[1, 2, 3])
         psnr_mid = (range_diff**2)/psnr_mse
         self.psnr = tf.reduce_mean(10*tf.log(psnr_mid)/tf.log(tf.constant(10, dtype=psnr_mid.dtype)))
-    def log10(x):
-        numerator = tf.log(x)
-        denominator = tf.log(tf.constant(10, dtype=numerator.dtype))
-        return numerator / denominator
 
     def __clip_weights__(self):
         clip_ops = []
@@ -433,7 +427,7 @@ class KspaceWgan(BasicModel):
 
         return train_op_d, train_op_g ,train_op_u
 
-    def __evaluation__(self, predict, labels):
+    def __evaluation__(self):
         """
         :param predict:
         :param labels:
@@ -441,7 +435,7 @@ class KspaceWgan(BasicModel):
         """
         # evalu = tf.reduce_mean(tf.square(tf.squeeze(predict['real']) - tf.squeeze(labels['real']))) \
         #         + tf.reduce_mean(tf.square(tf.squeeze(predict['imag']) - tf.squeeze(labels['imag'])))
-        evalu = {'k_space':self.context_loss,"PSNR":self.psnr,"NMSE":self.im_loss}
+        evalu = {'k_space':0,"PSNR":0,"NMSE":0}
         return evalu
 
     def get_reconstructed_image(self, real, imag, name=None):

@@ -1,11 +1,26 @@
 {
-  "IXI_T1":    {  "data":"/HOME/data/IXI/T1",
-                  "labels": "/HOME/data/IXI/T1",
-                  "info": "/HOME/data/IXI/T1",
+  "IXI_T1":    {  "data":"/media/rrtammyfs/labDatabase/IXI/IXI-T1",
+                  "labels": "/media/rrtammyfs/labDatabase/IXI/IXI-T1",
+                  "info": "/media/rrtammyfs/labDatabase/IXI/IXI-T1",
                   "suffix": "*/*.nii.gz"},
 
   "IXI_T2":    {  "data":"/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T2",
                   "labels": "/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T2",
                   "info": "/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T2",
-                  "suffix": "*/*.nii.gz"}
+                  "suffix": "*/*.nii.gz"},
+
+  "Lesions":    {  "data":"/HOME/data2/lesions",
+                  "labels": "/HOME/data2/lesions",
+                  "info": "/HOME/data2/lesions",
+                  "suffix": "*/*.nii.gz"},
+
+  "DCE-MRI":    {  "data":"/media/rrtammyfs/Users/Ariel/DCE_MRI/stroke",
+                  "labels": "/HOME/data/DCE-MRI",
+                  "info": "/HOME/data/DCE-MRI",
+                  "suffix": "*/nifti/*.hdr"},
+
+  "Lesions-PP":    {  "data":"/media/rrtammyfs/labDatabase/MSLesion-ISBI2015",
+                  "labels": "/media/rrtammyfs/Projects/2018/MRIGAN/data/lesions",
+                  "info": "/media/rrtammyfs/Projects/2018/MRIGAN/data/lesions",
+                  "suffix": "*/*/preprocessed/*.nii"}
 }

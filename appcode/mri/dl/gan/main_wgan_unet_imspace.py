@@ -42,10 +42,10 @@ def _parse_(serialized_example):
 
 
 # k space data set on loca SSD
-base_dir = '/HOME/data/shuffle'
-file_names = {'y_r': 'k_space_real_gt', 'y_i': 'k_space_imag_gt' , 'm_d':'meta_data'}
+base_dir = '/HOME/data2/shuffle'
+file_names = {'y_r': 'k_space_real_gt', 'y_i': 'k_space_imag_gt', 'm_d': 'meta_data'}
 
-tfrecords = {'test':["/HOME/data/test.tfrecords"],'train':["/HOME/data/train.tfrecords"]}
+tfrecords = {'test': ["/HOME/data2/LesionsBig_test.tfrecords"], 'train': ["/HOME/data2/LesionsBig_train.tfrecords"]}
 
 flags = tf.app.flags
 FLAGS = flags.FLAGS
@@ -56,8 +56,8 @@ flags.DEFINE_float('learning_rate', 0.0001, 'Initial learning rate.')
 flags.DEFINE_float('reg_w', 5e-4, 'L2 Norm regularization weight.')
 flags.DEFINE_float('reg_b', 5e-4, 'L2 Norm regularization weight.')
 # flags.DEFINE_integer('mini_batch_size', 10, 'Size of mini batch')
-flags.DEFINE_integer('mini_batch_size', 16, 'Size of mini batch')
-flags.DEFINE_integer('mini_batch_predict', 16, 'Size of mini batch for predict')
+flags.DEFINE_integer('mini_batch_size', 32, 'Size of mini batch')
+flags.DEFINE_integer('mini_batch_predict', 15, 'Size of mini batch for predict')
 flags.DEFINE_integer('max_predict', 50000, 'Number of steps to run trainer.')
 
 flags.DEFINE_float('gen_loss_context', 100, 'Generative loss, kspace context weight.')
@@ -67,7 +67,7 @@ flags.DEFINE_float('im_loss_context', 10, 'Generative loss, Image context weight
 flags.DEFINE_float('gen_loss_adversarial', 1, 'Generative loss, adversarial weight.')
 flags.DEFINE_integer('iters_no_adv', 1000, 'Iters with adv_w=0')
 
-flags.DEFINE_integer('print_test', 2000, 'Print test frequency')
+flags.DEFINE_integer('print_test', 500, 'Print test frequency')
 flags.DEFINE_integer('print_train', 100, 'Print train frequency')
 
 
@@ -93,7 +93,7 @@ logfile = open(os.path.join(FLAGS.train_dir, 'results_%s.log' % str(datetime.dat
 # mask_1 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50r_1')
 # mask_2 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50r_2')
 # mask_3 = get_rv_mask(mask_main_dir='/HOME/thesis/matlab/', factor='50r_3')
-masks = scipy.io.loadmat('/HOME/thesis/matlab/mask_30.mat')
+masks = scipy.io.loadmat('/HOME/thesis/matlab/mask_20.mat')
 mask_1 = masks['mask_1']
 mask_2 = masks['mask_2']
 mask_3 = masks['mask_3']
@@ -105,7 +105,6 @@ Y_loc = Y_loc[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2)
 #Select GPU 2
 GPU_ID = '1'
 print ('GPU USED: ' + GPU_ID)
-os.environ["CUDA_VISIBLE_DEVICES"] = GPU_ID
 
 def get_case_idx(case_hash, meta_data):
     """ Get case indices given cash hash and meta data memmap
@@ -164,7 +163,7 @@ def feed_data_old(data_set,i, y_input, train_phase, tt='train', batch_size=10):
             y_input['mask_3']: mask_3_feed,
             y_input['X_loc']: X_loc,
             y_input['Y_loc']: Y_loc,
-            train_phase: 'train' #Force Train
+            train_phase: True #Force Train
            }
     return feed
 
@@ -338,8 +337,10 @@ def train_model(mode, checkpoint=None):
 
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True
+    config.gpu_options.visible_device_list = GPU_ID
     sess = tf.Session(config=config)
     init = tf.global_variables_initializer()
+
 
     writer = defaultdict(dict)
     writer['train']['D'] = tf.summary.FileWriter(os.path.join(FLAGS.train_dir, 'train', 'D'), sess.graph)
@@ -430,14 +431,18 @@ def evaluate_checkpoint(tt='test', checkpoint=None, output_file=None, output_fil
     :return:
     """
     # Import data
-    data_set = KspaceDataSet(base_dir, file_names.values(), stack_size=50, shuffle=False, data_base=FLAGS.database)
+    data_set = KspaceDataSet(base_dir, file_names.values(), stack_size=FLAGS.mini_batch_predict, shuffle=False, data_base=FLAGS.database)
 
     net = load_graph(iterator=None)
 
     # Create a saver and keep all checkpoints
     saver = tf.train.Saver(tf.global_variables(), max_to_keep=None)
     # saver = tf.train.import_meta_graph('%s.meta' % checkpoint)
-    sess = tf.Session()
+    config = tf.ConfigProto()
+    config.gpu_options.allow_growth = True
+    config.gpu_options.visible_device_list = GPU_ID
+    sess = tf.Session(config=config)
+    init = tf.global_variables_initializer()
     saver.restore(sess, checkpoint)
     # saver.restore(sess, tf.train.latest_checkpoint(checkpoint))
 
@@ -450,7 +455,10 @@ def evaluate_checkpoint(tt='test', checkpoint=None, output_file=None, output_fil
     if output_file is None:
         # Create output directories
         output_file = os.path.join(os.path.abspath(os.path.join(checkpoint, os.pardir)), 'predict', tt)
-        os.makedirs(output_file)
+        try:
+            os.makedirs(output_file)
+        except:
+            print('Predict dir exists')
 
     if output_file is not None:
         f_out = open(os.path.join(output_file, "000000.predict_image.bin"), 'w')
@@ -466,13 +474,13 @@ def evaluate_checkpoint(tt='test', checkpoint=None, output_file=None, output_fil
                              tt=tt, batch_size=FLAGS.mini_batch_predict)
             if feed is not None:
                 feed[net.adv_loss_w] = gen_loss_adversarial
-                predict, result = sess.run([net.predict_g, net.evaluation], feed_dict=feed)
-
-                all_acc.append(np.array(result['k_space']))
-                psnr.append(np.array(result['PSNR']))
-                nmse.append(np.array(result['NMSE']))
-
-                print('Time: %s , Accuracy for mini_batch is l2_kspace: %s PSNR: %s NMSE: %s' % (datetime.datetime.now(), result['k_space'],result['PSNR'],result['NMSE']))
+                predict = sess.run(net.predict_g, feed_dict=feed)
+                #
+                # all_acc.append(np.array(result['k_space']))
+                # psnr.append(np.array(result['PSNR']))
+                # nmse.append(np.array(result['NMSE']))
+                #
+                # print('Time: %s , Accuracy for mini_batch is l2_kspace: %s PSNR: %s NMSE: %s' % (datetime.datetime.now(), result['k_space'],result['PSNR'],result['NMSE']))
                 if output_file is not None:
                     f_out.write(predict['image'].ravel())
                     # f_out_imag.write(predict['imag'].ravel())
@@ -485,7 +493,7 @@ def evaluate_checkpoint(tt='test', checkpoint=None, output_file=None, output_fil
 
     if output_file is not None:
         f_out.close()
-    print("Total accuracy is kspace_l2: %s PSNR: %s NMSE %s" % (np.array(all_acc).mean(),np.array(psnr).mean(),np.array(nmse).mean()))
+    # print("Total accuracy is kspace_l2: %s PSNR: %s NMSE %s" % (np.array(all_acc).mean(),np.array(psnr).mean(),np.array(nmse).mean()))
 
 
 def main(args):

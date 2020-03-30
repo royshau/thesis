@@ -1,0 +1,11 @@
+{
+  "IXI_T1":    {  "data":"/HOME/data/IXI/T1",
+                  "labels": "/HOME/data/IXI/T1",
+                  "info": "/HOME/data/IXI/T1",
+                  "suffix": "*/*.nii.gz"},
+
+  "IXI_T2":    {  "data":"/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T2",
+                  "labels": "/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T2",
+                  "info": "/home/roysh/MRI_Project/Code/appcode/mri/data/IXI/T2",
+                  "suffix": "*/*.nii.gz"}
+}

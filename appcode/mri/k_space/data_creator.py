@@ -10,6 +10,7 @@ from common.files_IO.file_handler import FileHandler
 import matplotlib.pyplot as plt
 from common.viewers.imshow import imshow
 import scipy.signal
+import scipy.io
 import random
 # MAX_IM_VAL = 2.0**16 - 1
 
@@ -101,8 +102,7 @@ class DataCreator:
                     # Dump example
                     meta_data_to_write = self.create_meta_data(meta_data, case_name, z, aug, norm_factor)
                     self.dump_example(out_path, counter,
-                                 dict(k_space_real_gt=k_space_real_gt, k_space_imag_gt=k_space_imag_gt,
-                                      meta_data=meta_data_to_write, image_gt=image_2d_gt), debug)
+                                 dict(image_gt=image_2d_gt), debug)
                     # Add to counter
                     counter += 1
                 # print "ONE EXAMPLE"
@@ -139,10 +139,11 @@ class DataCreator:
         for (name, data) in data_all.iteritems():
             # Set file name
             file_name = set_file_name(name, counter)
-
+            matdict = {'im_ori':data.transpose}
+            scipy.io.savemat(os.path.join(out_path, file_name),matdict)
             # Create file handler and write to file
-            f_handler = FileHandler(os.path.join(out_path, file_name), self.file_info[name], "write")
-            f_handler.write(data.transpose())
+            # f_handler = FileHandler(os.path.join(out_path, file_name), self.file_info[name], "write")
+            # f_handler.write(data.transpose())
 
     def rotate(self, image):
         """

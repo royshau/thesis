@@ -61,14 +61,15 @@ flags.DEFINE_integer('mini_batch_predict', 16, 'Size of mini batch for predict')
 flags.DEFINE_integer('max_predict', 50000, 'Number of steps to run trainer.')
 
 flags.DEFINE_float('gen_loss_context', 100, 'Generative loss, kspace context weight.')
-flags.DEFINE_float('im_loss_context', 10, 'Generative loss, Image context weight.')
+flags.DEFINE_float('im_loss_context', 5, 'Generative loss, Image context weight.')
+flags.DEFINE_float('im_loss_context_l1', 5, 'Generative loss, Image context weight.')
 
 # flags.DEFINE_float('gen_loss_adversarial', 1.0, 'Generative loss, adversarial weight.')
 flags.DEFINE_float('gen_loss_adversarial', 1, 'Generative loss, adversarial weight.')
-flags.DEFINE_integer('iters_no_adv', 1000, 'Iters with adv_w=0')
+flags.DEFINE_integer('iters_no_adv', 3000, 'Iters with adv_w=0')
 
-flags.DEFINE_integer('print_test', 2000, 'Print test frequency')
-flags.DEFINE_integer('print_train', 100, 'Print train frequency')
+flags.DEFINE_integer('print_test', 5000, 'Print test frequency')
+flags.DEFINE_integer('print_train', 200, 'Print train frequency')
 
 
 flags.DEFINE_integer('num_D_updates', 1, 'Discriminator update freq')
@@ -105,8 +106,7 @@ Y_loc = Y_loc[np.newaxis, :, :, np.newaxis].transpose(0,3,1,2)
 #Select GPU 2
 GPU_ID = '1'
 print ('GPU USED: ' + GPU_ID)
-os.environ["CUDA_VISIBLE_DEVICES"] = GPU_ID
-
+# os.environ["CUDA_VISIBLE_DEVICES"] = GPU_ID
 def get_case_idx(case_hash, meta_data):
     """ Get case indices given cash hash and meta data memmap
     :param case_hash:
@@ -339,6 +339,7 @@ def train_model(mode, checkpoint=None):
 
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True
+    config.gpu_options.visible_device_list = GPU_ID
     sess = tf.Session(config=config)
     init = tf.global_variables_initializer()
 
@@ -384,18 +385,17 @@ def train_model(mode, checkpoint=None):
         else:
             # Training
             # Update D network
-            if (i > FLAGS.iters_no_adv):
-                for it in np.arange(FLAGS.num_D_updates):
-                    feed = feed_data(i + it, net.labels, net.train_phase,
-                                     tt='train')
-                    feed[handle] = train_handle
+            for it in np.arange(FLAGS.num_D_updates):
+                feed = feed_data(i + it, net.labels, net.train_phase,
+                                 tt='train')
+                feed[handle] = train_handle
 
-                    if feed is not None:
-                        feed[net.adv_loss_w] = gen_loss_adversarial
+                if feed is not None:
+                    feed[net.adv_loss_w] = gen_loss_adversarial
 
-                        _, d_loss_fake, d_loss_real, d_loss = \
-                            sess.run([net.train_op_d, net.d_loss_fake, net.d_loss_real, net.d_loss], feed_dict=feed)
-                        _ = sess.run([net.clip_weights])
+                    _, d_loss_fake, d_loss_real, d_loss = \
+                        sess.run([net.train_op_d, net.d_loss_fake, net.d_loss_real, net.d_loss], feed_dict=feed)
+                    _ = sess.run([net.clip_weights])
 
             # Update G network
             feed = feed_data(i, net.labels, net.train_phase,
@@ -405,7 +405,7 @@ def train_model(mode, checkpoint=None):
             if feed is not None:
                 if (i<300):
                     _, g_loss = sess.run([net.train_op_k, net.g_loss], feed_dict=feed)
-                elif (i<750):
+                elif (i<FLAGS.iters_no_adv):
                     _, g_loss = sess.run([net.train_op_u, net.g_loss], feed_dict=feed)
                 else:
                     _, g_loss = sess.run([net.train_op_g, net.g_loss], feed_dict=feed)

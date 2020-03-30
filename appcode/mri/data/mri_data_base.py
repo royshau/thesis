@@ -31,12 +31,15 @@ class MriDataBase:
         curr_dir = os.getcwd()
         self.data_path = os.path.join(curr_dir,data_to_path[data_name]["data"])
         self.labels_path = os.path.join(curr_dir,data_to_path[data_name]["labels"])
-        curr_dir = '/HOME/thesis'
-        #curr_dir = ''
+        #curr_dir = '/HOME/thesis'
+        curr_dir = ''
         # New method for ADNI
         if "suffix" in data_to_path[data_name]:
             self.items = sorted(glob.glob(os.path.join(data_to_path[data_name]["data"], data_to_path[data_name]["suffix"])))
-            self.items = ['/'.join(item.split('/')[-2:]) for item in self.items]
+            if data_name == "DCE-MRI":
+                self.items = ['/'.join(item.split('/')[-3:]) for item in self.items]
+            else:
+                self.items = ['/'.join(item.split('/')[-2:]) for item in self.items]
             # self.items = [item.strip(self.data_path) for item in self.items]
         else:
             # OLD SchizReg

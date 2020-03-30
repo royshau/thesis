@@ -7,7 +7,7 @@ import glob
 
 import tensorflow as tf
 
-filenames = ["/HOME/data/test.tfrecords"]
+filenames = ["/HOME/data/DCE-MRI/dce_train.tfrecords"]
 dataset = tf.data.TFRecordDataset(filenames)
 def _parse_(serialized_example):
     feature = {'real':tf.FixedLenFeature([],tf.string),
@@ -42,27 +42,17 @@ sum_r= 0
 sum_i= 0
 
 i=0
-GPU_ID = '1'
+GPU_ID = '-1'
 os.environ["CUDA_VISIBLE_DEVICES"] = GPU_ID
 
 with tf.Session() as sess:
     while True:
         try:
+            i+=1
             imag, real = np.array(sess.run([ima, rea])).squeeze()
-            if (np.max(real)>max_real):
-                max_real = np.max(real)
-            if (np.max(imag)>max_imag):
-                max_imag = np.max(imag)
-            if (np.min(real)<min_real):
-                min_real = np.min(real)
-            if (np.min(imag)<min_imag):
-                min_imag = np.min(imag)
-            sum_r += np.sum(real)
-            sum_i += np.sum(imag)
-            i+=16
-            print(i)
         except tf.errors.OutOfRangeError:
             break
+
 print("stats")
 print(max_real)
 print(max_imag)

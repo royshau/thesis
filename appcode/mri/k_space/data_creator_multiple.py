@@ -14,6 +14,7 @@ import random
 from threading import Thread , BoundedSemaphore
 threadLimiter = BoundedSemaphore(10)
 import shutil
+import cv2
 
 # MAX_IM_VAL = 2.0**16 - 1
 
@@ -38,59 +39,64 @@ class DataCreatorMulti:
         self.rot = rot
 
     def create_example(self,case,data_base):
+            case_name = case.split('.')[0]
+            case_name = case_name.split('/')[-1]
+            print ("Working on case: " + case_name)
+
+            # Set output path and create dir
+            if case_name not in self.mri_data_base.info["train_test_list"]:
+                print ("case:  - not in tt list, add 1 as prefix -" + case_name)
+                return
+
+            tt = self.mri_data_base.info["train_test_list"][case_name]
+
+            out_path = os.path.join(self.base_out_path, tt, case_name)
+            os.makedirs(out_path)
+            counter = 0
+
+            # Read source data and create k_space + dummy image
+            source_data = data_base.get_source_data(case)
+            image_3d = source_data['img'][0].squeeze()
+
+            # ## HACK - padding image:
+            target = 256
+            # print "PADDING IMAGE TO FIX SIZE! 256-%d " % target
+            # if image_3d.shape[1] > target:
+            #     return
+            # image_3d = pad_image_with_zeros_fixed(dat=image_3d, to_size=[256, target])
+
+            # Rotate if needed
+            image_3d = self.rotate(image_3d)
+            # Crop
+            h,w,c = image_3d.shape
+            nh = (h-target)/2
+            if nh<0:
+                padded_image = np.zeros((target, target, c))
+                for i in range(c):
+                    padded_image[:, :, i] = cv2.resize(image_3d[:, :, i], (target, target),interpolation=cv2.INTER_CUBIC)
+                image_3d = padded_image
+            else:
+                image_3d = image_3d[nh:h-nh,nh:h-nh,:]
+            print(image_3d.shape)
+            # Normalize image
+            norm_factor = 1.0 / image_3d.max()
+            image_3d = (image_3d * norm_factor).astype('float32')
+            k_space_3d, _ = get_dummy_k_space_and_image(image_3d)
+            meta_data = source_data['meta_data'][0]
+
+            # Set image sizes
+            w = image_3d[:, :, 0].shape[0]
+            h = image_3d[:, :, 0].shape[1]
+
+            # For each Z in axial limits, create masks and dump examples
+            if "mprage" in case_name:
+                axial_limits = np.arange(np.round(1.7*self.axial_limits[0]),np.round(1.7*self.axial_limits[-1]),dtype=np.int32)
+            else:
+                axial_limits = self.axial_limits
             try:
-                flag = 1
-                threadLimiter.acquire()
-                case_name = case.split('.')[0]
-                case_name = case_name.split('/')[0]
-                print ("Working on case: " + case_name)
-
-                # Set output path and create dir
-                if case_name not in self.mri_data_base.info["train_test_list"]:
-                    print ("case:  - not in tt list, add 1 as prefix -" + case_name)
-                    return
-
-                tt = self.mri_data_base.info["train_test_list"][case_name]
-
-                out_path = os.path.join(self.base_out_path, tt, case_name)
-                try:
-                    os.makedirs(out_path)
-                except:
-                    print('dir already exists')
-                    if flag == 1:
-                        threadLimiter.release()
-                        flag =0
-                    return
-                counter = 0
-
-                # Read source data and create k_space + dummy image
-                source_data = data_base.get_source_data(case)
-                image_3d = source_data['img'][0].squeeze()
-
-                # ## HACK - padding image:
-                # pad = 256
-                # print "PADDING IMAGE TO FIX SIZE! 256-%d " % pad
-                # if image_3d.shape[1] > pad:
-                #     return
-                # image_3d = pad_image_with_zeros_fixed(dat=image_3d, to_size=[256, pad])
-
-                # Rotate if needed
-                image_3d = self.rotate(image_3d)
-
-                # Normalize image
-                norm_factor = 1.0 / image_3d.max()
-                image_3d = (image_3d * norm_factor).astype('float32')
-                k_space_3d, _ = get_dummy_k_space_and_image(image_3d)
-                meta_data = source_data['meta_data'][0]
-
-                # Set image sizes
-                w = image_3d[:, :, 0].shape[0]
-                h = image_3d[:, :, 0].shape[1]
-
-                # For each Z in axial limits, create masks and dump examples
-                for z in range(self.axial_limits[0], self.axial_limits[1] + 1):
-                    # Set ground truth
-                    k_space_2d_gt = np.stack((k_space_3d[:, :, z - 1], k_space_3d[:, :, z], k_space_3d[:, :, z + 1]),
+                for k in axial_limits:
+                # Set ground truth
+                    k_space_2d_gt = np.stack((k_space_3d[:, :, k - 1], k_space_3d[:, :, k], k_space_3d[:, :, k + 1]),
                                              axis=2)
                     k_space_real_gt = k_space_2d_gt.real
                     k_space_imag_gt = k_space_2d_gt.imag
@@ -99,20 +105,15 @@ class DataCreatorMulti:
 
                     aug = 0
                     # Dump example
-                    meta_data_to_write = self.create_meta_data(meta_data, case_name, z, aug, norm_factor)
+                    meta_data_to_write = self.create_meta_data(meta_data, case_name, k, aug, norm_factor)
                     self.dump_example(out_path, counter,
                                       dict(k_space_real_gt=k_space_real_gt, k_space_imag_gt=k_space_imag_gt,
                                            meta_data=meta_data_to_write), False)
                     # Add to counter
                     counter += 1
             except:
-                shutil.rmtree(out_path, ignore_errors=True)
-                self.create_example(case, data_base)
-            finally:
-                if flag == 1:
-                    threadLimiter.release()
-                    flag = 0
-
+                print("skipped " + case_name)
+                shutil.rmtree(out_path)
                     # print "ONE EXAMPLE"
             # exit()
 
@@ -127,9 +128,10 @@ class DataCreatorMulti:
 
         # For all cases in items
         for case in items:
-            t = Thread(target=self.create_example, args=(case,data_base))
-            t.start()
-        t.join()
+        #     t = Thread(target=self.create_example, args=(case,data_base))
+        #     t.start()
+        # t.join()
+            self.create_example(case,data_base)
 
     def create_meta_data(self, meta_data, case, axial_slice, aug, norm_factor):
         """
@@ -319,7 +321,7 @@ def get_subsample_forced(image, mask, force_width=None):
     return im_sub_reshaped
 
 
-def show_example(out_path, counter, data_all):
+def show_example(out_path, counter, data_all,has_gt=False):
     """
     Show example - need to re-write every time we change the data
     :param out_path: output writing path
@@ -333,7 +335,8 @@ def show_example(out_path, counter, data_all):
     fig.set_size_inches(18.5, 10.5, forward=True)
 
     ax[0][0].set_title('Original Image')
-    imshow(data_all["image_gt"], ax=ax[0][0], fig=fig)
+    if has_gt:
+        imshow(data_all["image_gt"], ax=ax[0][0], fig=fig)
 
     ax[0][1].set_title('SubSampled Image')
     imshow(data_all["image"], ax=ax[0][1], fig=fig)

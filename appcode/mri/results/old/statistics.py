@@ -120,7 +120,7 @@ def post_train_2v(data_dir, predict_paths, h=256, w=256, tt='test', show=False, 
         batches += 1
         print("Done on %d examples " % (mini_batch*batches))
 
-    mse_zero = np.array(error_zero_all).mean()
+    mse_zero = np.array(error_zero_all ).mean()
     print stats.ttest_1samp(error_zero_all, mse_zero)
 
     mse_interp = np.array(error_interp_all).mean()

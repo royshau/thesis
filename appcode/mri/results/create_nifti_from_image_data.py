@@ -64,7 +64,7 @@ def create_nifti_from_raw_data(data_dir, predict_path, output_path, data_base, b
             idx = get_case_idx(case, meta_data)
             name = db.info['hash_to_case'][case]
             print("Working on case : %s, number= (%d / %d)" % (name, done, num_of_cases))
-            ref = os.path.join('/HOME/data/IXI/T1', name, "IXI"+name+".nii.gz")
+            ref = os.path.join('/media/rrtammyfs/Projects/2018/MRIGAN/predict/28_5_2d_25', name, name+"_predict.nii.gz")
 
             if not os.path.exists(ref):
                 ref = None
