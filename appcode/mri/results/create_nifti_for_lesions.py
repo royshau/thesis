@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 file_names = ['k_space_real_gt', 'k_space_imag_gt', 'meta_data']
 import argparse
 
-predict_info = {'width': 182, 'height': 218, 'channels': 1, 'dtype': 'float32'}
+predict_info = {'width': 256, 'height': 256, 'channels': 1, 'dtype': 'float32'}
 predict_names = {'image': '000000.predict_image.bin'}
 import matplotlib.pyplot as plt
 
@@ -141,7 +141,7 @@ if __name__ == '__main__':
     parser.add_argument('--data_dir', dest='data_dir', default='/media/ohadsh/Data/ohadsh/work/data/T1/sagittal/', type=str, help='data directory')
     parser.add_argument('--num_of_cases', dest='num_of_cases', type=int, default=-1,  help='number of cases')
     parser.add_argument('--batch_size', dest='batch_size', type=int, default=50,  help='mini batch size')
-    parser.add_argument('--data_base', dest='data_base', type=str, default='Lesions-PP', help='data base name - for file info')
+    parser.add_argument('--data_base', dest='data_base', type=str, default='DCE-MRI', help='data base name - for file info')
     parser.add_argument('--predict_path', dest='predict_path', type=str, help='run path')
     parser.add_argument('--output_path', dest='output_path', default='./', type=str, help='out path')
     parser.add_argument('--source', dest='source', default='k_space', type=str, help='source')

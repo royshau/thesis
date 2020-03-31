@@ -11,13 +11,13 @@ train =0
 test=0
 for hash, filename in enumerate(files):
     casename = os.path.basename(filename).split(".")[-2]
-    if "Uptake" not in casename:
+    if "s_j" not in casename:
         continue
 
     data[casename] = {}
     data[casename]['hash'] = hash
     data[casename]['file'] = filename
-    if 'Uptake' in casename:
+    if 's_j' in casename:
         data[casename]['tt'] = 'test'
         test +=1
     else:

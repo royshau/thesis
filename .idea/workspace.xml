@@ -2,41 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61c86d96-e8ec-40c8-add1-07880b9e8c8d" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/k_space_wgan_WNET.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/k_space_wgan_dce.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_WNET.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_dce.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/old/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/old/main_wgan_unet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appcode/mri/results/PSNR_calc_lesions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appcode/mri/results/t_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appcode/mri/results/viewerLesions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Create_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/Create_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/data/create_TFrecords.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/data/create_TFrecords.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/data/data_to_path.json" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/data/data_to_path.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/data/mri_data_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/data/mri_data_base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/data/readTFrecord.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/data/readTFrecord.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/dl/gan/k_space_wgan_im_loss.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/old/k_space_wgan_im_loss.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/dl/gan/k_space_wgan_im_loss_1d.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/old/k_space_wgan_im_loss_1d.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/dl/gan/k_space_wgan_spatial.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/old/k_space_wgan_spatial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/dl/gan/k_space_wgan_unet.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/old/k_space_wgan_unet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/dl/gan/k_space_wgan_unet_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/old/k_space_wgan_unet_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/dl/gan/k_space_wgan_unet_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/old/k_space_wgan_unet_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/dl/gan/k_space_wgan_unet_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/k_space_wgan_unet_image.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/dl/gan/k_space_wgan_unet_unet.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/k_space_wgan_unet_unet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_im_loss.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/old/main_wgan_im_loss.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_im_loss_1d.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/old/main_wgan_im_loss_1d.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_spatial.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/old/main_wgan_spatial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_unet.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_unet_unet_4GPU.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_unet_imspace.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_unet_imspace.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_unet_unet.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_unet_unet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/k_space/data_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/k_space/data_creator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appcode/mri/data/create_data_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/data/create_data_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appcode/mri/data/data_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/data/data_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appcode/mri/dl/gan/data_feed_t.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/dl/gan/data_feed_t.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appcode/mri/k_space/data_creator_multiple.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/k_space/data_creator_multiple.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/k_space/files_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/k_space/files_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/results/PSNR_calc.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/results/PSNR_calc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/results/create_nifti_from_image_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/results/create_nifti_from_image_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appcode/mri/results/old/statistics.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/results/old/statistics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appcode/mri/results/create_nifti_for_lesions.py" beforeDir="false" afterPath="$PROJECT_DIR$/appcode/mri/results/create_nifti_for_lesions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/files_IO/file_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/files_IO/file_handler.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -82,54 +54,24 @@
         <entry file="file://$PROJECT_DIR$/Create_data.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
-              <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+              <caret line="19" column="20" lean-forward="true" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/appcode/mri/results/PSNR_calc_lesions.py">
+        <entry file="file://$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_dce.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+            <state relative-caret-position="245">
+              <caret line="70" lean-forward="true" selection-start-line="43" selection-start-column="12" selection-end-line="43" selection-end-column="38" />
+              <folding>
+                <element signature="e#160#198#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/appcode/mri/results/t_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/appcode/mri/results/old/statistics.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="134" column="48" lean-forward="true" selection-start-line="134" selection-start-column="48" selection-end-line="134" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/appcode/mri/k_space/data_creator_multiple.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2355">
-              <caret line="167" column="29" selection-start-line="167" selection-start-column="29" selection-end-line="167" selection-end-column="29" />
-              <folding>
-                <element signature="e#22#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/appcode/mri/results/create_nifti_for_lesions.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
@@ -139,37 +81,67 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/appcode/mri/results/create_nifti_from_image_data.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="900">
+              <caret line="92" column="28" lean-forward="true" selection-start-line="92" selection-start-column="28" selection-end-line="92" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/appcode/mri/dl/gan/data_feed_t.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" column="44" lean-forward="true" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
+              <folding>
+                <element signature="e#0#62#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common/files_IO/file_handler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1080">
-              <caret line="72" selection-start-line="72" selection-end-line="72" />
+            <state relative-caret-position="444">
+              <caret line="82" selection-start-line="80" selection-end-line="82" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/appcode/mri/data/mri_data_base.py">
+        <entry file="file://$PROJECT_DIR$/appcode/mri/k_space/data_creator_multiple.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="48" selection-start-line="48" selection-end-line="48" />
+            <state relative-caret-position="-622">
+              <caret line="72" column="20" lean-forward="true" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
+              <folding>
+                <element signature="e#22#31#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/lib/python2.7/posixpath.py">
+        <entry file="file://$PROJECT_DIR$/appcode/mri/results/t_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="885">
-              <caret line="65" selection-start-line="65" selection-end-line="65" />
+            <state relative-caret-position="105">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/appcode/mri/data/data_to_path.json">
+        <entry file="file://$PROJECT_DIR$/appcode/mri/data/create_data_info.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="77" selection-start-line="23" selection-start-column="77" selection-end-line="23" selection-end-column="77" />
+            <state relative-caret-position="240">
+              <caret line="16" column="23" lean-forward="true" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -186,8 +158,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>los</find>
-      <find>normalize</find>
       <find>X_loc</find>
       <find>L2_i</find>
       <find>evalua</find>
@@ -216,6 +186,8 @@
       <find>p_val</find>
       <find>ttes</find>
       <find>ttest</find>
+      <find>get_im</find>
+      <find>get_ima</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -274,20 +246,20 @@
         <option value="$PROJECT_DIR$/appcode/mri/data/readTFrecord.py" />
         <option value="$PROJECT_DIR$/appcode/mri/dl/gan/k_space_wgan_lesions.py" />
         <option value="$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_dce.py" />
-        <option value="$PROJECT_DIR$/appcode/mri/data/create_data_info.py" />
-        <option value="$PROJECT_DIR$/Create_data.py" />
-        <option value="$PROJECT_DIR$/appcode/mri/k_space/data_creator_multiple.py" />
         <option value="$PROJECT_DIR$/appcode/mri/k_space/files_info.py" />
         <option value="$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_lesions.py" />
         <option value="$PROJECT_DIR$/appcode/mri/dl/gan/unitest.py" />
         <option value="$PROJECT_DIR$/appcode/mri/k_space/k_space_data_set.py" />
-        <option value="$PROJECT_DIR$/appcode/mri/dl/gan/data_feed_t.py" />
-        <option value="$PROJECT_DIR$/common/files_IO/file_handler.py" />
         <option value="$PROJECT_DIR$/appcode/mri/data/data_to_path.json" />
-        <option value="$PROJECT_DIR$/appcode/mri/results/create_nifti_for_lesions.py" />
-        <option value="$PROJECT_DIR$/appcode/mri/results/PSNR_calc_lesions.py" />
         <option value="$PROJECT_DIR$/appcode/mri/results/old/statistics.py" />
         <option value="$PROJECT_DIR$/appcode/mri/results/t_test.py" />
+        <option value="$PROJECT_DIR$/appcode/mri/results/PSNR_calc_lesions.py" />
+        <option value="$PROJECT_DIR$/appcode/mri/dl/gan/data_feed_t.py" />
+        <option value="$PROJECT_DIR$/Create_data.py" />
+        <option value="$PROJECT_DIR$/common/files_IO/file_handler.py" />
+        <option value="$PROJECT_DIR$/appcode/mri/results/create_nifti_for_lesions.py" />
+        <option value="$PROJECT_DIR$/appcode/mri/data/create_data_info.py" />
+        <option value="$PROJECT_DIR$/appcode/mri/k_space/data_creator_multiple.py" />
       </list>
     </option>
   </component>
@@ -302,6 +274,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -338,13 +311,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/appcode/mri/dl/gan" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -367,7 +339,73 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.t_test">
+  <component name="RunManager" selected="Python.create_nifti_for_lesions">
+    <configuration name="Create_data" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="thesis" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Create_data.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="PSNR_calc_lesions" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="thesis" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/appcode/mri/results" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/appcode/mri/results/PSNR_calc_lesions.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="create_data_info" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="thesis" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/appcode/mri/data" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/appcode/mri/data/create_data_info.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="create_nifti_for_lesions" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="thesis" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -382,7 +420,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/appcode/mri/results/create_nifti_for_lesions.py" />
-      <option name="PARAMETERS" value="--predict_path $PROJECT_DIR$/../Trains/lesions_20_pp/predict/test --tt test --data_dir /media/rrtammyfs/Projects/2018/MRIGAN/data/lesions/shuffle --output_path /media/rrtammyfs/Projects/2018/MRIGAN/predict/lesions_20_pp" />
+      <option name="PARAMETERS" value="--predict_path /media/rrtammyfs/Projects/2018/MRIGAN/Trains/dce_20_first/predict/test --tt test --data_dir $PROJECT_DIR$/../data/DCE-MRI/shuffle --output_path /media/rrtammyfs/Projects/2018/MRIGAN/predict/dce_stroke" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -434,28 +472,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="file_handler" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="thesis" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/common/files_IO" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/common/files_IO/file_handler.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="main_wgan_dce" type="PythonConfigurationType" factoryName="Python">
       <module name="thesis" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -470,29 +486,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_dce.py" />
-      <option name="PARAMETERS" value="--tt test --mode evaluate --train_dir $PROJECT_DIR$/../Trains/dce_20_first --checkpoint $PROJECT_DIR$/../Trains/dce_20_first/model.ckpt-33000" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main_wgan_lesions" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="thesis" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/appcode/mri/dl/gan" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_lesions.py" />
-      <option name="PARAMETERS" value="--tt test --mode evaluate --train_dir $PROJECT_DIR$/../Trains/lesions_20_pp --checkpoint $PROJECT_DIR$/../Trains/lesions_20_pp/model.ckpt-24000" />
+      <option name="PARAMETERS" value="--tt test --mode evaluate --train_dir /media/rrtammyfs/Projects/2018/MRIGAN/Trains/dce_20_first --checkpoint /media/rrtammyfs/Projects/2018/MRIGAN/Trains/dce_20_first/model.ckpt-33000" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -566,28 +560,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="t_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="thesis" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/appcode/mri/results" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/appcode/mri/results/t_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="viewerLesions" type="PythonConfigurationType" factoryName="Python">
       <module name="thesis" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -617,19 +589,19 @@
       <item itemvalue="Python.main_wgan_multi_slices_GC" />
       <item itemvalue="Python.create_segmentation_commands" />
       <item itemvalue="Python.main_wgan_dce" />
-      <item itemvalue="Python.main_wgan_lesions" />
       <item itemvalue="Python.create_nifti_for_lesions" />
+      <item itemvalue="Python.PSNR_calc_lesions" />
+      <item itemvalue="Python.Create_data" />
       <item itemvalue="Python.data_feed_t" />
-      <item itemvalue="Python.file_handler" />
-      <item itemvalue="Python.t_test" />
+      <item itemvalue="Python.create_data_info" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.t_test" />
         <item itemvalue="Python.create_nifti_for_lesions" />
-        <item itemvalue="Python.main_wgan_lesions" />
         <item itemvalue="Python.data_feed_t" />
-        <item itemvalue="Python.file_handler" />
+        <item itemvalue="Python.Create_data" />
+        <item itemvalue="Python.create_data_info" />
+        <item itemvalue="Python.PSNR_calc_lesions" />
       </list>
     </recent_temporary>
   </component>
@@ -647,23 +619,25 @@
       <workItem from="1582551505088" duration="22188000" />
       <workItem from="1585133237360" duration="4641000" />
       <workItem from="1585313718855" duration="347000" />
+      <workItem from="1585555872407" duration="1412000" />
+      <workItem from="1585559677200" duration="4597000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51534000" />
+    <option name="totallyTimeSpent" value="57543000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="26" width="1920" height="1054" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24008575" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24651662" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4975" weight="0.3141243" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3638418" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4975" visible="true" weight="0.3135965" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.36293858" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -799,11 +773,6 @@
           <option name="timeStamp" value="145" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/appcode/mri/k_space/data_creator_multiple.py</url>
-          <line>75</line>
-          <option name="timeStamp" value="152" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/appcode/mri/results/create_nifti_for_lesions.py</url>
           <line>50</line>
           <option name="timeStamp" value="153" />
@@ -819,19 +788,14 @@
           <option name="timeStamp" value="158" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/common/files_IO/file_handler.py</url>
-          <line>82</line>
-          <option name="timeStamp" value="160" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/common/files_IO/file_handler.py</url>
-          <line>72</line>
-          <option name="timeStamp" value="163" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/appcode/mri/results/t_test.py</url>
           <line>11</line>
           <option name="timeStamp" value="164" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_dce.py</url>
+          <line>163</line>
+          <option name="timeStamp" value="165" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -844,17 +808,17 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/thesis$create_data_info.coverage" NAME="create_data_info Coverage Results" MODIFIED="1582890774604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/appcode/mri/data" />
+    <SUITE FILE_PATH="coverage/thesis$create_data_info.coverage" NAME="create_data_info Coverage Results" MODIFIED="1585562095980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/appcode/mri/data" />
     <SUITE FILE_PATH="coverage/thesis$data_creator_multiple.coverage" NAME="data_creator_multiple Coverage Results" MODIFIED="1582903706928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/appcode/mri/k_space" />
     <SUITE FILE_PATH="coverage/thesis$file_handler.coverage" NAME="file_handler Coverage Results" MODIFIED="1582982543280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common/files_IO" />
     <SUITE FILE_PATH="coverage/thesis$readTFrecord.coverage" NAME="readTFrecord Coverage Results" MODIFIED="1581872318597" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/appcode/mri/data" />
-    <SUITE FILE_PATH="coverage/thesis$PSNR_calc_lesions.coverage" NAME="PSNR_calc_lesions Coverage Results" MODIFIED="1582904630870" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/appcode/mri/results" />
+    <SUITE FILE_PATH="coverage/thesis$PSNR_calc_lesions.coverage" NAME="PSNR_calc_lesions Coverage Results" MODIFIED="1585556011057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/appcode/mri/results" />
     <SUITE FILE_PATH="coverage/thesis$create_TFrecords.coverage" NAME="create_TFrecords Coverage Results" MODIFIED="1580914459996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/appcode/mri/data" />
-    <SUITE FILE_PATH="coverage/thesis$main_wgan_dce.coverage" NAME="main_wgan_dce Coverage Results" MODIFIED="1582903712765" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/appcode/mri/dl/gan" />
-    <SUITE FILE_PATH="coverage/thesis$data_feed_t.coverage" NAME="data_feed_t Coverage Results" MODIFIED="1582982653192" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/appcode/mri/dl/gan" />
+    <SUITE FILE_PATH="coverage/thesis$main_wgan_dce.coverage" NAME="main_wgan_dce Coverage Results" MODIFIED="1585562840322" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/appcode/mri/dl/gan" />
     <SUITE FILE_PATH="coverage/thesis$t_test.coverage" NAME="t_test Coverage Results" MODIFIED="1585313742718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/appcode/mri/results" />
-    <SUITE FILE_PATH="coverage/thesis$Create_data.coverage" NAME="Create_data Coverage Results" MODIFIED="1582903537227" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/thesis$create_nifti_for_lesions.coverage" NAME="create_nifti_for_lesions Coverage Results" MODIFIED="1585133270981" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/appcode/mri/results" />
+    <SUITE FILE_PATH="coverage/thesis$data_feed_t.coverage" NAME="data_feed_t Coverage Results" MODIFIED="1585563030916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/appcode/mri/dl/gan" />
+    <SUITE FILE_PATH="coverage/thesis$Create_data.coverage" NAME="Create_data Coverage Results" MODIFIED="1585562708621" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/thesis$create_nifti_for_lesions.coverage" NAME="create_nifti_for_lesions Coverage Results" MODIFIED="1585563852023" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/appcode/mri/results" />
     <SUITE FILE_PATH="coverage/thesis$main_wgan_lesions.coverage" NAME="main_wgan_lesions Coverage Results" MODIFIED="1582982736048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/appcode/mri/dl/gan" />
   </component>
   <component name="debuggerHistoryManager">
@@ -970,20 +934,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/function.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="489" selection-start-line="489" selection-end-line="489" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/data/ops/dataset_ops.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="1583" selection-start-line="1583" selection-end-line="1583" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/function.py" />
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/data/ops/dataset_ops.py" />
     <entry file="file://$PROJECT_DIR$/appcode/mri/dl/gan/good_trainings.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -998,27 +950,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/gen_array_ops.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="7178" selection-start-line="7178" selection-end-line="7178" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="3299" selection-start-line="3299" selection-end-line="3299" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="935" selection-start-line="935" selection-end-line="935" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/gen_array_ops.py" />
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py" />
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py" />
     <entry file="file://$PROJECT_DIR$/appcode/mri/data/create_TFrecords.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -1026,13 +960,6 @@
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/appcode/mri/data/data_info.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret column="10058" selection-start-column="10058" selection-end-column="10058" />
         </state>
       </provider>
     </entry>
@@ -1060,37 +987,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/appcode/mri/data/create_data_info.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="16" lean-forward="true" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/appcode/mri/results/create_nifti_from_image_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="92" column="28" lean-forward="true" selection-start-line="92" selection-start-column="28" selection-end-line="92" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/appcode/mri/k_space/files_info.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
           <caret line="47" column="34" lean-forward="true" selection-start-line="47" selection-start-column="34" selection-end-line="47" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_dce.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="125" selection-start-line="125" selection-end-line="173" />
-          <folding>
-            <element signature="e#160#198#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1138,16 +1038,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/appcode/mri/dl/gan/data_feed_t.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
-          <folding>
-            <element signature="e#0#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_lesions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1845">
@@ -1165,41 +1055,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Create_data.py">
+    <entry file="file://$PROJECT_DIR$/appcode/mri/results/old/statistics.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+        <state relative-caret-position="1890">
+          <caret line="134" column="48" selection-start-line="134" selection-start-column="48" selection-end-line="134" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/appcode/mri/results/PSNR_calc_lesions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/appcode/mri/k_space/data_creator_multiple.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2355">
-          <caret line="167" column="29" selection-start-line="167" selection-start-column="29" selection-end-line="167" selection-end-column="29" />
-          <folding>
-            <element signature="e#22#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/appcode/mri/results/create_nifti_for_lesions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="14" column="43" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/files_IO/file_handler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="72" selection-start-line="72" selection-end-line="72" />
+        <state relative-caret-position="390">
+          <caret line="33" column="45" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -1224,20 +1090,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/appcode/mri/results/old/statistics.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="134" column="48" lean-forward="true" selection-start-line="134" selection-start-column="48" selection-end-line="134" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/appcode/mri/results/t_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
-          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/files_IO/file_handler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="82" selection-start-line="80" selection-end-line="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/appcode/mri/data/create_data_info.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="23" lean-forward="true" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/appcode/mri/data/data_info.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="10000" selection-start-column="10000" selection-end-column="10000" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/appcode/mri/k_space/data_creator_multiple.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-622">
+          <caret line="72" column="20" lean-forward="true" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/appcode/mri/results/create_nifti_from_image_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="92" column="28" lean-forward="true" selection-start-line="92" selection-start-column="28" selection-end-line="92" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/appcode/mri/dl/gan/data_feed_t.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="44" lean-forward="true" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Create_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="19" column="20" lean-forward="true" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/appcode/mri/dl/gan/main_wgan_dce.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="70" lean-forward="true" selection-start-line="43" selection-start-column="12" selection-end-line="43" selection-end-column="38" />
+          <folding>
+            <element signature="e#160#198#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/appcode/mri/results/create_nifti_for_lesions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="14" column="43" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
         </state>
       </provider>
     </entry>
