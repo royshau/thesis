@@ -3,7 +3,7 @@ from appcode.mri.k_space.utils import  get_image_from_kspace
 import matplotlib.pyplot as plt
 import numpy as np
 
-base_dir = '/HOME/data/DCE-MRI/shuffle'
+base_dir = '/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI/shuffle'
 file_names = {'y_r': 'k_space_real_gt', 'y_i': 'k_space_imag_gt', 'm_d': 'meta_data'}
 
 def feed_data(data_set, tt='train', batch_size=5):

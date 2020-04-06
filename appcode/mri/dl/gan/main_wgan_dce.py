@@ -44,7 +44,7 @@ def _parse_(serialized_example):
 base_dir = '/HOME/data/DCE-MRI/shuffle'
 file_names = {'y_r': 'k_space_real_gt', 'y_i': 'k_space_imag_gt', 'm_d': 'meta_data'}
 
-tfrecords = {'test': ["/HOME/data/DCE-MRI/dce_train.tfrecords"], 'train': ["/HOME/data/DCE-MRI/dce_test.tfrecords"]}
+tfrecords = {'test': ["/extdrive/users/roys/data/DCE_MRI/dce_test.tfrecords"], 'train': ["/extdrive/users/roys/data/DCE_MRI/dce_train.tfrecords"]}
 
 flags = tf.app.flags
 FLAGS = flags.FLAGS
@@ -64,14 +64,14 @@ flags.DEFINE_float('im_loss_context', 5, 'Generative loss, Image context weight.
 flags.DEFINE_float('im_loss_context_l1', 5, 'Generative loss, Image context weight.')
 
 # flags.DEFINE_float('gen_loss_adversarial', 1.0, 'Generative loss, adversarial weight.')
-flags.DEFINE_float('gen_loss_adversarial', 1, 'Generative loss, adversarial weight.')
-flags.DEFINE_integer('iters_no_adv', 1200, 'Iters with adv_w=0')
+flags.DEFINE_float('gen_loss_adversarial', 0.5, 'Generative loss, adversarial weight.')
+flags.DEFINE_integer('iters_no_adv', 2000, 'Iters with adv_w=0')
 flags.DEFINE_integer('train_D_every', 5000, 'Long Train D every N iterataions')
 flags.DEFINE_integer('num_D_updates_long', 100, 'Discriminator update freq for long train')
 
 
-flags.DEFINE_integer('print_test', 1500, 'Print test frequency')
-flags.DEFINE_integer('print_train', 100, 'Print train frequency')
+flags.DEFINE_integer('print_test', 1000, 'Print test frequency')
+flags.DEFINE_integer('print_train', 500, 'Print train frequency')
 
 flags.DEFINE_integer('num_D_updates', 1, 'Discriminator update freq')
 flags.DEFINE_integer('random_sampling_factor', 4, 'Random mask sampling factor')
@@ -105,7 +105,7 @@ X_loc = X_loc[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
 Y_loc = scipy.io.loadmat('/HOME/thesis/matlab/Y_loc.mat')['Y']
 Y_loc = Y_loc[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
 # Select GPU 2
-GPU_ID = '0'
+GPU_ID = '3'
 print('GPU USED: ' + GPU_ID)
 
 
@@ -331,12 +331,13 @@ def train_model(mode, checkpoint=None):
     print('Log not dumpped! fix needed!')
     tf.set_random_seed(50)
 
-    whole_dataset = tf.data.TFRecordDataset(tfrecords['train'])
-    whole_dataset = whole_dataset.map(_parse_, num_parallel_calls=16)
+    train_dataset = tf.data.TFRecordDataset(tfrecords['train'])
+    train_dataset = train_dataset.map(_parse_, num_parallel_calls=16)
     #whole_dataset = whole_dataset.shuffle(buffer_size=1000)
 
-    train_dataset = whole_dataset.skip(2000)
-    val_datset = whole_dataset.take(2000)
+    val_datset = tf.data.TFRecordDataset(tfrecords['test'])
+    val_datset = val_datset.map(_parse_, num_parallel_calls=16)
+
     # Shuffle the dataset
     # Repeat the input indefinitly
     train_dataset = train_dataset.repeat()
@@ -367,7 +368,7 @@ def train_model(mode, checkpoint=None):
 
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True
-    config.gpu_options.visible_device_list = GPU_ID
+    # config.gpu_options.visible_device_list = GPU_ID
     sess = tf.Session(config=config)
     init = tf.global_variables_initializer()
 
@@ -518,6 +519,10 @@ def evaluate_checkpoint(tt='test', checkpoint=None, output_file=None, output_fil
     print("Total accuracy is kspace_l2: %s PSNR: %s NMSE %s" % (
     np.array(all_acc).mean(), np.array(psnr).mean(), np.array(nmse).mean()))
 
+def copy(src, dst):
+    if os.path.isdir(dst):
+        dst = os.path.join(dst, os.path.basename(src))
+    shutil.copyfile(src, dst)
 
 def main(args):
     print('Initializing')
@@ -525,10 +530,10 @@ def main(args):
 
         # Copy scripts to training dir
         print('Training')
-        shutil.copy(os.path.abspath(__file__), args.train_dir)
+        copy(os.path.abspath(__file__), args.train_dir)
         model_file = inspect.getfile(KspaceWgan)
         model_file = model_file.split('.py')[0] + '.py'
-        shutil.copy(model_file, args.train_dir)
+        copy(model_file, args.train_dir)
         train_model(args.mode, args.checkpoint)
     elif args.mode == 'evaluate':
         evaluate_checkpoint(tt=args.tt, checkpoint=args.checkpoint, output_file=args.output_file,

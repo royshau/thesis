@@ -20,7 +20,7 @@ def _int64_feature(value):
 def _bytes_feature(value):
     return tf.train.Feature(bytes_list=tf.train.BytesList(value=[value]))
 
-tfrecord_filename = '/HOME/data/DCE-MRI/dce_train.tfrecords'
+tfrecord_filename = '/extdrive/users/roys/data/DCE_MRI/dce_train.tfrecords'
 
 # Initiating the writer and creating the tfrecords file.
 
@@ -31,9 +31,9 @@ writer = tf.io.TFRecordWriter(tfrecord_filename)
 # The images are named as apple01.jpg, apple02.jpg .. , orange01.jpg .. etc.
 
 
-real = sorted(glob.glob('/HOME/data/DCE-MRI/base/train/*/*.k_space_real_gt.bin'))
-imag = sorted(glob.glob('/HOME/data/DCE-MRI/base/train/*/*.k_space_imag_gt.bin'))
-meta = sorted(glob.glob('/HOME/data/DCE-MRI/base/train/*/*.meta_data.bin'))
+real = sorted(glob.glob('/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI/base/train/*/*.k_space_real_gt.bin'))
+imag = sorted(glob.glob('/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI/base/train/*/*.k_space_imag_gt.bin'))
+meta = sorted(glob.glob('/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI/base/train/*/*.meta_data.bin'))
 shuffled_ind = np.random.permutation(len(real))
 for i in shuffled_ind:
     try:
@@ -53,7 +53,7 @@ for i in shuffled_ind:
 
         writer.write(example.SerializeToString())
         print(i)
-    except:
+    except IOError:
         print("Error in " + real[i])
 writer.close()
 

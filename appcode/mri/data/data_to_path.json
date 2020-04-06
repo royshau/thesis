@@ -15,8 +15,8 @@
                   "suffix": "*/*.nii.gz"},
 
   "DCE-MRI":    {  "data":"/media/rrtammyfs/Users/Ariel/DCE_MRI/stroke",
-                  "labels": "/HOME/data/DCE-MRI",
-                  "info": "/HOME/data/DCE-MRI",
+                  "labels": "/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI",
+                  "info": "/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI",
                   "suffix": "*/nifti/*.hdr"},
 
   "Lesions-PP":    {  "data":"/media/rrtammyfs/labDatabase/MSLesion-ISBI2015",

@@ -71,14 +71,9 @@ class DataCreatorMulti:
             h,w,c = image_3d.shape
             nh = (h-target)/2
             if nh<0:
-                padded_image = np.zeros((320, 320, c))
-                for i in range(c):
-                    padded_image[:, :, i] = cv2.resize(image_3d[:, :, i], (320, 320),interpolation=cv2.INTER_CUBIC)
-                # padded_image[-nh:h+(-nh),-nh:h+(-nh),:] = image_3d
+                padded_image = np.zeros((target, target, c))
+                padded_image[-nh:h+(-nh),-nh:h+(-nh),:] = image_3d
                 image_3d = padded_image
-                h, w, c = image_3d.shape
-                nh = (h - target) / 2
-                image_3d = image_3d[nh:h-nh,nh:h-nh,:]
             else:
                 image_3d = image_3d[nh:h-nh,nh:h-nh,:]
             print(image_3d.shape)
@@ -115,7 +110,7 @@ class DataCreatorMulti:
                                            meta_data=meta_data_to_write), False)
                     # Add to counter
                     counter += 1
-            except:
+            except IOError:
                 print("skipped " + case_name)
                 shutil.rmtree(out_path)
                     # print "ONE EXAMPLE"
