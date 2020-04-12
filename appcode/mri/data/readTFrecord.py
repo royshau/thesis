@@ -7,7 +7,7 @@ import glob
 
 import tensorflow as tf
 
-filenames = ["/HOME/data/DCE-MRI/dce_train.tfrecords"]
+filenames = ["/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI/dce_test.tfrecords"]
 dataset = tf.data.TFRecordDataset(filenames)
 def _parse_(serialized_example):
     feature = {'real':tf.FixedLenFeature([],tf.string),
@@ -18,6 +18,12 @@ def _parse_(serialized_example):
     real = tf.reshape(real,[3,256, 256])
     imag = tf.decode_raw(example['imag'], tf.float32)
     imag = tf.reshape(imag, [3,256, 256])
+    real = tf.transpose(real,[1,2,0])
+    imag = tf.transpose(imag,[1,2,0])
+    concat = tf.concat([real,imag],axis=2)
+    concat = tf.image.random_flip_left_right(concat)
+    concat = tf.transpose(concat,[2,0,1])
+    real,imag = tf.split(concat,2)
     return real,imag
 
 
@@ -50,6 +56,7 @@ with tf.Session() as sess:
         try:
             i+=1
             imag, real = np.array(sess.run([ima, rea])).squeeze()
+            break
         except tf.errors.OutOfRangeError:
             break
 
@@ -61,11 +68,11 @@ print(min_imag)
 print(sum_r)
 print(sum_i)
 print(i)
-# plt.show()
-# image = get_image_from_kspace(real[2,1,:,:], imag[2,1,:,:])
-# plt.imshow(image)
-# plt.show()
-# image = get_image_from_kspace(real[3,1,:,:], imag[3,1,:,:])
-# plt.imshow(image)
-# plt.show()
-# print(1)
+plt.show()
+image = get_image_from_kspace(real[2,1,:,:], imag[2,1,:,:])
+plt.imshow(image)
+plt.show()
+image = get_image_from_kspace(real[3,1,:,:], imag[3,1,:,:])
+plt.imshow(image)
+plt.show()
+print(1)

@@ -37,14 +37,20 @@ def _parse_(serialized_example):
     real = tf.reshape(real, [3, 256, 256])
     imag = tf.decode_raw(example['imag'], tf.float32)
     imag = tf.reshape(imag, [3, 256, 256])
+    real = tf.transpose(real,[1,2,0])
+    imag = tf.transpose(imag,[1,2,0])
+    concat = tf.concat([real,imag],axis=2)
+    concat = tf.image.random_flip_left_right(concat)
+    concat = tf.transpose(concat,[2,0,1])
+    real,imag = tf.split(concat,2)
     return real, imag
 
 
 # k space data set on loca SSD
-base_dir = '/HOME/data/DCE-MRI/shuffle'
+base_dir = '/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI/shuffle'
 file_names = {'y_r': 'k_space_real_gt', 'y_i': 'k_space_imag_gt', 'm_d': 'meta_data'}
 
-tfrecords = {'test': ["/extdrive/users/roys/data/DCE_MRI/dce_test.tfrecords"], 'train': ["/extdrive/users/roys/data/DCE_MRI/dce_train.tfrecords"]}
+tfrecords = {'test': ["/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI/dce_test.tfrecords"], 'train': ["/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI/dce_train.tfrecords"]}
 
 flags = tf.app.flags
 FLAGS = flags.FLAGS
@@ -64,9 +70,9 @@ flags.DEFINE_float('im_loss_context', 5, 'Generative loss, Image context weight.
 flags.DEFINE_float('im_loss_context_l1', 5, 'Generative loss, Image context weight.')
 
 # flags.DEFINE_float('gen_loss_adversarial', 1.0, 'Generative loss, adversarial weight.')
-flags.DEFINE_float('gen_loss_adversarial', 0.5, 'Generative loss, adversarial weight.')
-flags.DEFINE_integer('iters_no_adv', 2000, 'Iters with adv_w=0')
-flags.DEFINE_integer('train_D_every', 5000, 'Long Train D every N iterataions')
+flags.DEFINE_float('gen_loss_adversarial', 0.1, 'Generative loss, adversarial weight.')
+flags.DEFINE_integer('iters_no_adv', 35000, 'Iters with adv_w=0')
+flags.DEFINE_integer('train_D_every', 50000, 'Long Train D every N iterataions')
 flags.DEFINE_integer('num_D_updates_long', 100, 'Discriminator update freq for long train')
 
 
@@ -105,7 +111,7 @@ X_loc = X_loc[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
 Y_loc = scipy.io.loadmat('/HOME/thesis/matlab/Y_loc.mat')['Y']
 Y_loc = Y_loc[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
 # Select GPU 2
-GPU_ID = '3'
+GPU_ID = '0'
 print('GPU USED: ' + GPU_ID)
 
 
@@ -251,8 +257,7 @@ def run_evaluation_all(sess, feed, net, step, writer, tt):
     psnr = []
     nmse = []
     predict_counter = 0
-    print("Evaluate Model with validation set")
-    while predict_counter<=1000 :
+    while predict_counter<=1799 :
         # Running over all data until epoch > 0
         predict, result = sess.run([net.predict_g, net.evaluation], feed_dict=feed)
 
@@ -412,7 +417,10 @@ def train_model(mode, checkpoint=None):
         if i % FLAGS.print_test == 0:
             # Record summary data and the accuracy
             if feed_val is not None:
+                print("Evaluating Model with validation set")
                 run_evaluation_all(sess, feed_val, net=net,step =i,writer=writer['test'], tt='TEST')
+                print("Evaluating Model with training set")
+                run_evaluation_all(sess, feed, net=net,step =i,writer=writer['train'], tt='TRAIN')
             save_checkpoint(sess=sess, saver=saver, step=i)
 
         else:
