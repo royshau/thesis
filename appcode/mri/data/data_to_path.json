@@ -14,10 +14,10 @@
                   "info": "/HOME/data2/lesions",
                   "suffix": "*/*.nii.gz"},
 
-  "DCE-MRI":    {  "data":"/media/rrtammyfs/Users/Ariel/DCE_MRI/stroke",
+  "DCE-MRI":    {  "data":"/media/rrtammyfs/Users/Ariel/DCE_MRI/",
                   "labels": "/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI",
                   "info": "/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI",
-                  "suffix": "*/nifti/*.hdr"},
+                  "suffix": "*/*/nifti/*.hdr"},
 
   "Lesions-PP":    {  "data":"/media/rrtammyfs/labDatabase/MSLesion-ISBI2015",
                   "labels": "/media/rrtammyfs/Projects/2018/MRIGAN/data/lesions",

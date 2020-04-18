@@ -71,10 +71,12 @@ class DataCreatorMulti:
             h,w,c = image_3d.shape
             nh = (h-target)/2
             if nh<0:
+                print("Zero Padding")
                 padded_image = np.zeros((target, target, c))
                 padded_image[-nh:h+(-nh),-nh:h+(-nh),:] = image_3d
                 image_3d = padded_image
             else:
+                print("Cropping")
                 image_3d = image_3d[nh:h-nh,nh:h-nh,:]
             print(image_3d.shape)
             # Normalize image

@@ -275,7 +275,7 @@ def run_evaluation(sess, feed, net, step, writer, tt):
     tt, datetime.datetime.now(), step, d_loss_no_reg, loss_g, l2_norm, g_loss_im))
     logfile.flush()
 
-def run_evaluation_all(sess, feed, net, step, writer, tt):
+def run_evaluation_all(sess, feed, net, step, writer, tt,samples):
     """
 
     :param sess:
@@ -291,7 +291,7 @@ def run_evaluation_all(sess, feed, net, step, writer, tt):
     nmse = []
     predict_counter = 0
     print("Evaluate Model with validation set")
-    while predict_counter<=1900 :
+    while predict_counter<=samples:
         # Running over all data until epoch > 0
         predict, result = sess.run([net.predict_g, net.evaluation], feed_dict=feed)
 

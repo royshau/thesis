@@ -37,7 +37,7 @@ class MriDataBase:
         if "suffix" in data_to_path[data_name]:
             self.items = sorted(glob.glob(os.path.join(data_to_path[data_name]["data"], data_to_path[data_name]["suffix"])))
             if data_name == "DCE-MRI":
-                self.items = ['/'.join(item.split('/')[-3:]) for item in self.items]
+                self.items = ['/'.join(item.split('/')[-4:]) for item in self.items]
             else:
                 self.items = ['/'.join(item.split('/')[-2:]) for item in self.items]
             # self.items = [item.strip(self.data_path) for item in self.items]

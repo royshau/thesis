@@ -20,19 +20,24 @@ def _parse_(serialized_example):
     imag = tf.reshape(imag, [3,256, 256])
     real = tf.transpose(real,[1,2,0])
     imag = tf.transpose(imag,[1,2,0])
-    concat = tf.concat([real,imag],axis=2)
-    concat = tf.image.random_flip_left_right(concat)
-    concat = tf.transpose(concat,[2,0,1])
-    real,imag = tf.split(concat,2)
     return real,imag
 
 
+def augment(real,imag):
+    concat = tf.concat([real,imag],axis=2)
+    concat = tf.image.random_flip_left_right(concat)
+    concat = tf.image.random_flip_up_down(concat)
+    concat = tf.transpose(concat,[2,0,1])
+    concat += tf.random.normal(concat.shape,stddev=0.005)
+    real,imag = tf.split(concat,2)
+    return real,imag
 
 # Parse the record into tensors.
 dataset = dataset.map(_parse_)
+dataset = dataset.map(augment)
 # Shuffle the dataset
 tf.set_random_seed(50)
-dataset = dataset.shuffle(buffer_size=10)
+dataset = dataset.shuffle(buffer_size=12)
 # Repeat the input indefinitly
 dataset = dataset.repeat(1)
 # Generate batches

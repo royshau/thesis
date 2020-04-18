@@ -35,6 +35,7 @@ real = sorted(glob.glob('/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI/base
 imag = sorted(glob.glob('/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI/base/train/*/*.k_space_imag_gt.bin'))
 meta = sorted(glob.glob('/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI/base/train/*/*.meta_data.bin'))
 shuffled_ind = np.random.permutation(len(real))
+print(len(real))
 for i in shuffled_ind:
     try:
         real_img = np.fromfile(real[i],np.float32)
@@ -52,7 +53,6 @@ for i in shuffled_ind:
         # Writing the serialized example.
 
         writer.write(example.SerializeToString())
-        print(i)
     except IOError:
         print("Error in " + real[i])
 writer.close()

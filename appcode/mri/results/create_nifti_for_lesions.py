@@ -80,7 +80,7 @@ def create_nifti_from_raw_data(data_dir, predict_path, output_path, data_base, b
             org_imag = data_set_tt.files_obj['k_space_imag_gt'].memmap[idx][:,1,:,:]
             # print(org_real.shape)
             data = get_image_from_kspace(org_real, org_imag).transpose(1, 2, 0)
- #           data = norm_data(data)
+            data = norm_data(data)
             write_nifti_data(data, output_path=res_out_path, reference=ref, name=name)
 
             # Predict from network
@@ -91,7 +91,7 @@ def create_nifti_from_raw_data(data_dir, predict_path, output_path, data_base, b
             # plt.show()
             # data = norm_data(data)
             data_gen = np.copy(pred_image)
-#            data_gen = norm_data(data_gen)
+            data_gen = norm_data(data_gen)
             write_nifti_data(data_gen, output_path=res_out_path, reference=ref, name=name+"_predict")
 
             # Zero Padding

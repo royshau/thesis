@@ -28,7 +28,8 @@ import time
 import sys
 
 
-def _parse_(serialized_example):
+
+def _parse_train_(serialized_example):
     feature = {'real': tf.FixedLenFeature([], tf.string),
                'imag': tf.FixedLenFeature([], tf.string),
                'meta': tf.FixedLenFeature([], tf.string)}
@@ -41,8 +42,21 @@ def _parse_(serialized_example):
     imag = tf.transpose(imag,[1,2,0])
     concat = tf.concat([real,imag],axis=2)
     concat = tf.image.random_flip_left_right(concat)
+    concat = tf.image.random_flip_up_down(concat)
     concat = tf.transpose(concat,[2,0,1])
+    concat += tf.random.normal(concat.shape,stddev=0.005)
     real,imag = tf.split(concat,2)
+    return real, imag
+
+def _parse_val_(serialized_example):
+    feature = {'real': tf.FixedLenFeature([], tf.string),
+               'imag': tf.FixedLenFeature([], tf.string),
+               'meta': tf.FixedLenFeature([], tf.string)}
+    example = tf.parse_single_example(serialized_example, feature)
+    real = tf.decode_raw(example['real'], tf.float32)
+    real = tf.reshape(real, [3, 256, 256])
+    imag = tf.decode_raw(example['imag'], tf.float32)
+    imag = tf.reshape(imag, [3, 256, 256])
     return real, imag
 
 
@@ -50,16 +64,16 @@ def _parse_(serialized_example):
 base_dir = '/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI/shuffle'
 file_names = {'y_r': 'k_space_real_gt', 'y_i': 'k_space_imag_gt', 'm_d': 'meta_data'}
 
-tfrecords = {'test': ["/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI/dce_test.tfrecords"], 'train': ["/media/rrtammyfs/Projects/2018/MRIGAN/data/DCE_MRI/dce_train.tfrecords"]}
+tfrecords = {'test': ["/HOME/data/DCE-MRI/dce_test.tfrecords"], 'train': ["/HOME/data/DCE-MRI/dce_train.tfrecords"]}
 
 flags = tf.app.flags
 FLAGS = flags.FLAGS
 
 flags.DEFINE_integer('max_steps', 5000000, 'Number of steps to run trainer.')
-flags.DEFINE_float('learning_rate', 0.0001, 'Initial learning rate.')
+flags.DEFINE_float('learning_rate', 0.00005, 'Initial learning rate.')
 # flags.DEFINE_float('regularization_weight', 5e-4, 'L2 Norm regularization weight.')
-flags.DEFINE_float('reg_w', 5e-4, 'L2 Norm regularization weight.')
-flags.DEFINE_float('reg_b', 5e-4, 'L2 Norm regularization weight.')
+flags.DEFINE_float('reg_w', 5e-3, 'L2 Norm regularization weight.')
+flags.DEFINE_float('reg_b', 5e-3, 'L2 Norm regularization weight.')
 # flags.DEFINE_integer('mini_batch_size', 10, 'Size of mini batch')
 flags.DEFINE_integer('mini_batch_size', 16, 'Size of mini batch')
 flags.DEFINE_integer('mini_batch_predict', 15, 'Size of mini batch for predict')
@@ -71,19 +85,22 @@ flags.DEFINE_float('im_loss_context_l1', 5, 'Generative loss, Image context weig
 
 # flags.DEFINE_float('gen_loss_adversarial', 1.0, 'Generative loss, adversarial weight.')
 flags.DEFINE_float('gen_loss_adversarial', 0.1, 'Generative loss, adversarial weight.')
-flags.DEFINE_integer('iters_no_adv', 35000, 'Iters with adv_w=0')
-flags.DEFINE_integer('train_D_every', 50000, 'Long Train D every N iterataions')
+flags.DEFINE_integer('iters_no_adv', 40000, 'Iters with adv_w=0')
+flags.DEFINE_integer('train_D_every', 500000, 'Long Train D every N iterataions')
 flags.DEFINE_integer('num_D_updates_long', 100, 'Discriminator update freq for long train')
+
+flags.DEFINE_integer('train_samples', 2844, 'Discriminator update freq for long train')
+flags.DEFINE_integer('val_samples', 3600, 'Discriminator update freq for long train')
 
 
 flags.DEFINE_integer('print_test', 1000, 'Print test frequency')
-flags.DEFINE_integer('print_train', 500, 'Print train frequency')
+flags.DEFINE_integer('print_train', 250, 'Print train frequency')
 
 flags.DEFINE_integer('num_D_updates', 1, 'Discriminator update freq')
 flags.DEFINE_integer('random_sampling_factor', 4, 'Random mask sampling factor')
 
 flags.DEFINE_boolean('to_show', False, 'View data')
-flags.DEFINE_string('database', 'Lesions', "data base name - for file info")
+flags.DEFINE_string('database', 'DCE-MRI', "data base name - for file info")
 flags.DEFINE_boolean('dump_debug', True, 'wide_debug_tensorboard')
 keep_center = 0.05
 DIMS_IN = np.array([3, 256, 256])
@@ -111,7 +128,7 @@ X_loc = X_loc[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
 Y_loc = scipy.io.loadmat('/HOME/thesis/matlab/Y_loc.mat')['Y']
 Y_loc = Y_loc[np.newaxis, :, :, np.newaxis].transpose(0, 3, 1, 2)
 # Select GPU 2
-GPU_ID = '0'
+GPU_ID = '1'
 print('GPU USED: ' + GPU_ID)
 
 
@@ -242,7 +259,7 @@ def run_evaluation(sess, feed, net, step, writer, tt):
     tt, datetime.datetime.now(), step, d_loss_no_reg, loss_g, l2_norm, g_loss_im))
     logfile.flush()
 
-def run_evaluation_all(sess, feed, net, step, writer, tt):
+def run_evaluation_all(sess, feed, net, step, writer, tt,samples):
     """
 
     :param sess:
@@ -257,7 +274,7 @@ def run_evaluation_all(sess, feed, net, step, writer, tt):
     psnr = []
     nmse = []
     predict_counter = 0
-    while predict_counter<=1799 :
+    while predict_counter<=samples :
         # Running over all data until epoch > 0
         predict, result = sess.run([net.predict_g, net.evaluation], feed_dict=feed)
 
@@ -337,11 +354,11 @@ def train_model(mode, checkpoint=None):
     tf.set_random_seed(50)
 
     train_dataset = tf.data.TFRecordDataset(tfrecords['train'])
-    train_dataset = train_dataset.map(_parse_, num_parallel_calls=16)
+    train_dataset = train_dataset.map(_parse_train_, num_parallel_calls=16)
     #whole_dataset = whole_dataset.shuffle(buffer_size=1000)
 
     val_datset = tf.data.TFRecordDataset(tfrecords['test'])
-    val_datset = val_datset.map(_parse_, num_parallel_calls=16)
+    val_datset = val_datset.map(_parse_val_, num_parallel_calls=16)
 
     # Shuffle the dataset
     # Repeat the input indefinitly
@@ -414,14 +431,14 @@ def train_model(mode, checkpoint=None):
     for i in range(start_iter, FLAGS.max_steps):
 
         # try:
-        if i % FLAGS.print_test == 0:
+        if i % FLAGS.print_test-1 == 0:
             # Record summary data and the accuracy
             if feed_val is not None:
                 print("Evaluating Model with validation set")
-                run_evaluation_all(sess, feed_val, net=net,step =i,writer=writer['test'], tt='TEST')
+                run_evaluation_all(sess, feed_val, net=net,step =i,writer=writer['test'], tt='TEST',samples=FLAGS.val_samples)
                 print("Evaluating Model with training set")
-                run_evaluation_all(sess, feed, net=net,step =i,writer=writer['train'], tt='TRAIN')
-            save_checkpoint(sess=sess, saver=saver, step=i)
+                run_evaluation_all(sess, feed, net=net,step =i,writer=writer['train'], tt='TRAIN',samples=FLAGS.train_samples)
+            save_checkpoint(sess=sess, saver=saver, step=i+1)
 
         else:
             # Training
